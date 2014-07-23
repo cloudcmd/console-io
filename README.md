@@ -1,7 +1,7 @@
 Console
 =======
 
-Web shell.
+Web console used in [Cloud Commander](http://cloudcmd.io).
 
 ## Install
 
