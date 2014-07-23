@@ -1,19 +1,24 @@
 {
-  "name": "cloudcmd-console",
-  "version": "0.2.0",
+  "name": "console-io",
+  "version": "1.0.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Console for Cloud Commander",
   "homepage": "http://cloudcmd.io",
+  "bin": {
+    "console": "bin/console.js"
+  },
+  "main": "lib/server.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/cloudcmd/console.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "dependencies": {
-      "util-io": "1.2.x"
+    "express": "~4.6.1",
+    "socket.io": "~1.0.6",
+    "util-io": "~1.2.x",
+    "win32": "~0.9.4"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "license": "MIT"
 }
