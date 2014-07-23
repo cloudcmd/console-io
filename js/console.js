@@ -24,21 +24,9 @@ var $, Util;
         Element     = document.querySelector('.console');
         jqconsole   = $(Element).jqconsole('', '> ');
         
-        setURL();
         addListeners();
     }
      
-    function setURL() {
-        var url     = prompt('URL'),
-            regExp  = RegExp('^https?://'),
-            isHTTP  = url.match(regExp);
-        
-        if (!isHTTP)
-            url = 'http://' + url;
-        
-        localStorage.setItem('Console-URL', url);
-    }
-    
     function handler(command) {
         if (command)
             Socket.emit(CHANNEL, command);

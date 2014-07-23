@@ -63,10 +63,9 @@ var Util, io;
         }
         
         function connect() {
-            var FIVE_SECONDS    = 5000,
-                url             = localStorage.getItem('Console-URL');
+            var FIVE_SECONDS    = 5000;
             
-            socket = io.connect(url, {
+            socket = io.connect({
                 'max reconnection attempts' : Math.pow(2, 32),
                 'reconnection limit'        : FIVE_SECONDS
             });
