@@ -2,7 +2,7 @@
   "name": "console-io",
   "version": "1.0.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-  "description": "Console for Cloud Commander",
+  "description": "Web console",
   "homepage": "http://cloudcmd.io",
   "bin": {
     "console": "bin/console.js"
@@ -12,7 +12,10 @@
     "type": "git",
     "url": "git://github.com/cloudcmd/console.git"
   },
-  "keywords": [],
+  "keywords": [
+    "console",
+    "terminal"
+  ],
   "dependencies": {
     "express": "~4.6.1",
     "socket.io": "~1.0.6",
