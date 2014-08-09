@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "express": "~4.6.1",
+    "glob": "~4.0.5",
     "socket.io": "~1.0.6",
     "util-io": "~1.2.x",
     "win32": "~0.9.4"
