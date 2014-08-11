@@ -16,5 +16,17 @@
         <script src="node_modules/util-io/lib/util.js"></script>
         <script src="lib/client/socket.js"></script>
         <script src="lib/client/console.js"></script>
+        <script>
+            (function() {
+                'use strict';
+                
+                window.addEventListener('load', load);
+                
+                function load() {
+                    window.removeEventListener('load', load);
+                    Console.init('.console');
+                }
+            })()
+        </script>
     </body>
 </html>
