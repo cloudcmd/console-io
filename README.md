@@ -36,8 +36,37 @@ And use it in your program
         webconsole(server);
         
         app.use(express.static(__dirname + 'node_modules/console-io'));
+        app.use(webconsole(server));
         
         server.listen(port, ip);
+```
+
+```html
+    <!doctype html>
+    <html>
+        <head>
+            <title>Console</title>
+        </head>
+        <body>
+            <div class="console"></div>
+            <script src="/console/console.js"></script>
+            <script>
+                (function() {
+                    'use strict';
+                    
+                    window.addEventListener('load', load);
+                    
+                    function load() {
+                        window.removeEventListener('load', load);
+                        
+                        Console.init('.console', function() {
+                            console.log('console ready')
+                        });
+                    }
+                })()
+            </script>
+        </body>
+    </html>
 ```
 
 ## License

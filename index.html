@@ -2,20 +2,10 @@
 <html>
     <head>
         <title>Console</title>
-        <link rel="stylesheet" href="css/console.css">
-        <link rel="stylesheet" href="lib/client/console/css/ansi.css">
-        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div class="console"></div>
-        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="//cdn.socket.io/socket.io-1.0.6.js"></script>
-        <script src="lib/client/console/lib/jqconsole.js"></script>
-        
-        <script src="node_modules/util-io/lib/util.js"></script>
-        <script src="lib/client/socket.js"></script>
-        <script src="lib/client/console.js"></script>
+        <script src="/console/console.js"></script>
         <script>
             (function() {
                 'use strict';
@@ -24,7 +14,10 @@
                 
                 function load() {
                     window.removeEventListener('load', load);
-                    Console.init('.console');
+                    
+                    Console.init('.console', function() {
+                        console.log('console ready')
+                    });
                 }
             })()
         </script>

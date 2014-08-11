@@ -18,8 +18,7 @@
         ip          =   process.env.IP              ||  /* c9           */
                         '0.0.0.0';
         
-        webconsole(server);
-        
+        app.use(webconsole(server));
         app.use(express.static(__dirname + '/../'));
         
         server.listen(port, ip);
