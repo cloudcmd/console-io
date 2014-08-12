@@ -13,6 +13,29 @@ Web console used in [Cloud Commander](http://cloudcmd.io).
 
 Start `console`, go to url `http://localhost:1337`
 
+## API
+
+### Server API
+
+**webconsole(server [,prefix])**
+
+- server    - instance of server
+- prefix    - prefix of console url to use in html
+
+
+### Client API
+
+**Console(element [, prefix], callback)**
+
+- element   - html element, or selector
+- prefix    - (optional) prefix to url (same as in server)
+- callback  - function to call after init
+
+When prefix set in server and client, you should use same prefix in html.
+For example, if you use prefix "any_prefix" you should connect
+console script in this way:
+
+`<script src="/any_prefix/console.js"></script>`
 
 ## Use as middleware
 
@@ -23,50 +46,44 @@ To use `Console` in your programs you should make local install:
 And use it in your program
 
 ```js
-    var webconsole  = require('console-io'),
-        http        = require('http'),
-        express     = require('express'),
-        
-        app         = express(),
-        server      = http.createServer(app),
-        
-        port        = 1337,
-        ip          = '0.0.0.0';
-        
-        webconsole(server);
-        
-        app.use(express.static(__dirname + 'node_modules/console-io'));
-        app.use(webconsole(server));
-        
-        server.listen(port, ip);
+/* server.js */
+
+var webconsole  = require('console-io'),
+    http        = require('http'),
+    express     = require('express'),
+    
+    app         = express(),
+    server      = http.createServer(app),
+    
+    port        = 1337,
+    ip          = '0.0.0.0';
+    
+app.use(express.static(__dirname + 'node_modules/console-io'));
+app.use(webconsole(server));
+
+server.listen(port, ip);
 ```
 
 ```html
-    <!doctype html>
-    <html>
-        <head>
-            <title>Console</title>
-        </head>
-        <body>
-            <div class="console"></div>
-            <script src="/console/console.js"></script>
-            <script>
-                (function() {
-                    'use strict';
-                    
-                    window.addEventListener('load', load);
-                    
-                    function load() {
-                        window.removeEventListener('load', load);
-                        
-                        Console.init('.console', function() {
-                            console.log('console ready')
-                        });
-                    }
-                })()
-            </script>
-        </body>
-    </html>
+<!-- index.html -->
+
+<div class="console"></div>
+<script src="/console/console.js"></script>
+<script>
+    (function() {
+        'use strict';
+        
+        window.addEventListener('load', load);
+        
+        function load() {
+            window.removeEventListener('load', load);
+            
+            Console.init('.console', function() {
+                console.log('console ready')
+            });
+        }
+    })()
+</script>
 ```
 
 ## License
