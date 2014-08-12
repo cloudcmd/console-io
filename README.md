@@ -51,6 +51,16 @@ Console.addShortCuts({
 });
 ```
 
+**Console.getPromptText()**
+
+Get text of prompt.
+
+**Console.setPromptText(text)**
+
+- text - string of new text
+
+Set new text of prompt.
+
 ## Use as middleware
 
 To use `Console` in your programs you should make local install:
