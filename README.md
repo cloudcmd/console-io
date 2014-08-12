@@ -37,6 +37,20 @@ console script in this way:
 
 `<script src="/any_prefix/console.js"></script>`
 
+**Console.addShortCuts(shortCuts)**
+
+- shortCuts - object contain big letter and function.
+
+Example: show alert on `Ctrl + A`:
+
+```js
+Console.addShortCuts({
+    'A': function() {
+        alert('hello');
+    }
+});
+```
+
 ## Use as middleware
 
 To use `Console` in your programs you should make local install:
