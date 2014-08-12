@@ -78,7 +78,7 @@ server.listen(port, ip);
         function load() {
             window.removeEventListener('load', load);
             
-            Console.init('.console', function() {
+            Console('.console', function() {
                 console.log('console ready')
             });
         }
