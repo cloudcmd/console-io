@@ -30,4 +30,11 @@
         
         server.listen(port, ip);
         console.log('url: http://' + ip + ':' + port);
+    
+    
+    function onMessage(data, next) {
+        next(null, {
+            stdout: data + '\n'
+        });
+    }
 })();
