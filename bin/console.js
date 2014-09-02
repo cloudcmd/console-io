@@ -23,8 +23,7 @@
                         '0.0.0.0';
         
         app .use(webconsole({
-                server: server, 
-                notMinify:true
+                server: server
             }))
             .use(minify({
                 dir: DIR
