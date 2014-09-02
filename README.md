@@ -87,8 +87,10 @@ var webconsole  = require('console-io'),
     port        = 1337,
     ip          = '0.0.0.0';
     
-app.use(express.static(__dirname));
-app.use(webconsole(server));
+app .use(webconsole({
+        server: server
+    }))
+    .use(express.static(__dirname));
 
 server.listen(port, ip);
 ```
