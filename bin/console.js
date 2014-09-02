@@ -22,7 +22,7 @@
         ip          =   process.env.IP              ||  /* c9           */
                         '0.0.0.0';
         
-        app .use(webconsole(server))
+        app .use(webconsole(server, null, '/console', true))
             .use(minify({
                 dir: DIR
             }))
