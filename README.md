@@ -61,6 +61,11 @@ Get text of prompt.
 
 Set new text of prompt.
 
+**Console.focus()**
+
+Set focus on Console.
+
+
 ## Use as middleware
 
 To use `Console` in your programs you should make local install:
