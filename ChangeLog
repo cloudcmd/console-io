@@ -1,0 +1,9 @@
+2014.09.3, v1.6.6
+
+fix:
+- (console) isMinify on a fly
+
+feature:
+- (gulp) add
+
+
