@@ -1,3 +1,13 @@
+2014.09.9, v1.6.8
+
+fix:
+- (jqconsole) horizontal scroll of prompt
+
+feature:
+- (console) prompt, old-prompt: add word-wrap
+- (console) rm .jqconsole-composition
+
+
 2014.09.4, v1.6.7
 
 feature:
