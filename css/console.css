@@ -30,7 +30,7 @@
     background-color: #666;
 }
 .jqconsole-prompt {
-    color: #4a473a
+    color: #4a473a;
 }
 .jqconsole-old-prompt {
     font-weight : normal;
@@ -39,6 +39,7 @@
 
 .jqconsole-prompt, .jqconsole-old-prompt {
     margin: 10px;
+    word-wrap: break-word;
 }
 
 .brace {
