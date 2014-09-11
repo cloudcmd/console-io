@@ -18,7 +18,7 @@
     "express"
   ],
   "dependencies": {
-    "express": "~4.8.3",
+    "express": "~4.9.0",
     "glob": "~4.0.5",
     "join-io": "~1.0.6",
     "minify": "~1.0.0",
