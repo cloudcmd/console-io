@@ -88,7 +88,8 @@ var webconsole  = require('console-io'),
     ip          = '0.0.0.0';
     
 app .use(webconsole({
-        server: server
+        server: server,
+        online: true /* load jquery and socket.io from cdn */
     }))
     .use(express.static(__dirname));
 
