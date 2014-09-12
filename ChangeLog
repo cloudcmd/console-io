@@ -1,3 +1,10 @@
+2014.09.12, v1.7.2
+
+feature:
+- (socket) window.Socket -> Console.Socket
+- (load) add "-join" if ":" in name
+
+
 2014.09.12, v1.7.1
 
 feature:
