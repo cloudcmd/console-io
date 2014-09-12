@@ -1,3 +1,12 @@
+2014.09.12, v1.7.5
+
+fix:
+- feature(console) add room with pre
+
+feature:
+- (console) add room with prefix
+
+
 2014.09.12, v1.7.4
 
 feature:
