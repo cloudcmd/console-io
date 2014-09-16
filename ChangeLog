@@ -1,3 +1,9 @@
+2014.09.16, v1.7.7
+
+fix:
+- (console) io.listen(o.server).sockets -> io.listen(o.server)
+
+
 2014.09.12, v1.7.6
 
 feature:
