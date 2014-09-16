@@ -1,3 +1,10 @@
+2014.09.16, v1.7.8
+
+feature:
+- (console) revert changes to jqconsole
+- (console) add break words for firefox
+
+
 2014.09.16, v1.7.7
 
 fix:
