@@ -1,3 +1,12 @@
+2014.09.17, v1.7.9
+
+fix:
+- (console) one directory for all consoles
+
+feature:
+- (console) add -v, --v
+
+
 2014.09.16, v1.7.8
 
 feature:
