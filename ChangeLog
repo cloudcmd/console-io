@@ -1,3 +1,14 @@
+2014.09.18, v1.7.9
+
+fix:
+- (console) one directory for all consoles
+
+feature:
+- (modules) util-io v1.3.0
+- (modules) add jq-console, util-io
+- (console) add -v, --v
+
+
 2014.09.16, v1.7.8
 
 feature:
