@@ -1,3 +1,15 @@
+2014.09.18, v1.7.10
+
+fix:
+- (console) load: parallel -> series
+
+feature:
+- (style) rm body
+- (package) v1.7.9
+- (modules) util-io v1.3.0
+- (modules) add jq-console, util-io
+
+
 2014.09.18, v1.7.9
 
 fix:
