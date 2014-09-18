@@ -10,11 +10,14 @@
     display                 : block;
     padding                 : 10px;
     margin                  : 10px;
-    font                    : 16px "Droid Sans Mono";
     background              : beige;
     -webkit-border-radius   : 5px;
     -moz-border-radius      : 5px;
     border-radius           : 5px;
+}
+
+.error-msg, .log-msg, .jqconsole-prompt, .jqconsole-old-prompt {
+    font : 16px "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
 }
 
 .jqconsole {
