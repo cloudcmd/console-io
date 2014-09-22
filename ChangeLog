@@ -1,8 +1,8 @@
 2014.09.22, v1.8.0
 
 fix:
-- feature(server) middle: pre, options -> options
-- feature(server) middle: pre, isMinify, isOnline -> pre, options
+- feature(server) middle: prefix, options -> options
+- feature(server) middle: prefix, isMinify, isOnline -> pre, options
 
 feature:
 - (server) middle: prefix, options -> options
