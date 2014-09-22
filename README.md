@@ -72,13 +72,13 @@ Set focus on Console.
 Could be used as middleware, or for init `Console`.
 
 ```js
-**Console({
+Console({
     server: server,/* only one should be passed: */
     socket: socket,/* server or socket  */
     online: true, /* default */
     minify: true, /* default */
     prefix:'/console' /* default */
-})**
+})
 ```
 
 **Console.middle(options);**
@@ -86,11 +86,11 @@ Could be used as middleware, or for init `Console`.
 Middleware function if there is a need of init `socket` in another place.
 
 ```js
-**Console.middle({
+Console.middle({
     prefix: '/console', /* default */
     online: true, /* default */
     minify: true, /* default */
-})**
+})
 ```
 
 ## Use as middleware
