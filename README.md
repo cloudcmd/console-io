@@ -65,6 +65,33 @@ Set new text of prompt.
 
 Set focus on Console.
 
+### Server API
+
+**Console(options);**
+
+Could be used as middleware, or for init `Console`.
+
+```js
+**Console({
+    server: server,/* only one should be passed: */
+    socket: socket,/* server or socket  */
+    online: true, /* default */
+    minify: true, /* default */
+    prefix:'/console' /* default */
+})**
+```
+
+**Console.middle(options);**
+
+Middleware function if there is a need of init `socket` in another place.
+
+```js
+**Console.middle({
+    prefix: '/console', /* default */
+    online: true, /* default */
+    minify: true, /* default */
+})**
+```
 
 ## Use as middleware
 
