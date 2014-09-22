@@ -1,3 +1,15 @@
+2014.09.22, v1.8.0
+
+fix:
+- feature(server) middle: pre, options -> options
+- feature(server) middle: pre, isMinify, isOnline -> pre, options
+
+feature:
+- (server) middle: prefix, options -> options
+- (server) middle: prefix, isMinify, isOnline -> prefix, options
+- (server) o.isMinify -> o.minify
+
+
 2014.09.18, v1.7.10
 
 fix:
