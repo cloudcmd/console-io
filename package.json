@@ -25,6 +25,8 @@
     "spawnify": "~1.2.2",
     "util-io": "~1.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "~3.8.8"
+  },
   "license": "MIT"
 }
