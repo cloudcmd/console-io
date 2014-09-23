@@ -15,14 +15,6 @@ Start `console`, go to url `http://localhost:1337`
 
 ## API
 
-### Server API
-
-**webconsole(server [,prefix])**
-
-- server    - instance of server
-- prefix    - prefix of console url to use in html
-
-
 ### Client API
 
 **Console(element [, prefix], callback)**
