@@ -1,3 +1,13 @@
+2014.09.24, v1.8.3
+
+fix:
+- (console) getHost for ie
+
+feature:
+- (package) add gulp-jshint, gulp-recess
+- (package) add gulp
+
+
 2014.09.23, v1.8.2
 
 fix:
