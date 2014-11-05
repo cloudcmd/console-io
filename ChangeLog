@@ -1,3 +1,13 @@
+2014.11.5, v1.9.7
+
+fix:
+- (console) emit: error -> err
+
+feature:
+- (console) font: redefine only in bin
+- (console-io) rm CHANNEL
+
+
 2014.11.4, v1.9.6
 
 feature:
