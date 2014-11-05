@@ -1,3 +1,9 @@
+2014.11.5, v1.9.8
+
+feature:
+- (console) change cwd in more obvious way
+
+
 2014.11.5, v1.9.7
 
 fix:
