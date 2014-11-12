@@ -12,8 +12,9 @@
             '*.js',
             'gulp/**/*.js',
             LIB + '*.js',
-            LIB_CLIENT + '/*.js',
-            LIB_SERVER + '/**/*.js',
+            LIB_CLIENT + '*.js',
+            LIB_SERVER + '**/*.js',
+            '!' + LIB_CLIENT + 'jquery.js'
         ];
     
     ['changelog', 'package'].forEach(function(name) {
