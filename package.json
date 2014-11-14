@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "express": "~4.10.0",
-    "join-io": "~1.0.6",
+    "join-io": "~1.2.0",
     "minify": "~1.1.0",
     "socket.io": "~1.2.0",
     "spawnify": "~1.5.0",
