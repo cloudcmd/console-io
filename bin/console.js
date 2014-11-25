@@ -4,6 +4,12 @@
     'use strict';
     
     var argv        = process.argv,
+        Util        = require('util-io'),
+        vm          = require('vm'),
+        
+        Clients     = [],
+        Num         = 0,
+        
         argvLast    = argv.slice().pop();
     
     switch (argvLast) {
@@ -41,6 +47,8 @@
         
         app .use(webconsole({
                 server: server,
+                execute: execute,
+                prompt: ' ',
                 online: false
             }))
             .use(minify({
@@ -57,5 +65,25 @@
         var pack = require('../package.json');
         
         console.log('v' + pack.version);
+    }
+    
+    function execute(socket, code) {
+        var error, context;
+        
+        if (!Clients[Num])
+            Clients[Num] = {
+                context : vm.createContext()
+            };
+        
+        context = Clients[Num].context;
+        
+        error   = Util.exec.try(function() {
+            vm.runInContext('result = eval("' + code + '")', context);
+        });
+        
+        if (error)
+            socket.emit('err', error.message + '\n');
+        else
+            socket.emit('data', context.result + '\n');
     }
 })();
