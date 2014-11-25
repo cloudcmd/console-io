@@ -1,3 +1,11 @@
+2014.11.25, v1.10.4
+
+feature:
+- (package) spawnify v1.6.0
+- (console) add execute
+- (console) path -> prompt
+
+
 2014.11.24, v1.10.3
 
 feature:
