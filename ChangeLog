@@ -1,3 +1,10 @@
+2014.11.26, v1.10.7
+
+fix:
+- (server) load jquery with pre when offline
+- (console) get back old prompt
+
+
 2014.11.25, v1.10.6
 
 feature:
