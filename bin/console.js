@@ -5,11 +5,6 @@
     
     var argv        = process.argv,
         Util        = require('util-io'),
-        vm          = require('vm'),
-        
-        Clients     = [],
-        Num         = 0,
-        
         argvLast    = argv.slice().pop();
     
     switch (argvLast) {
