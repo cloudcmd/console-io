@@ -22,9 +22,9 @@
     "express": "~4.10.0",
     "join-io": "~1.3.0",
     "mollify": "~1.0.3",
+    "rendy": "~1.0.2",
     "socket.io": "~1.2.0",
-    "spawnify": "~1.8.0",
-    "util-io": "~1.6.0"
+    "spawnify": "~1.8.0"
   },
   "devDependencies": {
     "gulp": "~3.8.8",
