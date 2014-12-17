@@ -4,7 +4,6 @@
     'use strict';
     
     var argv        = process.argv,
-        Util        = require('util-io'),
         argvLast    = argv.slice().pop();
     
     switch (argvLast) {
@@ -27,7 +26,7 @@
         http        = require('http'),
         
         express     = require('express'),
-        minify      = require('minify'),
+        mollify     = require('mollify'),
         
         app         = express(),
         server      = http.createServer(app),
@@ -44,7 +43,7 @@
                 server: server,
                 online: false
             }))
-            .use(minify({
+            .use(mollify({
                 dir: DIR
             }))
             .use(express.static(DIR));
