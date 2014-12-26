@@ -17,10 +17,6 @@
             '!' + LIB_CLIENT + 'jquery.js'
         ];
     
-    ['changelog', 'package'].forEach(function(name) {
-        gulp.task(name, require('./gulp/tasks/' + name));
-    });
-    
     gulp.task('jshint', function() {
         gulp.src(Src)
             .pipe(jshint())
@@ -37,7 +33,6 @@
     });
     
     gulp.task('default', ['jshint', 'css']);
-    gulp.task('release', ['changelog', 'package']);
     
     function onError(params) {
         console.log(params.message);
