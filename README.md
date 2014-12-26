@@ -29,7 +29,7 @@ console script in this way:
 
 `<script src="/any_prefix/console.js"></script>`
 
-**Console.addShortCuts(shortCuts)**
+#### Console.addShortCuts(shortCuts)
 
 - shortCuts - object contain big letter and function.
 
@@ -43,23 +43,23 @@ Console.addShortCuts({
 });
 ```
 
-**Console.getPromptText()**
+#### Console.getPromptText()
 
 Get text of prompt.
 
-**Console.setPromptText(text)**
+#### Console.setPromptText(text)
 
 - text - string of new text
 
 Set new text of prompt.
 
-**Console.focus()**
+#### Console.focus()
 
 Set focus on Console.
 
 ### Server API
 
-**Console(options);**
+#### Console(options)
 
 Could be used as middleware, or for init `Console`.
 
@@ -73,7 +73,7 @@ Console({
 })
 ```
 
-**Console.middle(options);**
+#### Console.middle(options)
 
 Middleware function if there is a need of init `socket` in another place.
 
