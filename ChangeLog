@@ -1,3 +1,12 @@
+2014.12.26, v1.11.7
+
+feature:
+- (travis) add
+- (gulp) rm
+- (package) gulp-recess v1.1.1
+- (package) gulp-jshint v1.9.0
+
+
 2014.12.17, v1.11.6
 
 fix:
