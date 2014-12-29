@@ -1,3 +1,12 @@
+2014.12.29, v1.11.8
+
+fix:
+- (console) start count of clients from 0
+
+feature:
+- (modules) jquery v2.1.3
+
+
 2014.12.26, v1.11.7
 
 feature:
