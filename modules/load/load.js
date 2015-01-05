@@ -19,6 +19,9 @@
             case '.json':
                 load.json(src, callback);
                 break;
+            
+            default:
+                load.ajax(src, callback);
             }
         }
         
@@ -32,7 +35,12 @@
                 el      = document.createElement('script');
                 el.id   = id;
                 el.src  = src;
-                el.addEventListener('load', callback);
+                
+                el.addEventListener('load', function(event) {
+                    callback(null, event);
+                });
+                
+                el.addEventListener('error', callback);
             
                 document.body.appendChild(el);
             }
@@ -51,7 +59,12 @@
                 el.id   = getIdBySrc(src);
                 el.rel  = 'stylesheet';
                 el.href = src;
-                el.addEventListener('load', callback);
+                
+                el.addEventListener('load', function(event) {
+                    callback(null, event);
+                });
+                
+                el.addEventListener('error', callback);
                 
                 document.head.appendChild(el);
             }
@@ -59,7 +72,7 @@
             return el;
         };
         
-        load.json   = function(url, callback) {
+        load.ajax   = function(url, callback) {
             var request = new XMLHttpRequest();
             
             request.open('GET', url, true);
@@ -68,7 +81,7 @@
                 var data;
                 
                 if (request.status >= 200 && request.status < 400){
-                    data = JSON.parse(request.responseText);
+                    data = request.responseText;
                     callback(null, data);
                 }
             });
@@ -76,6 +89,17 @@
             request.addEventListener('error', callback);
             
             request.send();
+        };
+        
+        load.json   = function(url ,callback) {
+            load.ajax(url, function(error, data) {
+                var json;
+                
+                if (!error)
+                    json = JSON.parse(data);
+                
+                callback(error, json || data);
+            });
         };
         
         load.series = function(urls, callback) {
