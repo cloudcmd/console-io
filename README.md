@@ -27,7 +27,7 @@ Start `console`, go to url `http://localhost:1337`
 
 ### Client API
 
-**Console(element [, prefix], callback)**
+#### Console(element [, prefix], callback)
 
 - element   - html element, or selector
 - prefix    - (optional) prefix to url (same as in server)
