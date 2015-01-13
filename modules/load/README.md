@@ -2,12 +2,20 @@
 
 Dynamically loading external JavaScript and CSS files 
 
-##How use?
+## Install
+
+```
+bower install load
+```
+
+## How use?
 Create `html` page with `js` connected.
 
 ```html
 <script src="load.min.js"></script>
 ```
+
+Than try one of this:
 
 ```js
 load.js('jquery.js', function(error) {
@@ -42,7 +50,7 @@ load.series([
 ], function() {
 });
 
-/* load all togeter and call callback */
+/* load all together and call callback */
 load.parallel([
     'menu.css',
     'menu.js',
