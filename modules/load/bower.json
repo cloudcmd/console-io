@@ -13,14 +13,5 @@
   "keywords": [
     "load"
   ],
-  "license": "MIT",
-  "_release": "1.1.2",
-  "_resolution": {
-    "type": "version",
-    "tag": "v1.1.2",
-    "commit": "967bd65c6b5af21da3d85ea4a2144014a28eee39"
-  },
-  "_source": "git://github.com/coderaiser/load.js.git",
-  "_target": "~1.1.0",
-  "_originalSource": "load"
+  "license": "MIT"
 }
