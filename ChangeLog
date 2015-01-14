@@ -1,3 +1,11 @@
+2015.01.14, v1.11.11
+
+feature:
+- (server) indexOf -> "==="
+- (package) v1.11.10
+- (load) v1.1.2
+
+
 2015.01.13, v1.11.10
 
 feature:
