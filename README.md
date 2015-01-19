@@ -23,6 +23,16 @@ Web console used in [Cloud Commander](http://cloudcmd.io).
 
 Start `console`, go to url `http://localhost:1337`
 
+## Hot keys
+
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `Ctrl + Z`            | cancel input
+| `Ctrl + L`            | clear screen
+| `Ctrl + C`            | kill running task
+
+For more details see [Jq-console keyboard shortcuts](https://github.com/replit/jq-console#default-key-config).
+
 ## API
 
 ### Client API
