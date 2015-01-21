@@ -13,4 +13,9 @@
     "version": "2.10.0",
     "local": "/modules/jq-console/lib/jqconsole.js",
     "remote": "//cdn.jsdelivr.net/jq-console/{{ version }}/jqconsole.min.js"
+}, {
+    "name": "skipfirst",
+    "version": "1.0.1",
+    "local": "/modules/skipfirst/lib/skipfirst.js",
+    "remote": "//cdn.jsdelivr.net/skipfirst/{{ version }}/skipfirst.min.js"
 }]
