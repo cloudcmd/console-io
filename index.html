@@ -12,15 +12,13 @@
             (function() {
                 'use strict';
                 
-                window.addEventListener('load', load);
-                
-                function load() {
-                    window.removeEventListener('load', load);
+                window.addEventListener('DOMContentLoaded', function load() {
+                    window.removeEventListener('DOMContentLoaded', load);
                     
                     Console('.console', function() {
                         console.log('console ready')
                     });
-                }
+                });
             })()
         </script>
     </body>
