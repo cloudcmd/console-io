@@ -1,3 +1,9 @@
+2015.02.01, v2.1.6
+
+feature:
+- (client) spead up load: load join.js and load.js only when they not loaded before
+
+
 2015.01.21, v2.1.5
 
 fix:
