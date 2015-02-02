@@ -85,11 +85,11 @@ Could be used as middleware, or for init `Console`.
 
 ```js
 Console({
-    server: server,/* only one should be passed: */
-    socket: socket,/* server or socket  */
-    online: true, /* default */
-    minify: true, /* default */
-    prefix:'/console' /* default */
+    server: server,     /* only one should be passed: */
+    socket: socket,     /* server or socket  */
+    online: true,       /* default */
+    minify: true,       /* default */
+    prefix:'/console'   /* default */
 })
 ```
 
@@ -100,8 +100,8 @@ Middleware function if there is a need of init `socket` in another place.
 ```js
 Console.middle({
     prefix: '/console', /* default */
-    online: true, /* default */
-    minify: true, /* default */
+    online: true,       /* default */
+    minify: true,       /* default */
 })
 ```
 
