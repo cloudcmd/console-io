@@ -1,3 +1,11 @@
+2015.02.04, v2.1.8
+
+feature:
+- (font) Droid Sans Mono v7
+- (package) v2.1.7
+- (console) loadScript: rm event listener "load" after load
+
+
 2015.02.03, v2.1.7
 
 feature:
