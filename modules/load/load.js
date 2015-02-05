@@ -1,7 +1,10 @@
-(function(window) {
+(function(global) {
     'use strict';
     
-    window.load = new LoadProto();
+    if (typeof module !== 'undefined' && module.exports)
+        module.exports = new LoadProto();
+    else
+        global.load = new LoadProto();
     
     function LoadProto() {
         function load(src, callback) {
@@ -167,4 +170,4 @@
         
         return load;
     }
-})(window);
+})(this);

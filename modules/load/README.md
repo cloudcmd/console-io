@@ -47,14 +47,14 @@ load.ajax('template/header.html', function(error, header) {
 load.series([
     'jquery.js',
     'jq-console.js',
-], function() {
+], function(error) {
 });
 
 /* load all together and call callback */
 load.parallel([
     'menu.css',
     'menu.js',
-], function() {
+], function(error) {
 });
 ```
 

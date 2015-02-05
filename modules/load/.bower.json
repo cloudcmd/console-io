@@ -1,7 +1,7 @@
 {
   "name": "load",
   "main": "load.js",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Dynamically loading external JavaScript and CSS files",
   "homepage": "https://github.com/coderaiser/load.js",
   "authors": [
@@ -15,13 +15,14 @@
   ],
   "ignore": [],
   "license": "MIT",
-  "_release": "1.1.3",
+  "_release": "1.1.4",
   "_resolution": {
     "type": "version",
-    "tag": "v1.1.3",
-    "commit": "a888f78f5634e8b93b98863d51ab530957413fbc"
+    "tag": "v1.1.4",
+    "commit": "2ea571ff43ad93c8813b714267951ab88429eaae"
   },
   "_source": "git://github.com/coderaiser/load.js.git",
-  "_target": "~1.1.0",
-  "_originalSource": "load"
+  "_target": "~1.1.4",
+  "_originalSource": "load",
+  "_direct": true
 }
