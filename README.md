@@ -6,8 +6,8 @@ Console [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMU
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
-[BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
-[DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
+[BuildStatusURL]:           https://travis-ci.org/cloudcmd/console  "Build Status"
+[DependencyStatusURL]:      https://gemnasium.com/cloudcmd/console "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
 
