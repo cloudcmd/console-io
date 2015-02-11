@@ -1,3 +1,11 @@
+2015.02.11, v2.1.11
+
+feature:
+- (console) mv execute to server
+- (jshintrc) add
+- (travis) add 0.12, iojs
+
+
 2015.02.09, v2.1.10
 
 feature:
