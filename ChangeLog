@@ -1,3 +1,9 @@
+2015.02.12, v2.1.12
+
+feature:
+- (server) execute: rm listeners when no need in them
+
+
 2015.02.11, v2.1.11
 
 feature:
