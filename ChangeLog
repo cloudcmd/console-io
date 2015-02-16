@@ -1,3 +1,9 @@
+2015.02.16, v2.1.14
+
+fix:
+- (server) when minify and no js/html/css send wrong files
+
+
 2015.02.13, v2.1.13
 
 feature:
