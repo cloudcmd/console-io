@@ -1,3 +1,9 @@
+2015.02.16, v2.1.15
+
+feature:
+- (console) processing: options.execute -> fn
+
+
 2015.02.16, v2.1.14
 
 fix:
