@@ -1,3 +1,9 @@
+2015.03.01, v2.2.2
+
+feature:
+- (console) setPromptLabel: add UpdatePromptLabel
+
+
 2015.03.01, v2.2.1
 
 feature:
