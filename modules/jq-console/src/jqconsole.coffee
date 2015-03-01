@@ -443,6 +443,12 @@ class JQConsole
       @prompt_label_continue = continue_label
     return undefined
 
+  # Update the main prompt label.
+  UpdatePromptLabel: ->
+    prompt_selector = '>span+span>span:first-child'
+    full_selector = '.' + CLASS_PROMPT + prompt_selector
+    @$console.find(full_selector).text(@prompt_label_main)
+
   # Writes the given text to the console in a <span>, with an optional class.
   #   @arg text: The text to write.
   #   @arg cls: The class to give the span containing the text. Optional.
@@ -528,8 +534,8 @@ class JQConsole
   # Aborts the current prompt operation and returns to output mode or the next
   # queued input/prompt operation.
   AbortPrompt: ->
-    if @state != STATE_PROMPT
-      throw new Error 'Cannot abort prompt when not in prompt state.'
+    if @state == STATE_OUTPUT
+      throw new Error 'Cannot abort prompt when not in prompt or input state.'
     @Write @GetPromptText(true) + NEWLINE, CLASS_OLD_PROMPT
     @ClearPromptText true
     @state = STATE_OUTPUT
@@ -629,7 +635,7 @@ class JQConsole
       .text ''
     # Bug in Chrome were the cursor's position is not recalculated
     @$prompt_cursor.detach()
-    @$prompt_after.before @$prompt_cursor
+    @$prompt_right.before @$prompt_cursor
 
   ###------------------------ Private Methods -------------------------------###
 
