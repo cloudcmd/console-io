@@ -10,7 +10,7 @@
     "remote": "//cdn.socket.io/socket.io-{{ version }}.js"
 }, {
     "name": "jq-console",
-    "version": "2.10.0",
+    "version": "2.11.0",
     "local": "/modules/jq-console/lib/jqconsole.js",
     "remote": "//cdn.jsdelivr.net/jq-console/{{ version }}/jqconsole.min.js"
 }, {
