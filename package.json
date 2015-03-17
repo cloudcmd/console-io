@@ -23,7 +23,7 @@
     "join-io": "~1.3.0",
     "mollify": "~1.0.3",
     "rendy": "~1.0.2",
-    "socket.io": "~1.3.3",
+    "socket.io": "~1.3.5",
     "spawnify": "~1.10.0"
   },
   "devDependencies": {
