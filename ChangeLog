@@ -1,3 +1,11 @@
+2015.05.12, v2.2.5
+
+feature:
+- (package) debug v2.2.0
+- (package) gulp-jshint v1.10
+- (console) console.log(error) -> console.error(error)
+
+
 2015.03.17, v2.2.4
 
 feature:
