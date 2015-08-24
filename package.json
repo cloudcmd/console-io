@@ -30,7 +30,7 @@
     "spawnify": "~2.1.0"
   },
   "devDependencies": {
-    "bower": "~1.4.1",
+    "bower": "^1.5.1",
     "gulp": "^3.9.0",
     "gulp-jshint": "~1.11.0",
     "gulp-recess": "~1.1.1"
