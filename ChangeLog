@@ -1,3 +1,10 @@
+2015.09.21, v2.2.13
+
+feature:
+- (package) socket.io v1.3.7
+- (package) bower v1.5.1
+
+
 2015.08.19, v2.2.12
 
 feature:
