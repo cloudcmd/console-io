@@ -85,11 +85,14 @@ Could be used as middleware, or for init `Console`.
 
 ```js
 Console({
-    server: server,     /* only one should be passed: */
-    socket: socket,     /* server or socket  */
-    online: true,       /* default */
-    minify: true,       /* default */
-    prefix:'/console'   /* default */
+    server: server,                         /* only one should be passed: */
+    socket: socket,                         /* server or socket  */
+    online: true,                           /* default */
+    minify: true,                           /* default */
+    prefix:'/console'                       /* default */
+    authCheck: function(socket, success) {  /* authorization function */
+    }
+    
 })
 ```
 
