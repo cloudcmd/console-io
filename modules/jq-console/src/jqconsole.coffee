@@ -32,6 +32,7 @@ CLASS_HEADER = "#{CLASS_PREFIX}header"
 CLASS_PROMPT = "#{CLASS_PREFIX}prompt"
 CLASS_OLD_PROMPT = "#{CLASS_PREFIX}old-prompt"
 CLASS_INPUT = "#{CLASS_PREFIX}input"
+CLASS_OLD_INPUT = "#{CLASS_PREFIX}old-input"
 CLASS_BLURRED = "#{CLASS_PREFIX}blurred"
 
 # Frequently used string literals
@@ -143,11 +144,13 @@ class JQConsole
   #     Defaults to DEFAULT_PROMPT_LABEL.
   #   @arg prompt_continue: The label to show before continuation lines of the
   #     command prompt. Optional. Defaults to DEFAULT_PROMPT_CONINUE_LABEL.
-  constructor: (outer_container, header, prompt_label, prompt_continue_label) ->
+  constructor: (outer_container, header, prompt_label, prompt_continue_label, disable_auto_focus = false) ->
     # Mobile devices supported sniff.
     @isMobile = !!navigator.userAgent.match /iPhone|iPad|iPod|Android/i
     @isIos = !!navigator.userAgent.match /iPhone|iPad|iPod/i
     @isAndroid = !!navigator.userAgent.match /Android/i
+
+    @auto_focus = not disable_auto_focus
 
     @$window = $(window)
 
@@ -527,7 +530,8 @@ class JQConsole
     @state = STATE_PROMPT
     @$prompt.attr 'class', CLASS_PROMPT + ' ' + @ansi.getClasses()
     @$prompt_label.text @_SelectPromptLabel false
-    @Focus()
+    if @auto_focus
+      @Focus()
     @_ScrollToEnd()
     return undefined
 
@@ -536,7 +540,17 @@ class JQConsole
   AbortPrompt: ->
     if @state == STATE_OUTPUT
       throw new Error 'Cannot abort prompt when not in prompt or input state.'
-    @Write @GetPromptText(true) + NEWLINE, CLASS_OLD_PROMPT
+
+    text = @GetPromptText(true)
+
+    if @state == STATE_INPUT
+      # Only write an old input line if there is text.
+      if text.trim().length != 0
+        @Write text + NEWLINE, CLASS_OLD_INPUT
+    else
+      # Write anyways to get a seperation between prompts.
+      @Write text + NEWLINE, CLASS_OLD_PROMPT
+
     @ClearPromptText true
     @state = STATE_OUTPUT
     @input_callback = @multiline_callback = null
@@ -1121,8 +1135,9 @@ class JQConsole
       left: pos.left
       top: pos.top
 
-    # Give time for mobile browsers to zoom in on textarea
-    setTimeout @ScrollWindowToPrompt.bind(@), 50
+    if @auto_focus
+      # Give time for mobile browsers to zoom in on textarea
+      setTimeout @ScrollWindowToPrompt.bind(@), 50
 
   ScrollWindowToPrompt: ->
     # The cursor's top position is effected by the scroll-top of the console
@@ -1327,8 +1342,8 @@ class JQConsole
     # is already extracted and has been put on the left of the prompt.
     @$composition.detach()
 
-$.fn.jqconsole = (header, prompt_main, prompt_continue) ->
-  new JQConsole this, header, prompt_main, prompt_continue
+$.fn.jqconsole = (header, prompt_main, prompt_continue, disable_auto_focus) ->
+  new JQConsole this, header, prompt_main, prompt_continue, disable_auto_focus
 
 $.fn.jqconsole.JQConsole = JQConsole
 $.fn.jqconsole.Ansi = Ansi

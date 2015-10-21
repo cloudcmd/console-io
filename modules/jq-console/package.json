@@ -1,13 +1,15 @@
 {
   "name": "jq-console",
-  "version": "2.11.0",
+  "version": "2.12.0",
   "description": "Feature complete web terminal",
   "main": "jqconsole.min.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --single-run"
+    "test": "./node_modules/karma/bin/karma start --single-run",
+    "compile": "coffee -o lib -c src",
+    "min": "uglifyjs lib/jqconsole.js > jqconsole.min.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +39,7 @@
     "karma": "~0.10.9",
     "karma-mocha": "~0.1.1",
     "karma-coverage": "~0.1.5",
-    "coffee-script": "~1.9.1"
+    "coffee-script": "~1.9.1",
+    "uglify-js": "~2.4.16"
   }
 }

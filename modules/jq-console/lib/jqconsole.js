@@ -6,7 +6,7 @@ Licensed under the MIT license
  */
 
 (function() {
-  var $, Ansi, CLASS_ANSI, CLASS_BLURRED, CLASS_CURSOR, CLASS_HEADER, CLASS_INPUT, CLASS_OLD_PROMPT, CLASS_PREFIX, CLASS_PROMPT, DEFAULT_INDENT_WIDTH, DEFAULT_PROMPT_CONINUE_LABEL, DEFAULT_PROMPT_LABEL, EMPTY_DIV, EMPTY_SELECTOR, EMPTY_SPAN, ESCAPE_CHAR, ESCAPE_SYNTAX, E_KEYPRESS, JQConsole, KEY_BACKSPACE, KEY_DELETE, KEY_DOWN, KEY_END, KEY_ENTER, KEY_HOME, KEY_LEFT, KEY_PAGE_DOWN, KEY_PAGE_UP, KEY_RIGHT, KEY_TAB, KEY_UP, NEWLINE, STATE_INPUT, STATE_OUTPUT, STATE_PROMPT, spanHtml,
+  var $, Ansi, CLASS_ANSI, CLASS_BLURRED, CLASS_CURSOR, CLASS_HEADER, CLASS_INPUT, CLASS_OLD_INPUT, CLASS_OLD_PROMPT, CLASS_PREFIX, CLASS_PROMPT, DEFAULT_INDENT_WIDTH, DEFAULT_PROMPT_CONINUE_LABEL, DEFAULT_PROMPT_LABEL, EMPTY_DIV, EMPTY_SELECTOR, EMPTY_SPAN, ESCAPE_CHAR, ESCAPE_SYNTAX, E_KEYPRESS, JQConsole, KEY_BACKSPACE, KEY_DELETE, KEY_DOWN, KEY_END, KEY_ENTER, KEY_HOME, KEY_LEFT, KEY_PAGE_DOWN, KEY_PAGE_UP, KEY_RIGHT, KEY_TAB, KEY_UP, NEWLINE, STATE_INPUT, STATE_OUTPUT, STATE_PROMPT, spanHtml,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     slice = [].slice;
 
@@ -53,6 +53,8 @@ Licensed under the MIT license
   CLASS_OLD_PROMPT = CLASS_PREFIX + "old-prompt";
 
   CLASS_INPUT = CLASS_PREFIX + "input";
+
+  CLASS_OLD_INPUT = CLASS_PREFIX + "old-input";
 
   CLASS_BLURRED = CLASS_PREFIX + "blurred";
 
@@ -273,7 +275,10 @@ Licensed under the MIT license
   };
 
   JQConsole = (function() {
-    function JQConsole(outer_container, header, prompt_label, prompt_continue_label) {
+    function JQConsole(outer_container, header, prompt_label, prompt_continue_label, disable_auto_focus) {
+      if (disable_auto_focus == null) {
+        disable_auto_focus = false;
+      }
       this._HideComposition = bind(this._HideComposition, this);
       this._ShowComposition = bind(this._ShowComposition, this);
       this._UpdateComposition = bind(this._UpdateComposition, this);
@@ -286,6 +291,7 @@ Licensed under the MIT license
       this.isMobile = !!navigator.userAgent.match(/iPhone|iPad|iPod|Android/i);
       this.isIos = !!navigator.userAgent.match(/iPhone|iPad|iPod/i);
       this.isAndroid = !!navigator.userAgent.match(/Android/i);
+      this.auto_focus = !disable_auto_focus;
       this.$window = $(window);
       this.header = header || '';
       this.prompt_label_main = typeof prompt_label === 'string' ? prompt_label : DEFAULT_PROMPT_LABEL;
@@ -620,16 +626,26 @@ Licensed under the MIT license
       this.state = STATE_PROMPT;
       this.$prompt.attr('class', CLASS_PROMPT + ' ' + this.ansi.getClasses());
       this.$prompt_label.text(this._SelectPromptLabel(false));
-      this.Focus();
+      if (this.auto_focus) {
+        this.Focus();
+      }
       this._ScrollToEnd();
       return void 0;
     };
 
     JQConsole.prototype.AbortPrompt = function() {
+      var text;
       if (this.state === STATE_OUTPUT) {
         throw new Error('Cannot abort prompt when not in prompt or input state.');
       }
-      this.Write(this.GetPromptText(true) + NEWLINE, CLASS_OLD_PROMPT);
+      text = this.GetPromptText(true);
+      if (this.state === STATE_INPUT) {
+        if (text.trim().length !== 0) {
+          this.Write(text + NEWLINE, CLASS_OLD_INPUT);
+        }
+      } else {
+        this.Write(text + NEWLINE, CLASS_OLD_PROMPT);
+      }
       this.ClearPromptText(true);
       this.state = STATE_OUTPUT;
       this.input_callback = this.multiline_callback = null;
@@ -1270,7 +1286,9 @@ Licensed under the MIT license
         left: pos.left,
         top: pos.top
       });
-      return setTimeout(this.ScrollWindowToPrompt.bind(this), 50);
+      if (this.auto_focus) {
+        return setTimeout(this.ScrollWindowToPrompt.bind(this), 50);
+      }
     };
 
     JQConsole.prototype.ScrollWindowToPrompt = function() {
@@ -1505,8 +1523,8 @@ Licensed under the MIT license
 
   })();
 
-  $.fn.jqconsole = function(header, prompt_main, prompt_continue) {
-    return new JQConsole(this, header, prompt_main, prompt_continue);
+  $.fn.jqconsole = function(header, prompt_main, prompt_continue, disable_auto_focus) {
+    return new JQConsole(this, header, prompt_main, prompt_continue, disable_auto_focus);
   };
 
   $.fn.jqconsole.JQConsole = JQConsole;
