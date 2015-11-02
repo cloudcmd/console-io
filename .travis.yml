@@ -12,7 +12,7 @@ before_install:
   - npm install gulp -g
 
 script:
-  - gulp default
+  - npm test
 
 notifications:
     email:
