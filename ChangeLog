@@ -1,3 +1,11 @@
+2015.11.04, v2.4.0
+
+feature:
+- (console) restore path after reconnect
+- (package) scripts: test
+- (package) gulp-jshint v1.12.0
+
+
 2015.10.21, v2.3.3
 
 feature:
