@@ -30,6 +30,7 @@ CLASS_PREFIX = 'jqconsole-'
 CLASS_CURSOR = "#{CLASS_PREFIX}cursor"
 CLASS_HEADER = "#{CLASS_PREFIX}header"
 CLASS_PROMPT = "#{CLASS_PREFIX}prompt"
+CLASS_PROMPT_TEXT = "#{CLASS_PROMPT}-text"
 CLASS_OLD_PROMPT = "#{CLASS_PREFIX}old-prompt"
 CLASS_INPUT = "#{CLASS_PREFIX}input"
 CLASS_OLD_INPUT = "#{CLASS_PREFIX}old-input"
@@ -267,7 +268,7 @@ class JQConsole
     # Save this instance to be accessed if lost.
     $(outer_container).data 'jqconsole', this
 
-  #### Reset methods
+  # Reset methods
 
   # Resets the history into intitial state.
   ResetHistory: ->
@@ -291,6 +292,8 @@ class JQConsole
     @input_queue = []
     @input_callback = null
     @multiline_callback = null
+    @custom_control_key_handler = null
+    @custom_keypress_handler = null
     @ResetHistory()
     @ResetShortcuts()
     @ResetMatchings()
@@ -642,11 +645,13 @@ class JQConsole
 
   # Clear the console keeping only the prompt.
   Clear: ->
+    prompt_class = if @state == STATE_INPUT then CLASS_INPUT else CLASS_PROMPT
     @$console
       .find(".#{CLASS_HEADER}")
-      .nextUntil(".#{CLASS_PROMPT}")
+      .nextUntil(".#{prompt_class}")
       .addBack()
       .text ''
+
     # Bug in Chrome were the cursor's position is not recalculated
     @$prompt_cursor.detach()
     @$prompt_right.before @$prompt_cursor
@@ -698,6 +703,12 @@ class JQConsole
 
     # Needed for the CSS z-index on the cursor to work.
     @$prompt_right.css position: 'relative'
+
+    # To indicate the prompt text (maybe used for highlighting etc)
+    @$prompt_left.addClass(CLASS_PROMPT_TEXT)
+    @$prompt_right.addClass(CLASS_PROMPT_TEXT)
+    @$prompt_before.addClass(CLASS_PROMPT_TEXT)
+    @$prompt_after.addClass(CLASS_PROMPT_TEXT)
 
     # The cursor. A span containing a space that shades its following character.
     # If the font of the prompt is not monospace, the content should be set to
@@ -785,6 +796,17 @@ class JQConsole
     else
       @$input_source.bind 'text', @_UpdateComposition
 
+  # Handle key presses and potentially override internal keypress handler.
+  # @arg handler: function that can be used to handle key presses.
+  #               can override internal handler by returning false.
+  SetKeyPressHandler: (handler) ->
+    @custom_keypress_handler = handler
+
+  # Handle and potentially override control keys (tab, up, down).
+  # @arg handler: function that can be used to control key events.
+  SetControlKeyHandler: (handler) ->
+    @custom_control_key_handler = handler
+
   # Handles a character key press.
   #   @arg event: The jQuery keyboard Event object to handle.
   _HandleChar: (event) =>
@@ -804,6 +826,10 @@ class JQConsole
     # These are handled in _HandleKey().
     if char_code in [8, 9, 13] then return false
 
+    if @custom_keypress_handler?
+      if @custom_keypress_handler.call(@, event) == false
+        return false
+
     @$prompt_left.text @$prompt_left.text() + String.fromCharCode char_code
     @_ScrollToEnd()
     return false
@@ -818,6 +844,10 @@ class JQConsole
 
     # Check for char matching next time the callstack unwinds.
     setTimeout $.proxy(@_CheckMatchings, this), 0
+
+    if @custom_control_key_handler?
+      if @custom_control_key_handler.call(@, event) == false
+        return false
 
     # Don't care about alt-modifier.
     if event.altKey
