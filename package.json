@@ -34,7 +34,7 @@
     "bower": "^1.5.1",
     "gulp": "^3.9.0",
     "gulp-jshint": "^1.12.0",
-    "gulp-recess": "~1.1.1"
+    "gulp-recess": "^1.2.0"
   },
   "license": "MIT"
 }
