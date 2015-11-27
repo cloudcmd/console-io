@@ -1,3 +1,11 @@
+2015.11.27, v2.5.1
+
+feature:
+- (bower) jq-console v2.13.2
+- (package) gulp-jshint v2.0.0
+- (package) gulp-recess v1.2.0
+
+
 2015.11.11, v2.5.0
 
 feature:
