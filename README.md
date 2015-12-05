@@ -144,19 +144,9 @@ server.listen(port, ip);
 <div class="console"></div>
 <script src="/console/console.js"></script>
 <script>
-    (function() {
-        'use strict';
-        
-        window.addEventListener('load', load);
-        
-        function load() {
-            window.removeEventListener('load', load);
-            
-            Console('.console', function() {
-                console.log('console ready')
-            });
-        }
-    })()
+    Console('.console', function() {
+        console.log('console ready')
+    });
 </script>
 ```
 
