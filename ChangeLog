@@ -1,3 +1,9 @@
+2016.03.17, v2.7.1
+
+fix:
+- (console) getPromptText: check state first
+
+
 2016.03.17, v2.7.0
 
 feature:
