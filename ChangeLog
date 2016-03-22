@@ -1,3 +1,9 @@
+2016.03.22, v2.7.4
+
+fix:
+- (console) use event.key instead of deprecated event.keyIdentifier
+
+
 2016.03.17, v2.7.3
 
 fix:
