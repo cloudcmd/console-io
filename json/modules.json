@@ -1,6 +1,6 @@
 [{
     "name": "jquery",
-    "version": "2.1.4",
+    "version": "3.0.0",
     "local": "/modules/jquery/dist/jquery.js",
     "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
 }, {

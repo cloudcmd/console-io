@@ -13,9 +13,9 @@
     "modules"
   ],
   "dependencies": {
-    "jquery": "~2.1.4",
     "load": "~1.1.4",
     "skipfirst": "~1.0.0",
-    "jq-console": "~2.13.2"
+    "jq-console": "~2.13.2",
+    "jquery": "^3.0.0"
   }
 }
