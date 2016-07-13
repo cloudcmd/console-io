@@ -89,10 +89,9 @@ Console({
     socket: socket,                         /* server or socket  */
     online: true,                           /* default */
     minify: true,                           /* default */
-    prefix:'/console'                       /* default */
+    prefix: '/console'                       /* default */
     authCheck: function(socket, success) {  /* authorization function */
     }
-    
 })
 ```
 
