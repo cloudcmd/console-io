@@ -27,7 +27,7 @@
     "join-io": "~1.4.0",
     "mollify": "~1.0.3",
     "rendy": "~1.1.0",
-    "socket.io": "~1.4.3",
+    "socket.io": "^1.5.0",
     "spawnify": "~2.3.0",
     "tildify": "~1.2.0"
   },
