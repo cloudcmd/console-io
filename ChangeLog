@@ -1,3 +1,11 @@
+2016.10.20, v2.7.11
+
+feature:
+- (gitignore) rm unused
+- (bower) jquery v3.1.1
+- (modules) jquery, jq-console: js -> min.js
+
+
 2016.10.08, v2.7.10
 
 feature:
