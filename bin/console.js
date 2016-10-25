@@ -41,7 +41,8 @@
         
         app .use(webconsole({
                 server: server,
-                online: false
+                online: false,
+                minify: false
             }))
             .use(mollify({
                 dir: DIR
