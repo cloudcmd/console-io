@@ -1,3 +1,9 @@
+2016.10.25, v2.7.12
+
+feature:
+- (console) minify: false
+
+
 2016.10.20, v2.7.11
 
 feature:
