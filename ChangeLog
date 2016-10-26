@@ -1,3 +1,12 @@
+2016.10.26, v2.7.13
+
+feature:
+- (console) prevent loading of socket.io when already loaded
+- (jshintrc) esversion: 6
+- (gulpfile) rm iifee
+- (travis) node_js: add 7
+
+
 2016.10.25, v2.7.12
 
 feature:
