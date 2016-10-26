@@ -1,12 +1,7 @@
 language: node_js
 node_js:
-    - 0.10
-    - 0.12
-    - iojs
-
-matrix:
-  allow_failures:
-    - node_js: 'iojs'
+    - 6
+    - 7
 
 before_install:
   - npm install gulp -g
@@ -18,3 +13,4 @@ notifications:
     email:
         on_success: never
         on_failure: change
+
