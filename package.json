@@ -22,7 +22,7 @@
     "express"
   ],
   "dependencies": {
-    "debug": "~2.2.0",
+    "debug": "^2.3.0",
     "express": "^4.14.0",
     "join-io": "~1.4.0",
     "mollify": "~1.0.3",
