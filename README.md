@@ -143,9 +143,21 @@ server.listen(port, ip);
 <div class="console"></div>
 <script src="/console/console.js"></script>
 <script>
-    Console('.console', function() {
+    const options = {
+        prefix: 'console',
+        env: {
+            CURRENT_FILE: getCurrentFile(),
+            CURRENT_APP: 'console-io'
+        }
+    };
+    
+    Console('.console', options, function() {
         console.log('console ready')
     });
+    
+    function getCurrentFile() {
+        return 'filename.txt';
+    }
 </script>
 ```
 
