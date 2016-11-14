@@ -1,20 +1,20 @@
 'use strict';
-    
-const gulp        = require('gulp'),
-    jshint      = require('gulp-jshint'),
-    recess      = require('gulp-recess'),
-    
-    LIB         = 'lib/',
-    LIB_CLIENT  = LIB + 'client/',
-    LIB_SERVER  = LIB + 'server/',
-    Src         = [
-        '*.js',
-        'gulp/**/*.js',
-        LIB + '*.js',
-        LIB_CLIENT + '*.js',
-        LIB_SERVER + '**/*.js',
-        '!' + LIB_CLIENT + 'jquery.js'
-    ];
+
+const gulp = require('gulp');
+const jshint = require('gulp-jshint');
+const recess = require('gulp-recess');
+
+const LIB = 'lib/';
+const LIB_CLIENT = LIB + 'client/';
+const LIB_SERVER = LIB + 'server/';
+const Src = [
+    '*.js',
+    'gulp/**/*.js',
+    LIB + '*.js',
+    LIB_CLIENT + '*.js',
+    LIB_SERVER + '**/*.js',
+    '!' + LIB_CLIENT + 'jquery.js'
+];
 
 gulp.task('jshint', () => {
     gulp.src(Src)
