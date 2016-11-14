@@ -1,5 +1,6 @@
-node_modules
-npm-debug.log
+*.
+legacy/lib/client.js
+
 modules/jquery/external
 modules/jquery/dist
 !modules/jquery/dist/jquery.min.js
@@ -8,6 +9,4 @@ modules/jq-console/lib
 modules/jq-console/src
 modules/jq-console/test
 !modules/jq-console/jqconsole.min.js
-
-legacy
 

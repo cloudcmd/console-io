@@ -160,7 +160,15 @@ server.listen(port, ip);
     }
 </script>
 ```
+## Environments
+
+In old `node.js` environments that not fully supports `es2015`, `console-io` could be used with:
+
+```js
+var console = require('console-io/legacy');
+```
 
 ## License
 
 MIT
+

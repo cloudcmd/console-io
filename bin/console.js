@@ -2,8 +2,8 @@
 
 'use strict';
 
-var argv        = process.argv,
-    argvLast    = argv.slice().pop();
+const argv = process.argv;
+const argvLast = argv.slice().pop();
 
 switch (argvLast) {
 case '-v':
@@ -19,24 +19,24 @@ default:
 }
 
 function start() {
-    var DIR         = __dirname + '/../',
+    const DIR = __dirname + '/../';
     
-    webconsole  = require('../'),
-    http        = require('http'),
+    const webconsole  = require('../');
+    const http = require('http');
     
-    express     = require('express'),
-    mollify     = require('mollify'),
+    const express = require('express');
+    const mollify = require('mollify');
+     
+    const app = express();
+    const server = http.createServer(app);
     
-    app         = express(),
-    server      = http.createServer(app),
-    
-    port        =   process.env.PORT            ||  /* c9           */
+    const port =    process.env.PORT            ||  /* c9           */
                     process.env.app_port        ||  /* nodester     */
                     process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
-                    1337,
+                    1337;
     
-    ip          =   process.env.IP              ||  /* c9           */
-                    '0.0.0.0';
+    const ip = process.env.IP ||  /* c9 */
+              '0.0.0.0';
     
     app .use(webconsole({
             server: server,
@@ -54,7 +54,7 @@ function start() {
 }
 
 function version() {
-    var pack = require('../package.json');
+    const pack = require('../package');
     
     console.log('v' + pack.version);
 }
