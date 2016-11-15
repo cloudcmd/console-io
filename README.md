@@ -10,7 +10,6 @@ Console [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMU
 [DependencyStatusURL]:      https://gemnasium.com/cloudcmd/console "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
-
 Web console used in [Cloud Commander](http://cloudcmd.io).
 
 ![Console](https://raw.githubusercontent.com/cloudcmd/console/master/img/console.png "Console")
@@ -84,13 +83,12 @@ Set focus on Console.
 Could be used as middleware, or for init `Console`.
 
 ```js
-Console({
-    server: server,                         /* only one should be passed: */
-    socket: socket,                         /* server or socket  */
-    online: true,                           /* default */
-    minify: true,                           /* default */
+Console.listen(socket, {
+    server: server,                          /* when no socket*/
+    online: true,                            /* default */
+    minify: true,                            /* default */
     prefix: '/console'                       /* default */
-    authCheck: function(socket, success) {  /* authorization function */
+    authCheck: function(socket, success) {   /* authorization function */
     }
 })
 ```
@@ -100,7 +98,7 @@ Console({
 Middleware function if there is a need of init `socket` in another place.
 
 ```js
-Console.middle({
+Console({
     prefix: '/console', /* default */
     online: true,       /* default */
     minify: true,       /* default */
@@ -118,21 +116,20 @@ And use it in your program
 ```js
 /* server.js */
 
-var webconsole  = require('console-io'),
-    http        = require('http'),
-    express     = require('express'),
-    
-    app         = express(),
-    server      = http.createServer(app),
-    
-    port        = 1337,
-    ip          = '0.0.0.0';
+const webconsole  = require('console-io');
+const http = require('http');
+const express = require('express');
+
+const app = express();
+const server = http.createServer(app);
+
+const port = 1337;
+const ip = '0.0.0.0';
     
 app .use(webconsole({
-        server: server,
-        online: true /* load jquery and socket.io from cdn */
-    }))
-    .use(express.static(__dirname));
+    server: server,
+    online: true /* load jquery and socket.io from cdn */
+})).use(express.static(__dirname));
 
 server.listen(port, ip);
 ```
