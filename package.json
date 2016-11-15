@@ -20,6 +20,9 @@
     "wisdom": "npm run build",
     "build": "redrun 6to5:* mkdir:* legacy:*",
     "legacy:index": "echo \"module.exports = require('./lib/server');\" > legacy/index.js",
+    "legacy:client": "cat lib/client/console.js > legacy/lib/client/console.js",
+    "legacy:css": "cp -r css legacy/",
+    "legacy:module:files": "cp -r modules legacy/",
     "legacy:package": "echo \"module.exports = require('../package');\" > legacy/package.js",
     "mkdir:json": "mkdir -p legacy/json",
     "legacy:modules": "echo \"module.exports = require('../../json/modules');\" > legacy/json/modules.js"
