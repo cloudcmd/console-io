@@ -37,7 +37,7 @@
     "mollify": "~1.0.3",
     "rendy": "~1.1.0",
     "socket.io": "^1.5.0",
-    "spawnify": "~2.3.0",
+    "spawnify": "^3.0.0",
     "tildify": "~1.2.0"
   },
   "devDependencies": {
