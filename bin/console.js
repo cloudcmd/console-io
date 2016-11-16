@@ -39,14 +39,12 @@ function start() {
               '0.0.0.0';
     
     app .use(webconsole({
-            server: server,
-            online: false,
-            minify: false
-        }))
-        .use(mollify({
-            dir: DIR
-        }))
-        .use(express.static(DIR));
+        server: server,
+        online: false,
+        minify: false
+    })).use(mollify({
+        dir: DIR
+    })).use(express.static(DIR));
     
     server.listen(port, ip);
     
