@@ -38,12 +38,12 @@
     "currify": "^1.0.0",
     "debug": "^2.3.0",
     "express": "^4.14.0",
-    "join-io": "~1.4.0",
-    "mollify": "~1.0.3",
-    "rendy": "~1.1.0",
+    "join-io": "^1.4.0",
+    "mollify": "^1.0.3",
+    "rendy": "^1.1.0",
     "socket.io": "^1.5.0",
     "spawnify": "^3.0.0",
-    "tildify": "~1.2.0"
+    "tildify": "^1.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
