@@ -6,7 +6,7 @@
   "homepage": "http://cloudcmd.io",
   "bin": {
     "console": "bin/console.js",
-    "console_": "bin_/console.js"
+    "console_": "legacy/bin/console.js"
   },
   "main": "server/index.js",
   "repository": {
