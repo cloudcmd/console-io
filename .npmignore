@@ -1,5 +1,4 @@
 *.
-legacy/lib/client.js
 
 modules/jquery/external
 modules/jquery/dist

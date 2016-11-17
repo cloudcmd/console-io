@@ -2,7 +2,6 @@
 
 const DIR = './';
 const DIR_ROOT = __dirname + '/..';
-const DIR_SERVER = DIR + 'server/';
 
 const path = require('path');
 
@@ -26,7 +25,7 @@ const joinFn = currify(_joinFn);
 const konsoleFn = currify(_konsoleFn);
 const minifyFn = currify(_minifyFn);
 
-const Console = require(DIR_SERVER + 'console');
+const Console = require('./console');
 
 module.exports = (options = {}) => {
     const router = Router();
@@ -112,7 +111,7 @@ function _konsoleFn(options, req, res, next) {
     req.url = req.url.replace(prefix, '');
     
     if (req.url === '/console.js')
-        req.url = '/lib/client' + req.url;
+        req.url = '/client' + req.url;
     
     next();
 }

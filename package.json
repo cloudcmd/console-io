@@ -6,9 +6,9 @@
   "homepage": "http://cloudcmd.io",
   "bin": {
     "console": "bin/console.js",
-    "console_": "legacy/bin/console.js"
+    "console_": "bin_/console.js"
   },
-  "main": "lib/server.js",
+  "main": "server/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/cloudcmd/console.git"
@@ -17,17 +17,11 @@
     "lint:eslint-bin": "eslint --rule 'no-console:0' bin",
     "lint:eslint-lib": "eslint --config .client.eslintrc lib",
     "lint": "redrun lint:*",
-    "6to5:lib": "babel lib -d legacy/lib",
+    "6to5:lib": "babel server -d server_",
     "6to5:bin": "babel bin -d legacy/bin",
     "wisdom": "npm run build",
-    "build": "redrun 6to5:* mkdir:* legacy:*",
-    "legacy:index": "echo \"module.exports = require('./lib/server');\" > legacy/index.js",
-    "legacy:client": "cat lib/client/console.js > legacy/lib/client/console.js",
-    "legacy:css": "cp -r css legacy/",
-    "legacy:module:files": "cp -r modules legacy/",
-    "legacy:package": "echo \"module.exports = require('../package');\" > legacy/package.js",
-    "mkdir:json": "mkdir -p legacy/json",
-    "legacy:modules": "echo \"module.exports = require('../../json/modules');\" > legacy/json/modules.js"
+    "build": "redrun 6to5:* legacy:*",
+    "legacy:index": "echo \"module.exports = require('../server_');\" > legacy/index.js"
   },
   "keywords": [
     "console",
