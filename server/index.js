@@ -152,11 +152,11 @@ function staticFn(req, res) {
 
 function execute(socket, command, cwd) {
     const cmd = command.cmd;
-    const env = command.env;
+    const env = Object.assign({}, command.env, process.env);
     
     const spawn = spawnify(cmd, {
-        cwd: cwd(),
-        env: env
+        env,
+        cwd: cwd()
     });
     
     socket.on('kill', kill);
