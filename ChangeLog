@@ -1,3 +1,9 @@
+2016.11.21, v3.0.5
+
+fix:
+- (index) execute: old env variables droped by new ones
+
+
 2016.11.17, v3.0.4
 
 fix:
