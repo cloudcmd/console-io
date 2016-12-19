@@ -11,7 +11,7 @@ const spawnify = require('spawnify/legacy');
 const rendy = require('rendy');
 
 const express = require('express');
-const currify = require('currify/legacy');
+const currify = require('currify');
 const Router = express.Router;
 
 const modules = require('../json/modules');
@@ -152,7 +152,8 @@ function staticFn(req, res) {
 
 function execute(socket, command, cwd) {
     const cmd = command.cmd;
-    const env = Object.assign({}, command.env, process.env);
+    const assign = Object.assign || objectAssign;
+    const env = assign({}, command.env, process.env);
     
     const spawn = spawnify(cmd, {
         env,
@@ -198,5 +199,17 @@ function execute(socket, command, cwd) {
         
         socket.emit('prompt');
     }
+}
+
+function objectAssign() {
+    const o = {};
+    
+    [].forEach.call(arguments, (obj) => {
+        Object.keys(obj).forEach((k) => {
+            o[k] = obj[k];
+        });
+    });
+    
+    return o;
 }
 
