@@ -1,3 +1,9 @@
+2016.12.19, v3.0.7
+
+fix:
+- (index) Object.assign: add support of old versions of node.js
+
+
 2016.11.23, v3.0.6
 
 feature:
