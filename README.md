@@ -125,11 +125,16 @@ const server = http.createServer(app);
 
 const port = 1337;
 const ip = '0.0.0.0';
-    
+
+const online = true;
 app .use(webconsole({
-    server: server,
-    online: true /* load jquery and socket.io from cdn */
+    server,
+    online, /* load jquery and socket.io from cdn */
 })).use(express.static(__dirname));
+
+webconsole.listen({
+    server
+});
 
 server.listen(port, ip);
 ```

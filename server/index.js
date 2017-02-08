@@ -41,7 +41,12 @@ module.exports = (options = {}) => {
     return router;
 };
 
-module.exports.listen = (socket, options = {}) => {
+module.exports.listen = (socket, options) => {
+    if (!options) {
+        options = socket;
+        socket = null
+    }
+    
     const o = options;
     
     if (!options.prefix)
