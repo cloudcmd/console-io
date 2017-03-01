@@ -5,9 +5,9 @@
     "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
 }, {
     "name": "socket",
-    "version": "1.4.8",
+    "version": "1.7.3",
     "local": "/socket.io/socket.io.js",
-    "remote": "//cdn.socket.io/socket.io-{{ version }}.js"
+    "remote": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/{{ version }}/socket.io.js"
 }, {
     "name": "jq-console",
     "version": "2.13.2",
