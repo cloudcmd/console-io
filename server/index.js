@@ -157,8 +157,7 @@ function staticFn(req, res) {
 
 function execute(socket, command, cwd) {
     const cmd = command.cmd;
-    const assign = Object.assign || objectAssign;
-    const env = assign({}, command.env, process.env);
+    const env = Object.assign({}, command.env, process.env);
     
     const spawn = spawnify(cmd, {
         env,
@@ -204,17 +203,5 @@ function execute(socket, command, cwd) {
         
         socket.emit('prompt');
     }
-}
-
-function objectAssign() {
-    const o = {};
-    
-    [].forEach.call(arguments, (obj) => {
-        Object.keys(obj).forEach((k) => {
-            o[k] = obj[k];
-        });
-    });
-    
-    return o;
 }
 
