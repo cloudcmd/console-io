@@ -2,6 +2,7 @@
 
 modules/jquery/external
 modules/jquery/dist
+modules/jquery/src
 !modules/jquery/dist/jquery.min.js
 
 modules/jq-console/lib
