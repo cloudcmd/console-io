@@ -14,7 +14,7 @@ const Clients = [];
 let Socket;
 let ConNum = -1;
 
-module.exports = function(socket, options) {
+module.exports = (socket, options) => {
     const o = options || {};
     const prefix  = o.prefix || '/console';
     
@@ -71,7 +71,7 @@ function onConnection(options, socket) {
     logClients('add after:', Clients);
     
     const onMessage = processing.bind(null, socket, ConNum, execute);
-    const onDisconnect = function(conNum) {
+    const onDisconnect = (conNum) => {
         logClients('remove before:', Clients);
         
         if (Clients.length !== conNum + 1) {
