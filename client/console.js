@@ -5,9 +5,9 @@
 module.exports = new ConsoleProto();
 
 function ConsoleProto() {
-    var Spawn;
-    var jqconsole;
-    var ShortCuts = {};
+    let Spawn;
+    let jqconsole;
+    let ShortCuts = {};
     
     if (!(this instanceof ConsoleProto))
         return new ConsoleProto();
@@ -20,18 +20,18 @@ function ConsoleProto() {
     }
     
     function Console(element, options, callback) {
-        var el = getElement(element);
+        const el = getElement(element);
         
         if (!callback) {
             callback = options;
             options = {};
         }
         
-        var socketPath = options.socketPath || '';
-        var prefix = options.prefix || '/console';
-        var env = options.env || {};
+        const socketPath = options.socketPath || '';
+        const prefix = options.prefix || '/console';
+        const env = options.env || {};
         
-        load(prefix, function() {
+        load(prefix, () => {
             jqconsole = $(el).jqconsole('', '> ');
             
             Spawn = SpawnProto(jqconsole, {
@@ -49,13 +49,13 @@ function ConsoleProto() {
         });
     }
     
-    Console.addShortCuts    = function(shortCuts) {
+    Console.addShortCuts = (shortCuts) => {
         if (shortCuts)
             ShortCuts = shortCuts;
     };
     
-    Console.getPromptText   = function() {
-        var text = '';
+    Console.getPromptText = () => {
+        let text = '';
         
         if (jqconsole.GetState() !== 'output')
             jqconsole.GetPromptText();
@@ -63,11 +63,11 @@ function ConsoleProto() {
         return text;
     };
     
-    Console.setPromptText   = function(text) {
+    Console.setPromptText   = (text) => {
         jqconsole.SetPromptText(text);
     };
     
-    Console.focus           = function() {
+    Console.focus           = () => {
         if (jqconsole)
             jqconsole.Focus();
     };
@@ -75,7 +75,7 @@ function ConsoleProto() {
     function addOnMouseUp(jqconsole) {
         var console     = jqconsole.$console;
         
-        console.mouseup(function() {
+        console.mouseup(() => {
             var top,
                 isSelection = '' + window.getSelection();
             
@@ -100,7 +100,7 @@ function ConsoleProto() {
         if (!scripts.length)
             after();
         else
-            loadScript(scripts.map(function(name) {
+            loadScript(scripts.map((name) => {
                 return prefix + name;
             }), after); 
         
@@ -113,7 +113,7 @@ function ConsoleProto() {
                     '/css/ansi.css',
                 ]);
             
-            load.json(prefix + '/modules.json', function(error, remote) {
+            load.json(prefix + '/modules.json', (error, remote) => {
                 var names = [
                     'jQuery',
                     'io'
@@ -129,7 +129,7 @@ function ConsoleProto() {
                             return;
                         
                         var reg = RegExp(name, 'i');
-                        remote  = remote.filter(function(item) {
+                        remote  = remote.filter((item) => {
                             return !reg.test(item);
                         });
                     });
@@ -142,7 +142,7 @@ function ConsoleProto() {
     
     function loadScript(srcs, callback) {
         var i       = srcs.length,
-            func    = function() {
+            func    = () => {
                 --i;
                 
                 if (!i)
@@ -180,7 +180,7 @@ function ConsoleProto() {
         
         var self = this;
         var socket;
-        var prompt = function() {
+        var prompt = () => {
             var is = isPrompt();
             
             if (!is)
@@ -207,15 +207,15 @@ function ConsoleProto() {
                 path: socketPath + '/socket.io'
             });
             
-            socket.on('err', function(data) {
+            socket.on('err', (data) => {
                 error(data);
             });
             
-            socket.on('data', function(data) {
+            socket.on('data', (data) => {
                 log(data);
             });
             
-            socket.on('prompt', function() {
+            socket.on('prompt', () => {
                 forceWrite();
                 prompt();
                 
@@ -223,7 +223,7 @@ function ConsoleProto() {
                     Console.setPromptText(promptText.pop());
             });
             
-            socket.on('path', function(path) {
+            socket.on('path', (path) => {
                 if (commands.length)
                     execute(commands.pop(), env);
                 else
@@ -232,11 +232,11 @@ function ConsoleProto() {
                 cwd = path;
             });
             
-            socket.on('connect', function() {
+            socket.on('connect', () => {
                 log('console: connected\n');
             });
             
-            socket.on('disconnect', function() {
+            socket.on('disconnect', () => {
                 error('console: disconnected\n');
                 
                 commands.push('cd ' + cwd);
@@ -256,7 +256,7 @@ function ConsoleProto() {
         function getEnv(env) {
             var obj = {};
             
-            Object.keys(env).forEach(function(name) {
+            Object.keys(env).forEach((name) => {
                 obj[name] = getValue(env[name]);
             });
             
@@ -273,7 +273,7 @@ function ConsoleProto() {
             });
         }
         
-        this.on     = function() {
+        this.on = function() {
             socket.on.apply(socket, arguments);
             return self;
         };
