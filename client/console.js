@@ -55,12 +55,10 @@ function ConsoleProto() {
     };
     
     Console.getPromptText = () => {
-        let text = '';
-        
         if (jqconsole.GetState() !== 'output')
-            jqconsole.GetPromptText();
+            return jqconsole.GetPromptText();
         
-        return text;
+        return '';
     };
     
     Console.setPromptText   = (text) => {
