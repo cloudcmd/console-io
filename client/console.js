@@ -103,37 +103,36 @@ function ConsoleProto() {
             }), after); 
         
         function after() {
-            var load    = window.load,
-                join    = window.join,
-                
-                css     = prefix + join([
-                    '/css/console.css',
-                    '/css/ansi.css',
-                ]);
+            const load = window.load;
+            const join = window.join;
+            
+            const css = prefix + join([
+                '/css/console.css',
+                '/css/ansi.css',
+            ]);
             
             load.json(prefix + '/modules.json', (error, remote) => {
-                var names = [
+                const names = [
                     'jQuery',
                     'io'
                 ];
                 
-                if (error) {
+                if (error)
                     /*eslint no-console: 0*/
-                    console.error(error);
-                } else {
-                    /* do not load jquery if it is loaded */
-                    names.forEach(function (name) {
-                        if (!window[name])
-                            return;
-                        
-                        var reg = RegExp(name, 'i');
-                        remote  = remote.filter((item) => {
-                            return !reg.test(item);
-                        });
-                    });
+                    return console.error(error);
                     
-                    load.series(remote.concat(css), callback);
-                }
+                /* do not load jquery if it is loaded */
+                names.forEach((name) => {
+                    if (!window[name])
+                        return;
+                    
+                    const reg = RegExp(name, 'i');
+                    remote  = remote.filter((item) => {
+                        return !reg.test(item);
+                    });
+                });
+                
+                load.series(remote.concat(css), callback);
             });
         }
     }
@@ -147,8 +146,8 @@ function ConsoleProto() {
                     callback();
             };
         
-        srcs.forEach(function(src) {
-            var element = document.createElement('script');
+        srcs.forEach((src) => {
+            const element = document.createElement('script');
         
             element.src = src;
             element.addEventListener('load', function load() {
@@ -161,43 +160,42 @@ function ConsoleProto() {
     }
     
     function isPrompt() {
-        var state = jqconsole.GetState();
-        var is = state === 'prompt';
+        const state = jqconsole.GetState();
+        const is = state === 'prompt';
         
         return is;
     }
-        
+    
     function SpawnProto(jqconsole, options) {
         if (!(this instanceof SpawnProto))
             return new SpawnProto(jqconsole, options);
-            
-        var Buffer = {
+        
+        const Buffer = {
             'log-msg': '',
             'error-msg': ''
         };
         
-        var self = this;
-        var socket;
-        var prompt = () => {
-            var is = isPrompt();
+        let socket;
+        const prompt = () => {
+            if (isPrompt())
+                return;
             
-            if (!is)
-                jqconsole.Prompt(true, self.handler);
+            jqconsole.Prompt(true, this.handler);
         };
         
-        var env = options.env;
+        const {env} = options;
         
         init(options);
         
         function init(options) {
-            var cwd = '';
-            var commands = [];
-            var promptText = [];
-            var href = getHost();
-            var FIVE_SECONDS = 5000;
+            let cwd = '';
+            const commands = [];
+            const promptText = [];
+            const href = getHost();
+            const FIVE_SECONDS = 5000;
             
-            var room = options.prefix;
-            var socketPath = options.socketPath;
+            const room = options.prefix;
+            const {socketPath} = options;
             
             socket = io.connect(href + room, {
                 'max reconnection attempts' : Math.pow(2, 32),
@@ -252,7 +250,7 @@ function ConsoleProto() {
         }
         
         function getEnv(env) {
-            var obj = {};
+            const obj = {};
             
             Object.keys(env).forEach((name) => {
                 obj[name] = getValue(env[name]);
@@ -266,39 +264,39 @@ function ConsoleProto() {
                 return;
             
             socket.emit('command', {
-                cmd: cmd,
+                cmd,
                 env: getEnv(env)
             });
         }
         
-        this.on = function() {
-            socket.on.apply(socket, arguments);
-            return self;
+        this.on = (...args) => {
+            socket.on(...args);
+            return this
         };
         
-        this.emit   = function() {
-            socket.emit.apply(socket, arguments);
-            return self;
+        this.emit = (...args) => {
+            socket.emit(...args);
+            return this
         };
         
         this.handler = function getHandler(command) {
             if (command)
                 return execute(command, env);
             
-            jqconsole.Prompt(true, self.handler);
+            jqconsole.Prompt(true, getHandler);
         };
         
-        this.kill       = function() {
+        this.kill = () => {
             socket.emit('kill');
         };
         
-        this.write      = function(data) {
+        this.write = (data) => {
             socket.emit('write', data);
         };
         
         function getHost() {
-            var l       = location,
-                href    = l.origin || l.protocol + '//' + l.host;
+            const l = location;
+            const href = l.origin || l.protocol + '//' + l.host;
             
             return href;
         }
@@ -306,19 +304,20 @@ function ConsoleProto() {
         function write(data, className) {
             var isContain;
             
-            if (data) {
-                Buffer[className]   += data;
-                isContain           = ~Buffer[className].indexOf('\n');
-                
-                if (isContain) {
-                    jqconsole.Write(Buffer[className], className);
-                    Buffer[className] = '';
-                }
+            if (!data)
+                return;
+            
+            Buffer[className]   += data;
+            isContain           = ~Buffer[className].indexOf('\n');
+            
+            if (isContain) {
+                jqconsole.Write(Buffer[className], className);
+                Buffer[className] = '';
             }
         }
         
         function forceWrite() {
-            Object.keys(Buffer).forEach(function(name) {
+            Object.keys(Buffer).forEach((name) => {
                 if (Buffer[name]) {
                     jqconsole.Write(Buffer[name], name);
                     Buffer[name] = '';
@@ -336,9 +335,7 @@ function ConsoleProto() {
     }
     
     function abortPrompt() {
-         var is = isPrompt();
-         
-         if (is)
+         if (isPrompt())
             jqconsole.AbortPrompt();
     }
     
@@ -348,71 +345,66 @@ function ConsoleProto() {
     }
         
     function addShortCuts(jqconsole) {
-        jqconsole.RegisterShortcut('Z', function() {
+        jqconsole.RegisterShortcut('Z', () => {
             jqconsole.SetPromptText('');
         });
         
         jqconsole.RegisterShortcut('L', clear);
         
-        Object.keys(ShortCuts).forEach(function(key) {
-            var func = ShortCuts[key];
+        Object.keys(ShortCuts).forEach((key) => {
+            const func = ShortCuts[key];
             
             jqconsole.RegisterShortcut(key, func);
         });
     }
     
     function addKeyWhenNoPrompt(jqconsole) {
-        var skip = skipfirst(readNoPrompt);
-            
+        const skip = skipfirst(readNoPrompt);
+        
         jqconsole
             .$input_source[0]
-            .addEventListener('keydown', function(event) {
-                var ENTER   = 13,
-                    is      = isPrompt();
+            .addEventListener('keydown', (event) => {
+                const ENTER = 13;
+                const is = isPrompt();
                 
                 if (is)
-                    skip.clear();
-                else
-                    skip(event.keyCode === ENTER, event);
+                    return skip.clear();
+                
+                skip(event.keyCode === ENTER, event);
             });
     }
     
     function readNoPrompt(event) {
-        var char,
-            KEY_C   = 67,
-            isCtrl  = event.ctrlKey || event.metaKey,
-            isC     = event.keyCode === KEY_C;
+        const KEY_C = 67;
+        const isCtrl = event.ctrlKey || event.metaKey;
+        const isC = event.keyCode === KEY_C;
         
-        if (isC && isCtrl) {
-            Spawn.kill();
-        } else {
-            char = fromCharCode(event);
-            
-            if (char) {
-                Spawn.write(char);
-                jqconsole.Write(char);
-            }
-        }
+        if (isC && isCtrl)
+            return Spawn.kill();
+        
+        const char = fromCharCode(event);
+        
+        if (!char)
+            return;
+        
+        Spawn.write(char);
+        jqconsole.Write(char);
     }
     
     function fromCharCode(event) {
-        var code, hex,
-            char        = '',
-            identifier  = event.key,
-            shift       = event.shiftKey;
+        let char = '';
         
-        if (!identifier) {
-            identifier = event.keyIdentifier;
-        }
+        const shift = event.shiftKey;
+        const identifier = event.key || event.keyIdentifier;
          
         if (identifier === 'Enter') {
             char = '\n';
         } else if (!event.key) {
-            code = identifier.substring(2);
-            hex  = parseInt(code, 16);
+            const code = identifier.substring(2);
+            const hex = parseInt(code, 16);
             
             if (!isNaN(hex))
-                char        = String.fromCharCode(hex);
+                char = String.fromCharCode(hex);
             
             if (!shift && /[a-z]/i.test(char))
                 char = char.toLowerCase();
