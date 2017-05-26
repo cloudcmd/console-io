@@ -71,7 +71,7 @@ function onConnection(options, socket) {
     logClients('add after:', Clients);
     
     const onMessage = processing.bind(null, socket, ConNum, execute);
-    const onDisconnect = (conNum) => {
+    const onDisconnect = ((conNum) => {
         logClients('remove before:', Clients);
         
         if (Clients.length !== conNum + 1) {
@@ -87,7 +87,7 @@ function onConnection(options, socket) {
         
         socket.removeListener('command', onMessage);
         socket.removeListener('disconnect', onDisconnect);
-    }.bind(null, ConNum);
+    }).bind(null, ConNum);
     
     socket.on('command', onMessage);
     socket.on('disconnect', onDisconnect);

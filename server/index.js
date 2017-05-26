@@ -1,6 +1,5 @@
 'use strict';
 
-const DIR = './';
 const DIR_ROOT = __dirname + '/..';
 
 const path = require('path');
@@ -26,6 +25,8 @@ const konsoleFn = currify(_konsoleFn);
 const minifyFn = currify(_minifyFn);
 
 const Console = require('./console');
+
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = (options = {}) => {
     const router = Router();
@@ -115,8 +116,11 @@ function _konsoleFn(options, req, res, next) {
     
     req.url = req.url.replace(prefix, '');
     
-    if (req.url === '/console.js')
-        req.url = '/client' + req.url;
+    if (/^\/console\.js(\.map)?$/.test(req.url))
+        req.url = `/dist${req.url}`;
+    
+    if (isDev)
+        req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
     
     next();
 }

@@ -1,5 +1,7 @@
 *.
 
+webpack.config.js
+
 modules/jquery/external
 modules/jquery/dist
 modules/jquery/src

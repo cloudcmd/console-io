@@ -14,13 +14,21 @@
     "url": "git://github.com/cloudcmd/console.git"
   },
   "scripts": {
+    "start": "node bin/console",
+    "start:dev": "NODE_ENV=development npm start",
+    "build:client": "webpack --progress",
+    "build:client:dev": "NODE_ENV=development redrun build:client",
+    "watcher": "nodemon -w client -w server --exec",
+    "watch:lint": "npm run watcher -- 'npm run lint'",
+    "watch:client": "redrun build:client -- --watch",
+    "watch:client:dev": "redrun build:client:dev -- --watch",
     "lint:eslint-bin": "eslint --rule 'no-console:0' bin",
-    "lint:eslint-lib": "eslint --config .client.eslintrc lib",
+    "lint:eslint": "eslint --config .client.eslintrc server webpack.config.js",
     "lint": "redrun lint:*",
     "6to5:lib": "babel server -d server_",
     "6to5:bin": "babel bin -d legacy/bin",
     "wisdom": "npm run build",
-    "build": "redrun 6to5:* legacy:*",
+    "build": "redrun 6to5:* build:* legacy:*",
     "legacy:index": "echo \"module.exports = require('../server_');\" > legacy/index.js"
   },
   "keywords": [
@@ -41,11 +49,14 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-loader": "^7.0.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-es2015": "^6.18.0",
     "bower": "^1.5.1",
     "eslint": "^3.10.2",
-    "redrun": "^5.9.3"
+    "nodemon": "^1.11.0",
+    "redrun": "^5.9.3",
+    "webpack": "^2.6.1"
   },
   "license": "MIT"
 }
