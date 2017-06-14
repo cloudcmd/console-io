@@ -65,20 +65,19 @@ function ConsoleProto() {
         jqconsole.SetPromptText(text);
     };
     
-    Console.focus           = () => {
+    Console.focus = () => {
         if (jqconsole)
             jqconsole.Focus();
     };
     
     function addOnMouseUp(jqconsole) {
-        var console     = jqconsole.$console;
+        const {$console} = jqconsole;
         
-        console.mouseup(() => {
-            var top,
-                isSelection = '' + window.getSelection();
+        $console.mouseup(() => {
+            const isSelection = '' + window.getSelection();
             
             if (!isSelection) {
-                top        = console.scrollTop();
+                const top = console.scrollTop();
                 
                 Console.focus();
                 console.scrollTop(top);
@@ -87,7 +86,7 @@ function ConsoleProto() {
     }
     
     function load(prefix, callback) {
-        var scripts = [];
+        const scripts = [];
         
         if (!window.load)
             scripts.push('/modules/load/load.js');
@@ -96,11 +95,11 @@ function ConsoleProto() {
             scripts.push('/join/join.js');
         
         if (!scripts.length)
-            after();
-        else
-            loadScript(scripts.map((name) => {
-                return prefix + name;
-            }), after); 
+            return after();
+        
+        loadScript(scripts.map((name) => {
+            return prefix + name;
+        }), after); 
         
         function after() {
             const load = window.load;
@@ -127,7 +126,7 @@ function ConsoleProto() {
                         return;
                     
                     const reg = RegExp(name, 'i');
-                    remote  = remote.filter((item) => {
+                    remote = remote.filter((item) => {
                         return !reg.test(item);
                     });
                 });
