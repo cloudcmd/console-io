@@ -1,3 +1,10 @@
+2017.06.14, v3.1.1
+
+feature:
+- (package) eslint v4.0.0
+- (modules) socket.io v2.0.3
+
+
 2017.05.26, v3.1.0
 
 fix:
