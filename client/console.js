@@ -77,10 +77,10 @@ function ConsoleProto() {
             const isSelection = '' + window.getSelection();
             
             if (!isSelection) {
-                const top = console.scrollTop();
+                const top = $console.scrollTop();
                 
                 Console.focus();
-                console.scrollTop(top);
+                $console.scrollTop(top);
             }
         });
     }
