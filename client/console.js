@@ -2,6 +2,9 @@
 
 'use strict';
 
+require('../css/console.css');
+require('../css/ansi.css');
+
 module.exports = new ConsoleProto();
 
 function ConsoleProto() {
@@ -99,16 +102,11 @@ function ConsoleProto() {
         
         loadScript(scripts.map((name) => {
             return prefix + name;
-        }), after); 
+        }), after);
         
         function after() {
             const load = window.load;
             const join = window.join;
-            
-            const css = prefix + join([
-                '/css/console.css',
-                '/css/ansi.css',
-            ]);
             
             load.json(prefix + '/modules.json', (error, remote) => {
                 const names = [
@@ -119,7 +117,7 @@ function ConsoleProto() {
                 if (error)
                     /*eslint no-console: 0*/
                     return console.error(error);
-                    
+                
                 /* do not load jquery if it is loaded */
                 names.forEach((name) => {
                     if (!window[name])
@@ -131,7 +129,7 @@ function ConsoleProto() {
                     });
                 });
                 
-                load.series(remote.concat(css), callback);
+                load.series(remote, callback);
             });
         }
     }
