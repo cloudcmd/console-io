@@ -25,7 +25,6 @@ function start() {
     const http = require('http');
     
     const express = require('express');
-    const mollify = require('mollify');
      
     const app = express();
     const server = http.createServer(app);
@@ -38,12 +37,10 @@ function start() {
     const ip = process.env.IP ||  /* c9 */
               '0.0.0.0';
     
+    const online = false;
     app .use(webconsole({
         server,
-        online: false,
-        minify: false
-    })).use(mollify({
-        dir: DIR
+        online,
     })).use(express.static(DIR));
     
     webconsole.listen({

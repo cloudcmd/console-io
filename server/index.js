@@ -5,7 +5,6 @@ const DIR_ROOT = __dirname + '/..';
 const path = require('path');
 
 const join = require('join-io');
-const mollify = require('mollify');
 const spawnify = require('spawnify/legacy');
 const rendy = require('rendy');
 
@@ -15,14 +14,9 @@ const Router = express.Router;
 
 const modules = require('../json/modules');
 
-const mollifyFn = mollify({
-    dir : DIR_ROOT
-});
-
 const modulesFn = currify(_modulesFn);
 const joinFn = currify(_joinFn);
 const konsoleFn = currify(_konsoleFn);
-const minifyFn = currify(_minifyFn);
 
 const Console = require('./console');
 
@@ -36,7 +30,6 @@ module.exports = (options = {}) => {
         .get(konsoleFn(options))
         .get(modulesFn(prefix, options))
         .get(joinFn(options))
-        .get(minifyFn(options))
         .get(staticFn)
     
     return router;
@@ -128,30 +121,12 @@ function _konsoleFn(options, req, res, next) {
 function _joinFn(o, req, res, next) {
     if (req.url.indexOf('/join'))
         return next ();
-        
-    const minify = checkOption(o.minify);
     
     const joinFunc = join({
-        minify,
         dir: DIR_ROOT
     });
     
     joinFunc(req, res, next);
-}
-
-function _minifyFn(o, req, res, next) {
-    const url = req.url;
-    const minify = checkOption(o.minify);
-    
-    if (!minify)
-        return next();
-    
-    const sendFile = (url) => () => {
-        const file = path.normalize(DIR_ROOT + url);
-        res.sendFile(file);
-    };
-    
-    mollifyFn(req, res, sendFile(url));
 }
 
 function staticFn(req, res) {

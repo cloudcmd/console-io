@@ -86,7 +86,6 @@ Could be used as middleware, or for init `Console`.
 Console.listen(socket, {
     server: server,                          /* when no socket*/
     online: true,                            /* default */
-    minify: true,                            /* default */
     prefix: '/console'                       /* default */
     authCheck: function(socket, success) {   /* authorization function */
     }
@@ -101,7 +100,6 @@ Middleware function if there is a need of init `socket` in another place.
 Console({
     prefix: '/console', /* default */
     online: true,       /* default */
-    minify: true,       /* default */
 })
 ```
 
