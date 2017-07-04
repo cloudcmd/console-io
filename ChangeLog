@@ -1,3 +1,11 @@
+2017.07.04, v4.0.0
+
+feature:
+- (console) rm minify option
+- (client) minify css in bundle
+- (package) rm bower
+
+
 2017.06.21, v3.1.3
 
 fix:
