@@ -22,7 +22,8 @@ const Console = require('./console');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-module.exports = (options = {}) => {
+module.exports = (options) => {
+    options = options || {};
     const router = Router();
     const prefix = options.prefix || '/console';
     
