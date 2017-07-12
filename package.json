@@ -3,10 +3,8 @@
   "version": "4.0.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Web console",
-  "homepage": "http://cloudcmd.io",
   "bin": {
-    "console": "bin/console.js",
-    "console_": "legacy/bin/console.js"
+    "console": "bin/console.js"
   },
   "main": "server/index.js",
   "repository": {
@@ -24,12 +22,7 @@
     "watch:client:dev": "redrun build:client:dev -- --watch",
     "lint:eslint-bin": "eslint --rule 'no-console:0' bin",
     "lint:eslint": "eslint --config .client.eslintrc server webpack.config.js",
-    "lint": "redrun lint:*",
-    "6to5:lib": "babel server -d server_",
-    "6to5:bin": "babel bin -d legacy/bin",
-    "wisdom": "npm run build",
-    "build": "redrun 6to5:* build:* legacy:*",
-    "legacy:index": "echo \"module.exports = require('../server_');\" > legacy/index.js"
+    "lint": "redrun lint:*"
   },
   "keywords": [
     "console",
@@ -58,6 +51,9 @@
     "redrun": "^5.9.3",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=4.0.0"
   },
   "license": "MIT"
 }

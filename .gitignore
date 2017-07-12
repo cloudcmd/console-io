@@ -14,7 +14,6 @@ modules/jq-console/src
 modules/jq-console/test
 !modules/jq-console/jqconsole.min.js
 
-legacy
 server_
 *.swp
 
