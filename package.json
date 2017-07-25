@@ -16,6 +16,8 @@
     "start:dev": "NODE_ENV=development npm start",
     "build:client": "webpack --progress",
     "build:client:dev": "NODE_ENV=development redrun build:client",
+    "build": "redrun build:*",
+    "wisdom": "npm run build",
     "watcher": "nodemon -w client -w server --exec",
     "watch:lint": "npm run watcher -- 'npm run lint'",
     "watch:client": "redrun build:client -- --watch",
