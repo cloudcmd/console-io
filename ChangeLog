@@ -1,3 +1,9 @@
+2017.07.25, v5.0.3
+
+fix:
+- (package) build step before publish
+
+
 2017.07.25, v5.0.2
 
 fix:
