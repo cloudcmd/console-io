@@ -38,9 +38,9 @@ function ConsoleProto() {
             jqconsole = $(el).jqconsole('', '> ');
             
             Spawn = SpawnProto(jqconsole, {
-                env: env,
-                prefix: prefix,
-                socketPath: socketPath,
+                env,
+                prefix,
+                socketPath,
             });
             
             addShortCuts(jqconsole);
