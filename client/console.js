@@ -276,11 +276,11 @@ function ConsoleProto() {
             return this
         };
         
-        this.handler = function getHandler(command) {
+        this.handler = (command) => {
             if (command)
                 return execute(command, env);
             
-            jqconsole.Prompt(true, getHandler);
+            jqconsole.Prompt(true, this.handler);
         };
         
         this.kill = () => {
@@ -299,13 +299,11 @@ function ConsoleProto() {
         }
         
         function write(data, className) {
-            var isContain;
-            
             if (!data)
                 return;
             
-            Buffer[className]   += data;
-            isContain           = ~Buffer[className].indexOf('\n');
+            Buffer[className] += data;
+            const isContain = ~Buffer[className].indexOf('\n');
             
             if (isContain) {
                 jqconsole.Write(Buffer[className], className);
@@ -394,9 +392,10 @@ function ConsoleProto() {
         const shift = event.shiftKey;
         const identifier = event.key || event.keyIdentifier;
          
-        if (identifier === 'Enter') {
-            char = '\n';
-        } else if (!event.key) {
+        if (identifier === 'Enter')
+            return '\n';
+        
+        if (!event.key) {
             const code = identifier.substring(2);
             const hex = parseInt(code, 16);
             
