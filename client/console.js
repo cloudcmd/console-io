@@ -340,7 +340,7 @@ function ConsoleProto() {
         jqconsole.SetPromptLabel(prompt);
         jqconsole.UpdatePromptLabel();
     }
-        
+    
     function addShortCuts(jqconsole) {
         jqconsole.RegisterShortcut('Z', () => {
             jqconsole.SetPromptText('');
