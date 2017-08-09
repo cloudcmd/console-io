@@ -1,6 +1,7 @@
 package-lock.json
 dist
 dist-dev
+yarn-error.log
 
 node_modules
 npm-debug.log

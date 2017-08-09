@@ -1,5 +1,7 @@
 *.
 
+yarn-error.log
+
 webpack.config.js
 
 modules/jquery/external
