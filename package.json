@@ -14,8 +14,9 @@
   "scripts": {
     "start": "node bin/console",
     "start:dev": "NODE_ENV=development npm start",
-    "build:client": "webpack --progress",
-    "build:client:dev": "NODE_ENV=development redrun build:client",
+    "build-progress": "webpack --progress",
+    "build:client": "npm run build-progress -- --mode production",
+    "build:client:dev": "NODE_ENV=development npm run build-progress -- --mode development",
     "build": "redrun build:*",
     "wisdom": "npm run build",
     "watcher": "nodemon -w client -w server --exec",
@@ -51,7 +52,8 @@
     "nodemon": "^1.11.0",
     "redrun": "^5.9.3",
     "style-loader": "^0.20.1",
-    "webpack": "^3.0.0"
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
   },
   "engines": {
     "node": ">=4.0.0"
