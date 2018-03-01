@@ -1,3 +1,10 @@
+2018.03.01, v5.0.5
+
+feature:
+- (package) webpack v4.0.1
+- (package) style-loader v0.20.1
+
+
 2017.12.05, v5.0.4
 
 feature:
