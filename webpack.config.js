@@ -1,10 +1,7 @@
 'use strict';
 
 const path = require('path');
-const webpack = require('webpack');
-const {optimize} = webpack;
 const dir = './client';
-
 const {env} = process;
 const isDev = env.NODE_ENV === 'development';
 
