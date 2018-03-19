@@ -1,3 +1,11 @@
+2018.03.19, v5.1.0
+
+feature:
+- (package) add babel-plugin-transform-object-rest-spread
+- (console) add ability to set cwd
+- (package) redrun v6.0.0
+
+
 2018.03.05, v5.0.6
 
 feature:
