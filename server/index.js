@@ -3,7 +3,6 @@
 const DIR_ROOT = __dirname + '/..';
 
 const path = require('path');
-
 const join = require('join-io');
 const spawnify = require('spawnify');
 const rendy = require('rendy');

@@ -36,10 +36,11 @@ For more details see [Jq-console keyboard shortcuts](https://github.com/replit/j
 
 ### Client API
 
-#### Console(element [, prefix], callback)
+#### Console(element [, options, prefix], callback)
 
 - element   - html element, or selector
 - prefix    - (optional) prefix to url (same as in server)
+- options   - (optional) {cwd}
 - callback  - function to call after init
 
 When prefix set in server and client, you should use same prefix in html.

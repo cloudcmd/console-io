@@ -7,6 +7,9 @@ require('../css/ansi.css');
 
 module.exports = new ConsoleProto();
 
+const currify = require('currify/legacy');
+const sum = currify((a, b) => a + b);
+
 function ConsoleProto() {
     let Spawn;
     let jqconsole;
@@ -33,12 +36,14 @@ function ConsoleProto() {
         const socketPath = options.socketPath || '';
         const prefix = options.prefix || '/console';
         const env = options.env || {};
+        const cwd = options.cwd || '';
         
         load(prefix, () => {
             jqconsole = $(el).jqconsole('', '> ');
             
             Spawn = SpawnProto(jqconsole, {
                 env,
+                cwd,
                 prefix,
                 socketPath,
             });
@@ -54,7 +59,9 @@ function ConsoleProto() {
     
     Console.addShortCuts = (shortCuts) => {
         if (shortCuts)
-            ShortCuts = shortCuts;
+            ShortCuts = {
+                ...shortCuts
+            };
     };
     
     Console.getPromptText = () => {
@@ -79,12 +86,13 @@ function ConsoleProto() {
         $console.mouseup(() => {
             const isSelection = '' + window.getSelection();
             
-            if (!isSelection) {
-                const top = $console.scrollTop();
-                
-                Console.focus();
-                $console.scrollTop(top);
-            }
+            if (isSelection)
+                return;
+            
+            const top = $console.scrollTop();
+            
+            Console.focus();
+            $console.scrollTop(top);
         });
     }
     
@@ -100,9 +108,7 @@ function ConsoleProto() {
         if (!scripts.length)
             return after();
         
-        loadScript(scripts.map((name) => {
-            return prefix + name;
-        }), after);
+        loadScript(scripts.map(sum(prefix)), after);
         
         function after() {
             const load = window.load;
@@ -158,9 +164,7 @@ function ConsoleProto() {
     
     function isPrompt() {
         const state = jqconsole.GetState();
-        const is = state === 'prompt';
-        
-        return is;
+        return state === 'prompt';
     }
     
     function SpawnProto(jqconsole, options) {
@@ -185,7 +189,7 @@ function ConsoleProto() {
         init(options);
         
         function init(options) {
-            let cwd = '';
+            let {cwd} = options;
             const commands = [];
             const promptText = [];
             const href = getHost();
@@ -197,7 +201,14 @@ function ConsoleProto() {
             socket = io.connect(href + room, {
                 'max reconnection attempts' : Math.pow(2, 32),
                 'reconnection limit'        : FIVE_SECONDS,
-                path: socketPath + '/socket.io'
+                path: socketPath + '/socket.io',
+                transportOptions: {
+                    polling: {
+                        extraHeaders: {
+                            'x-cwd': cwd
+                        }
+                    }
+                }
             });
             
             socket.on('err', (data) => {

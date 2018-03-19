@@ -34,11 +34,11 @@ module.exports = (socket, options) => {
                 throw Error('options.authCheck should be function!');
             
             if (!authCheck)
+                return onConnection(options, socket);
+            
+            authCheck(socket, () => {
                 onConnection(options, socket);
-            else
-                authCheck(socket, () => {
-                    onConnection(options, socket);
-                });
+            });
         });
 };
 
@@ -58,14 +58,15 @@ function onConnection(options, socket) {
         ConNum = Clients.length;
     
     const msg = log(ConNum + 1, 'console connected\n');
-    const dir = WIN ? CWD : tildify(CWD);
+    const cwd = socket.handshake.headers['x-cwd'] || CWD;
+    const dir = WIN ? cwd : tildify(cwd);
      
     socket.emit('data', msg);
     socket.emit('path', options.prompt || dir);
     socket.emit('prompt');
     
     Clients[ConNum] = {
-        cwd: CWD
+        cwd
     };
     
     logClients('add after:', Clients);
