@@ -36,15 +36,6 @@ For more details see [Jq-console keyboard shortcuts](https://github.com/replit/j
 
 ### Client API
 
-`Console` inhertis from [Emitify](https://github.com/coderaiser/emitify) so you can subscribe to next events:
-
-- `path`
-
-```js
-const konsole = Console();
-konsole.on('path', console.log);
-```
-
 #### Console(element [, options, prefix], callback)
 
 - element   - html element, or selector

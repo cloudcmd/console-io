@@ -8,8 +8,6 @@ require('../css/ansi.css');
 module.exports = ConsoleProto;
 
 const load = require('load.js');
-const inherits = require('inherits');
-const Emitify = require('emitify/legacy');
 const currify = require('currify/legacy');
 const getHost = require('./get-host');
 const getEnv = require('./get-env');
@@ -17,8 +15,6 @@ const getEnv = require('./get-env');
 const isFn = (fn) => typeof fn === 'function';
 const exec = (fn, ...a) => isFn(fn) && fn(...a);
 const sum = currify((a, b) => a + b);
-
-inherits(ConsoleProto, Emitify);
 
 function ConsoleProto(element, options, callback) {
     let Spawn;
@@ -28,7 +24,6 @@ function ConsoleProto(element, options, callback) {
     if (!(this instanceof ConsoleProto))
         return new ConsoleProto(element, options, callback);
     
-    Emitify.call(this);
     Console(element, options, callback);
     
     const self = this;
@@ -212,15 +207,13 @@ function ConsoleProto(element, options, callback) {
                     self.setPromptText(promptText.pop());
             });
             
-            socket.on('path', (path) => {
+            socket.on('label', (path) => {
                 if (commands.length)
                     execute(commands.pop(), env);
                 else
                     setPromptLabel(path + '> ');
                 
                 cwd = path;
-                
-                self.emit('path', path);
             });
             
             socket.on('connect', () => {

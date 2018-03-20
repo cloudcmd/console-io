@@ -40,7 +40,8 @@
     "rendy": "^1.1.0",
     "socket.io": "^2.0.1",
     "spawnify": "^4.0.0",
-    "tildify": "^1.2.0"
+    "tildify": "^1.2.0",
+    "untildify": "^3.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -49,7 +50,6 @@
     "babel-preset-env": "^1.6.0",
     "clean-css-loader": "^0.1.2",
     "css-loader": "^0.28.4",
-    "emitify": "^3.1.0",
     "eslint": "^4.0.0",
     "inherits": "^2.0.3",
     "load.js": "^1.1.5",

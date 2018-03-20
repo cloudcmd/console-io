@@ -3,13 +3,22 @@
 const io = require('socket.io');
 const tildify = require('tildify');
 const debug = require('debug');
+
 const logConsole = debug('console');
 const logClients = debug('console:clients');
+const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
 
 const WIN = process.platform === 'win32';
 const CWD = process.cwd();
 
 const Clients = [];
+
+const cwd = (conNum) => (path) => {
+    if (!path)
+        return Clients[conNum].cwd;
+    
+    Clients[conNum].cwd = path;
+};
 
 let Socket;
 let ConNum = -1;
@@ -62,7 +71,7 @@ function onConnection(options, socket) {
     const dir = WIN ? cwd : tildify(cwd);
      
     socket.emit('data', msg);
-    socket.emit('path', options.prompt || dir);
+    socket.emit('label', options.prompt || rmLastSlash(dir));
     socket.emit('prompt');
     
     Clients[ConNum] = {
@@ -98,15 +107,6 @@ function processing(socket, conNum, fn, command) {
     log(conNum, command.cmd);
     
     fn(socket, command, cwd(conNum));
-}
-
-function cwd(conNum) {
-    return (path) => {
-        if (!path)
-            return Clients[conNum].cwd;
-        
-        Clients[conNum].cwd = path;
-    };
 }
 
 function getType(type) {

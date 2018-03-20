@@ -7,11 +7,15 @@ const join = require('join-io');
 const spawnify = require('spawnify');
 const rendy = require('rendy');
 
+const untildify = require('untildify');
 const express = require('express');
 const currify = require('currify/legacy');
 const Router = express.Router;
 
 const modules = require('../json/modules');
+
+const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
+const addLastSlash = (a) => a[a.length - 1] === '/' ? a : `${a}/`;
 
 const modulesFn = currify(_modulesFn);
 const joinFn = currify(_joinFn);
@@ -169,7 +173,9 @@ function execute(socket, command, cwd) {
     }
     
     function onPath(path) {
-        socket.emit('path', path);
+        socket.emit('label', rmLastSlash(path));
+        socket.emit('path', addLastSlash(untildify(path)));
+        
         cwd(path);
     }
     
