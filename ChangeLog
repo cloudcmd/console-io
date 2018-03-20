@@ -1,3 +1,9 @@
+2018.03.20, v6.0.1
+
+fix:
+- (console) event path -> label
+
+
 2018.03.20, v6.0.0
 
 feature:
