@@ -36,6 +36,15 @@ For more details see [Jq-console keyboard shortcuts](https://github.com/replit/j
 
 ### Client API
 
+`Console` inhertis from [Emitify](https://github.com/coderaiser/emitify) so you can subscribe to next events:
+
+- `path`
+
+```js
+const konsole = Console();
+konsole.on('path', console.log);
+```
+
 #### Console(element [, options, prefix], callback)
 
 - element   - html element, or selector
@@ -49,31 +58,32 @@ console script in this way:
 
 `<script src="/any_prefix/console.js"></script>`
 
-#### Console.addShortCuts(shortCuts)
+#### addShortCuts(shortCuts)
 
 - shortCuts - object contain big letter and function.
 
 Example: show alert on `Ctrl + A`:
 
 ```js
-Console.addShortCuts({
+const konsole = Console();
+konsole.addShortCuts({
     'A': function() {
         alert('hello');
     }
 });
 ```
 
-#### Console.getPromptText()
+#### getPromptText()
 
 Get text of prompt.
 
-#### Console.setPromptText(text)
+#### setPromptText(text)
 
 - text - string of new text
 
 Set new text of prompt.
 
-#### Console.focus()
+#### focus()
 
 Set focus on Console.
 
@@ -152,9 +162,11 @@ server.listen(port, ip);
         }
     };
     
-    Console('.console', options, function() {
+    const konsole = Console('.console', options, function() {
         console.log('console ready')
     });
+    
+    konsole.focus();
     
     function getCurrentFile() {
         return 'filename.txt';

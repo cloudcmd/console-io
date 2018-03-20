@@ -5,18 +5,33 @@
 require('../css/console.css');
 require('../css/ansi.css');
 
-module.exports = new ConsoleProto();
+module.exports = ConsoleProto;
 
+const load = require('load.js');
+const inherits = require('inherits');
+const Emitify = require('emitify/legacy');
 const currify = require('currify/legacy');
+const getHost = require('./get-host');
+const getEnv = require('./get-env');
+
+const isFn = (fn) => typeof fn === 'function';
+const exec = (fn, ...a) => isFn(fn) && fn(...a);
 const sum = currify((a, b) => a + b);
 
-function ConsoleProto() {
+inherits(ConsoleProto, Emitify);
+
+function ConsoleProto(element, options, callback) {
     let Spawn;
     let jqconsole;
     let ShortCuts = {};
     
     if (!(this instanceof ConsoleProto))
-        return new ConsoleProto();
+        return new ConsoleProto(element, options, callback);
+    
+    Emitify.call(this);
+    Console(element, options, callback);
+    
+    const self = this;
     
     function getElement(el) {
         if (typeof el !== 'string')
@@ -38,7 +53,7 @@ function ConsoleProto() {
         const env = options.env || {};
         const cwd = options.cwd || '';
         
-        load(prefix, () => {
+        loadAll(prefix, () => {
             jqconsole = $(el).jqconsole('', '> ');
             
             Spawn = SpawnProto(jqconsole, {
@@ -52,30 +67,31 @@ function ConsoleProto() {
             addKeyWhenNoPrompt(jqconsole);
             addOnMouseUp(jqconsole);
             
-            if (typeof callback === 'function')
-                callback(Spawn);
+            exec(callback, Spawn);
         });
+        
+        return this;
     }
     
-    Console.addShortCuts = (shortCuts) => {
+    this.addShortCuts = (shortCuts) => {
         if (shortCuts)
             ShortCuts = {
                 ...shortCuts
             };
     };
     
-    Console.getPromptText = () => {
+    this.getPromptText = () => {
         if (jqconsole.GetState() !== 'output')
             return jqconsole.GetPromptText();
         
         return '';
     };
     
-    Console.setPromptText   = (text) => {
+    this.setPromptText   = (text) => {
         jqconsole.SetPromptText(text);
     };
     
-    Console.focus = () => {
+    this.focus = () => {
         if (jqconsole)
             jqconsole.Focus();
     };
@@ -91,16 +107,13 @@ function ConsoleProto() {
             
             const top = $console.scrollTop();
             
-            Console.focus();
+            self.focus();
             $console.scrollTop(top);
         });
     }
     
-    function load(prefix, callback) {
+    function loadAll(prefix, callback) {
         const scripts = [];
-        
-        if (!window.load)
-            scripts.push('/modules/load/load.js');
         
         if (!window.join)
             scripts.push('/join/join.js');
@@ -108,10 +121,9 @@ function ConsoleProto() {
         if (!scripts.length)
             return after();
         
-        loadScript(scripts.map(sum(prefix)), after);
+        load(scripts.map(sum(prefix)), after);
         
         function after() {
-            const load = window.load;
             const join = window.join;
             
             load.json(prefix + '/modules.json', (error, remote) => {
@@ -138,28 +150,6 @@ function ConsoleProto() {
                 load.series(remote, callback);
             });
         }
-    }
-    
-    function loadScript(srcs, callback) {
-        var i       = srcs.length,
-            func    = () => {
-                --i;
-                
-                if (!i)
-                    callback();
-            };
-        
-        srcs.forEach((src) => {
-            const element = document.createElement('script');
-        
-            element.src = src;
-            element.addEventListener('load', function load() {
-                func();
-                element.removeEventListener('load', load);
-            });
-        
-            document.body.appendChild(element);
-        });
     }
     
     function isPrompt() {
@@ -211,20 +201,15 @@ function ConsoleProto() {
                 }
             });
             
-            socket.on('err', (data) => {
-                error(data);
-            });
-            
-            socket.on('data', (data) => {
-                log(data);
-            });
+            socket.on('err', error);
+            socket.on('data', log);
             
             socket.on('prompt', () => {
                 forceWrite();
                 prompt();
                 
                 if (promptText.length)
-                    Console.setPromptText(promptText.pop());
+                    self.setPromptText(promptText.pop());
             });
             
             socket.on('path', (path) => {
@@ -234,6 +219,8 @@ function ConsoleProto() {
                     setPromptLabel(path + '> ');
                 
                 cwd = path;
+                
+                self.emit('path', path);
             });
             
             socket.on('connect', () => {
@@ -244,27 +231,10 @@ function ConsoleProto() {
                 error('console: disconnected\n');
                 
                 commands.push('cd ' + cwd);
-                promptText.push(Console.getPromptText());
+                promptText.push(self.getPromptText());
                 
                 abortPrompt();
             });
-        }
-        
-        function getValue(value) {
-            if (typeof value === 'function')
-                return value();
-            
-            return value;
-        }
-        
-        function getEnv(env) {
-            const obj = {};
-            
-            Object.keys(env).forEach((name) => {
-                obj[name] = getValue(env[name]);
-            });
-            
-            return obj;
         }
         
         function execute(cmd, env) {
@@ -301,13 +271,6 @@ function ConsoleProto() {
         this.write = (data) => {
             socket.emit('write', data);
         };
-        
-        function getHost() {
-            const l = location;
-            const href = l.origin || l.protocol + '//' + l.host;
-            
-            return href;
-        }
         
         function write(data, className) {
             if (!data)
@@ -426,6 +389,6 @@ function ConsoleProto() {
         jqconsole.Prompt(true, Spawn.handler);
     }
     
-    return Console;
+    return this;
 }
 
