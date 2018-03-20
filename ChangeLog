@@ -1,3 +1,10 @@
+2018.03.20, v6.0.0
+
+feature:
+- (npmignore) .*
+- (console) add ability to create a couple instances
+
+
 2018.03.19, v5.1.0
 
 feature:
