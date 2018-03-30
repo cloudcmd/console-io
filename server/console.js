@@ -36,14 +36,13 @@ module.exports = (socket, options) => {
     else
         throw Error('server or socket should be passed in options!');
     
+    check(auth);
+    
     Socket
         .of(prefix)
         .on('connection', (socket) => {
             const auth = options.auth;
             const connection = connectWraped(options, socket);
-            
-            if (auth && typeof auth !== 'function')
-                throw Error('options.auth should be function!');
             
             if (!auth)
                 return connect(options, socket);
@@ -128,5 +127,10 @@ function log(connNum, str, typeParam) {
     logConsole(ret);
     
     return ret;
+}
+
+function check(auth) {
+    if (auth && typeof auth !== 'function')
+        throw Error('options.auth should be function!');
 }
 
