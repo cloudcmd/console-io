@@ -9,7 +9,7 @@
   "main": "server/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cloudcmd/console.git"
+    "url": "git://github.com/cloudcmd/console-io.git"
   },
   "scripts": {
     "start": "node bin/console",
