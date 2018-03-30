@@ -55,7 +55,7 @@ module.exports.listen = (socket, options) => {
         prefix: o.prefix,
         prompt: o.prompt,
         execute: o.execute || execute,
-        authCheck: o.authCheck
+        auth: o.auth,
     });
 }
 

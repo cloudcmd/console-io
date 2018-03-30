@@ -3,6 +3,7 @@
 const io = require('socket.io');
 const tildify = require('tildify');
 const debug = require('debug');
+const wraptile = require('wraptile/legacy');
 
 const logConsole = debug('console');
 const logClients = debug('console:clients');
@@ -12,6 +13,7 @@ const WIN = process.platform === 'win32';
 const CWD = process.cwd();
 
 const Clients = [];
+const connectWraped = wraptile(connect);
 
 const cwd = (conNum) => (path) => {
     if (!path)
@@ -37,17 +39,17 @@ module.exports = (socket, options) => {
     Socket
         .of(prefix)
         .on('connection', (socket) => {
-            const authCheck = options.authCheck;
-           
-            if (authCheck && typeof authCheck !== 'function')
-                throw Error('options.authCheck should be function!');
+            const auth = options.auth;
+            const connection = connectWraped(options, socket);
             
-            if (!authCheck)
-                return onConnection(options, socket);
+            if (auth && typeof auth !== 'function')
+                throw Error('options.auth should be function!');
             
-            authCheck(socket, () => {
-                onConnection(options, socket);
-            });
+            if (!auth)
+                return connect(options, socket);
+            
+            const reject = () => socket.emit('reject');
+            socket.on('auth', auth(connection, reject));
         });
 };
 
@@ -55,7 +57,7 @@ module.exports.getSocketPath = () => {
     return Socket.path();
 };
 
-function onConnection(options, socket) {
+function connect(options, socket) {
     const execute = options.execute;
     const indexEmpty = Clients.indexOf(null);
     

@@ -86,11 +86,12 @@ Could be used as middleware, or for init `Console`.
 
 ```js
 Console.listen(socket, {
-    server: server,                          /* when no socket*/
+    server,                                  /* when no socket*/
     online: true,                            /* default */
     prefix: '/console'                       /* default */
-    authCheck: function(socket, success) {   /* authorization function */
-    }
+    auth: (accept, reject) => (username, password) => {
+        accept();
+    },
 })
 ```
 
