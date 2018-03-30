@@ -36,12 +36,12 @@ module.exports = (socket, options) => {
     else
         throw Error('server or socket should be passed in options!');
     
+    const auth = options.auth;
     check(auth);
     
     Socket
         .of(prefix)
         .on('connection', (socket) => {
-            const auth = options.auth;
             const connection = connectWraped(options, socket);
             
             if (!auth)
