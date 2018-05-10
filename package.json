@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "currify": "^2.0.0",
-    "debug": "^3.0.0",
+    "debug": "^3.1.0",
     "express": "^4.14.0",
     "join-io": "^2.0.0",
     "rendy": "^2.0.0",
