@@ -1,3 +1,16 @@
+2018.09.27, v8.0.0
+
+feature:
+- (package) debug v4.0.1
+- (package) load.js v2.0.0
+- (console) drop support of node < 8
+- (package) babel v7.0.0
+- (package) webpack-cli v3.1.0
+- (package) style-loader v0.23.0
+- (package) eslint v5.5.0
+- (package) css-loader v1.0.0
+
+
 2018.05.10, v7.0.6
 
 feature:
