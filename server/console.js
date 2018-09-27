@@ -3,7 +3,7 @@
 const io = require('socket.io');
 const tildify = require('tildify');
 const debug = require('debug');
-const wraptile = require('wraptile/legacy');
+const wraptile = require('wraptile');
 
 const logConsole = debug('console');
 const logClients = debug('console:clients');

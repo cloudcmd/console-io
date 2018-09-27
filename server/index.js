@@ -9,7 +9,7 @@ const rendy = require('rendy');
 
 const untildify = require('untildify');
 const express = require('express');
-const currify = require('currify/legacy');
+const currify = require('currify');
 const Router = express.Router;
 
 const modules = require('../json/modules');
