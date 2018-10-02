@@ -1,4 +1,4 @@
-/* global $, io, skipfirst */
+/* global $, io */
 
 'use strict';
 
@@ -8,6 +8,8 @@ require('../css/ansi.css');
 module.exports = ConsoleProto;
 
 const load = require('load.js');
+const skipfirst = require('skipfirst');
+
 const getHost = require('./get-host');
 const getEnv = require('./get-env');
 

@@ -64,6 +64,7 @@ function _modulesFn(prefix, options, req, res, next) {
     const o = options;
     
     let urlSocket = '';
+    let urlJq = prefix;
     let urlJquery = prefix;
     
     if (checkOption(o.online)) {
@@ -78,9 +79,11 @@ function _modulesFn(prefix, options, req, res, next) {
                 urlSocket = Console.getSocketPath() + '/socket.io.js';
             else if (m.name === 'jquery')
                 urlJquery += m.local;
+            else
+                urlJq += m.local;
         });
         
-        urls.push.apply(urls, [urlJquery, urlSocket]);
+        urls.push.apply(urls, [urlJquery, urlJq, urlSocket]);
     }
     
     res.type('json');
