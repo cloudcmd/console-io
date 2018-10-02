@@ -3,7 +3,6 @@
 const DIR_ROOT = __dirname + '/..';
 
 const path = require('path');
-const join = require('join-io');
 const spawnify = require('spawnify');
 const rendy = require('rendy');
 
@@ -18,7 +17,6 @@ const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
 const addLastSlash = (a) => a[a.length - 1] === '/' ? a : `${a}/`;
 
 const modulesFn = currify(_modulesFn);
-const joinFn = currify(_joinFn);
 const konsoleFn = currify(_konsoleFn);
 
 const Console = require('./console');
@@ -33,7 +31,6 @@ module.exports = (options) => {
     router.route(prefix + '/*')
         .get(konsoleFn(options))
         .get(modulesFn(prefix, options))
-        .get(joinFn(options))
         .get(staticFn)
     
     return router;
@@ -68,7 +65,6 @@ function _modulesFn(prefix, options, req, res, next) {
     
     let urlSocket = '';
     let urlJquery = prefix;
-    let urlJoin = prefix + '/join';
     
     if (checkOption(o.online)) {
         urls.push.apply(urls, modules.map((m) => {
@@ -82,11 +78,9 @@ function _modulesFn(prefix, options, req, res, next) {
                 urlSocket = Console.getSocketPath() + '/socket.io.js';
             else if (m.name === 'jquery')
                 urlJquery += m.local;
-            else
-                urlJoin += ':' + m.local;
         });
         
-        urls.push.apply(urls, [urlJquery, urlSocket, urlJoin]);
+        urls.push.apply(urls, [urlJquery, urlSocket]);
     }
     
     res.type('json');
@@ -120,17 +114,6 @@ function _konsoleFn(options, req, res, next) {
         req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
     
     next();
-}
-
-function _joinFn(o, req, res, next) {
-    if (req.url.indexOf('/join'))
-        return next ();
-    
-    const joinFunc = join({
-        dir: DIR_ROOT
-    });
-    
-    joinFunc(req, res, next);
 }
 
 function staticFn(req, res) {
