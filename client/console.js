@@ -281,7 +281,7 @@ function ConsoleProto(element, options, callback) {
     }
     
     function abortPrompt() {
-         if (isPrompt())
+        if (isPrompt())
             jqconsole.AbortPrompt();
     }
     

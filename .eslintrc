@@ -9,5 +9,7 @@
     "rules": {
         "indent": ["error", 4]
     },
-  "extends": ["eslint:recommended"]
+    "extends": [
+        "eslint:recommended",
+    ]
 }

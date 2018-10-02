@@ -23,9 +23,9 @@
     "watch:lint": "npm run watcher -- 'npm run lint'",
     "watch:client": "redrun build:client -- --watch",
     "watch:client:dev": "redrun build:client:dev -- --watch",
-    "lint:bin": "eslint --rule 'no-console:0' bin",
-    "lint:server": "eslint server webpack.config.js",
-    "lint:client": "eslint --config .eslintrc.client client",
+    "lint:bin": "eslint -c .eslintrc.server --rule 'no-console:0' bin",
+    "lint:server": "eslint -c .eslintrc.server server webpack.config.js",
+    "lint:client": "eslint -c .eslintrc.client client",
     "lint": "redrun lint:*"
   },
   "keywords": [
@@ -52,6 +52,7 @@
     "clean-css-loader": "^1.0.1",
     "css-loader": "^1.0.0",
     "eslint": "^5.5.0",
+    "eslint-plugin-node": "^7.0.1",
     "inherits": "^2.0.3",
     "load.js": "^2.0.0",
     "nodemon": "^1.11.0",
@@ -61,7 +62,7 @@
     "webpack-cli": "^3.1.0"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.3.0"
   },
   "license": "MIT"
 }
