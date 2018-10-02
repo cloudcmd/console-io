@@ -23,8 +23,9 @@
     "watch:lint": "npm run watcher -- 'npm run lint'",
     "watch:client": "redrun build:client -- --watch",
     "watch:client:dev": "redrun build:client:dev -- --watch",
-    "lint:eslint-bin": "eslint --rule 'no-console:0' bin",
-    "lint:eslint": "eslint --config .client.eslintrc server webpack.config.js",
+    "lint:bin": "eslint --rule 'no-console:0' bin",
+    "lint:server": "eslint server webpack.config.js",
+    "lint:client": "eslint --config .eslintrc.client client",
     "lint": "redrun lint:*"
   },
   "keywords": [

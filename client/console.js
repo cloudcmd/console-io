@@ -1,4 +1,4 @@
-/* global $, io, skipfirst; */
+/* global $, io, skipfirst */
 
 'use strict';
 
@@ -8,13 +8,11 @@ require('../css/ansi.css');
 module.exports = ConsoleProto;
 
 const load = require('load.js');
-const currify = require('currify/legacy');
 const getHost = require('./get-host');
 const getEnv = require('./get-env');
 
 const isFn = (fn) => typeof fn === 'function';
 const exec = (fn, ...a) => isFn(fn) && fn(...a);
-const sum = currify((a, b) => a + b);
 
 function ConsoleProto(element, options, callback) {
     let Spawn;
@@ -108,43 +106,29 @@ function ConsoleProto(element, options, callback) {
     }
     
     function loadAll(prefix, callback) {
-        const scripts = [];
-        
-        if (!window.join)
-            scripts.push('/join/join.js');
-        
-        if (!scripts.length)
-            return after();
-        
-        load(scripts.map(sum(prefix)), after);
-        
-        function after() {
-            const join = window.join;
+        load.json(prefix + '/modules.json', (error, remote) => {
+            const names = [
+                'jQuery',
+                'io'
+            ];
             
-            load.json(prefix + '/modules.json', (error, remote) => {
-                const names = [
-                    'jQuery',
-                    'io'
-                ];
+            if (error)
+                /*eslint no-console: 0*/
+                return console.error(error);
+            
+            /* do not load jquery if it is loaded */
+            names.forEach((name) => {
+                if (!window[name])
+                    return;
                 
-                if (error)
-                    /*eslint no-console: 0*/
-                    return console.error(error);
-                
-                /* do not load jquery if it is loaded */
-                names.forEach((name) => {
-                    if (!window[name])
-                        return;
-                    
-                    const reg = RegExp(name, 'i');
-                    remote = remote.filter((item) => {
-                        return !reg.test(item);
-                    });
+                const reg = RegExp(name, 'i');
+                remote = remote.filter((item) => {
+                    return !reg.test(item);
                 });
-                
-                load.series(remote, callback);
             });
-        }
+            
+            load.series(remote, callback);
+        });
     }
     
     function isPrompt() {
