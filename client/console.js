@@ -9,12 +9,17 @@ module.exports = ConsoleProto;
 
 const load = require('load.js');
 const skipfirst = require('skipfirst');
+const {promisify} = require('es6-promisify');
+const tryToCatch = require('try-to-catch/legacy');
 
 const getHost = require('./get-host');
 const getEnv = require('./get-env');
 
 const isFn = (fn) => typeof fn === 'function';
 const exec = (fn, ...a) => isFn(fn) && fn(...a);
+
+const loadJSON = promisify(load.json)
+const loadSeries = promisify(load.series);
 
 function ConsoleProto(element, options, callback) {
     let Spawn;
@@ -48,7 +53,7 @@ function ConsoleProto(element, options, callback) {
         const env = options.env || {};
         const cwd = options.cwd || '';
         
-        loadAll(prefix, () => {
+        loadAll(prefix).then(() => {
             jqconsole = $(el).jqconsole('', '> ');
             
             Spawn = SpawnProto(jqconsole, {
@@ -107,30 +112,29 @@ function ConsoleProto(element, options, callback) {
         });
     }
     
-    function loadAll(prefix, callback) {
-        load.json(prefix + '/modules.json', (error, remote) => {
-            const names = [
-                'jQuery',
-                'io'
-            ];
+    async function loadAll(prefix) {
+        let [error, remote] = await tryToCatch(loadJSON, prefix + '/modules.json');
+        const names = [
+            'jQuery',
+            'io'
+        ];
+        
+        if (error)
+            /*eslint no-console: 0*/
+            return console.error(error);
+        
+        /* do not load jquery if it is loaded */
+        names.forEach((name) => {
+            if (!window[name])
+                return;
             
-            if (error)
-                /*eslint no-console: 0*/
-                return console.error(error);
-            
-            /* do not load jquery if it is loaded */
-            names.forEach((name) => {
-                if (!window[name])
-                    return;
-                
-                const reg = RegExp(name, 'i');
-                remote = remote.filter((item) => {
-                    return !reg.test(item);
-                });
+            const reg = RegExp(name, 'i');
+            remote = remote.filter((item) => {
+                return !reg.test(item);
             });
-            
-            load.series(remote, callback);
         });
+        
+        await loadSeries(remote);
     }
     
     function isPrompt() {
