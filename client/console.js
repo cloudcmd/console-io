@@ -67,7 +67,7 @@ function ConsoleProto(element, options, callback) {
             addKeyWhenNoPrompt(jqconsole);
             addOnMouseUp(jqconsole);
             
-            exec(callback, Spawn);
+            exec(callback, Spawn, this);
         });
         
         return this;
