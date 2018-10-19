@@ -1,77 +1,110 @@
-/* global $, io */
+/* global $ */
 
 'use strict';
 
 require('../css/console.css');
 require('../css/ansi.css');
 
-module.exports = ConsoleProto;
-
 const load = require('load.js');
 const skipfirst = require('skipfirst');
 const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch/legacy');
 
-const getHost = require('./get-host');
-const getEnv = require('./get-env');
-
-const isFn = (fn) => typeof fn === 'function';
-const exec = (fn, ...a) => isFn(fn) && fn(...a);
+const Spawn = require('./spawn');
 
 const loadJSON = promisify(load.json)
 const loadSeries = promisify(load.series);
 
-function ConsoleProto(element, options, callback) {
-    let Spawn;
-    let jqconsole;
+module.exports = async (element, options) => {
+    const [jqconsole, spawn] = await init(element, options);
+    const konsole = Console(element, {
+        jqconsole,
+        spawn,
+    });
+    
+    return konsole;
+};
+
+async function init(element, options) {
+    const el = getElement(element);
+    
+    const socketPath = options.socketPath || '';
+    const prefix = options.prefix || '/console';
+    const env = options.env || {};
+    const cwd = options.cwd || '';
+    
+    await loadAll(prefix);
+    
+    const jqconsole = $(el).jqconsole('', '> ');
+    const spawn = Spawn(jqconsole, {
+        env,
+        cwd,
+        prefix,
+        socketPath,
+    });
+    
+    return [
+        jqconsole,
+        spawn,
+    ];
+}
+
+async function loadAll(prefix) {
+    let [error, remote] = await tryToCatch(loadJSON, prefix + '/modules.json');
+    const names = [
+        'jQuery',
+        'io'
+    ];
+    
+    if (error)
+        /*eslint no-console: 0*/
+        return console.error(error);
+    
+    /* do not load jquery if it is loaded */
+    names.forEach((name) => {
+        if (!window[name])
+            return;
+        
+        const reg = RegExp(name, 'i');
+        remote = remote.filter((item) => {
+            return !reg.test(item);
+        });
+    });
+    
+    await loadSeries(remote);
+}
+
+function getElement(el) {
+    if (typeof el !== 'string')
+        return el;
+    
+    return document.querySelector(el);
+}
+
+function Console(element, {spawn, jqconsole}) {
     let ShortCuts = {};
     
-    if (!(this instanceof ConsoleProto))
-        return new ConsoleProto(element, options, callback);
+    if (!(this instanceof Console))
+        return new Console(element, {
+            spawn,
+            jqconsole,
+        });
     
     const self = this;
     
-    Console(element, options, callback);
+    addShortCuts(jqconsole);
+    addKeyWhenNoPrompt(jqconsole);
+    addOnMouseUp(jqconsole);
     
-    function getElement(el) {
-        if (typeof el !== 'string')
-            return el;
-        
-        return document.querySelector(el);
-    }
+    this.on = (...args) => {
+        spawn.on(...args);
+    };
     
-    function Console(element, options, callback) {
-        const el = getElement(element);
-        
-        if (!callback) {
-            callback = options;
-            options = {};
-        }
-        
-        const socketPath = options.socketPath || '';
-        const prefix = options.prefix || '/console';
-        const env = options.env || {};
-        const cwd = options.cwd || '';
-        
-        loadAll(prefix).then(() => {
-            jqconsole = $(el).jqconsole('', '> ');
-            
-            Spawn = SpawnProto(jqconsole, {
-                env,
-                cwd,
-                prefix,
-                socketPath,
-            });
-            
-            addShortCuts(jqconsole);
-            addKeyWhenNoPrompt(jqconsole);
-            addOnMouseUp(jqconsole);
-            
-            exec(callback, Spawn);
-        });
-        
-        return this;
-    }
+    this.emit = (...args) => {
+        spawn.emit(...args);
+    };
+    
+    this.handler = spawn.handler;
     
     this.addShortCuts = (shortCuts) => {
         if (shortCuts)
@@ -112,190 +145,11 @@ function ConsoleProto(element, options, callback) {
         });
     }
     
-    async function loadAll(prefix) {
-        let [error, remote] = await tryToCatch(loadJSON, prefix + '/modules.json');
-        const names = [
-            'jQuery',
-            'io'
-        ];
-        
-        if (error)
-            /*eslint no-console: 0*/
-            return console.error(error);
-        
-        /* do not load jquery if it is loaded */
-        names.forEach((name) => {
-            if (!window[name])
-                return;
-            
-            const reg = RegExp(name, 'i');
-            remote = remote.filter((item) => {
-                return !reg.test(item);
-            });
-        });
-        
-        await loadSeries(remote);
-    }
-    
     function isPrompt() {
         const state = jqconsole.GetState();
         return state === 'prompt';
     }
-    
-    function SpawnProto(jqconsole, options) {
-        if (!(this instanceof SpawnProto))
-            return new SpawnProto(jqconsole, options);
-        
-        const Buffer = {
-            'log-msg': '',
-            'error-msg': ''
-        };
-        
-        let socket;
-        const prompt = () => {
-            if (isPrompt())
-                return;
-            
-            jqconsole.Prompt(true, this.handler);
-        };
-        
-        const {env} = options;
-        
-        init(options);
-        
-        function init(options) {
-            let {cwd} = options;
-            const commands = [];
-            const promptText = [];
-            const href = getHost();
-            const FIVE_SECONDS = 5000;
-            
-            const room = options.prefix;
-            const {socketPath} = options;
-            
-            socket = io.connect(href + room, {
-                'max reconnection attempts' : Math.pow(2, 32),
-                'reconnection limit'        : FIVE_SECONDS,
-                path: socketPath + '/socket.io',
-                transportOptions: {
-                    polling: {
-                        extraHeaders: {
-                            'x-cwd': cwd
-                        }
-                    }
-                }
-            });
-            
-            socket.on('err', error);
-            socket.on('data', log);
-            
-            socket.on('prompt', () => {
-                forceWrite();
-                prompt();
-                
-                if (promptText.length)
-                    self.setPromptText(promptText.pop());
-            });
-            
-            socket.on('label', (path) => {
-                if (commands.length)
-                    execute(commands.pop(), env);
-                else
-                    setPromptLabel(path + '> ');
-                
-                cwd = path;
-            });
-            
-            socket.on('connect', () => {
-                log('console: connected\n');
-            });
-            
-            socket.on('disconnect', () => {
-                error('console: disconnected\n');
-                
-                commands.push('cd ' + cwd);
-                promptText.push(self.getPromptText());
-                
-                abortPrompt();
-            });
-        }
-        
-        function execute(cmd, env) {
-            if (!cmd)
-                return;
-            
-            socket.emit('command', {
-                cmd,
-                env: getEnv(env)
-            });
-        }
-        
-        this.on = (...args) => {
-            socket.on(...args);
-            return this
-        };
-        
-        this.emit = (...args) => {
-            socket.emit(...args);
-            return this
-        };
-        
-        this.handler = (command) => {
-            if (command)
-                return execute(command, env);
-            
-            jqconsole.Prompt(true, this.handler);
-        };
-        
-        this.kill = () => {
-            socket.emit('kill');
-        };
-        
-        this.write = (data) => {
-            socket.emit('write', data);
-        };
-        
-        function write(data, className) {
-            if (!data)
-                return;
-            
-            Buffer[className] += data;
-            const isContain = ~Buffer[className].indexOf('\n');
-            
-            if (isContain) {
-                jqconsole.Write(Buffer[className], className);
-                Buffer[className] = '';
-            }
-        }
-        
-        function forceWrite() {
-            Object.keys(Buffer).forEach((name) => {
-                if (Buffer[name]) {
-                    jqconsole.Write(Buffer[name], name);
-                    Buffer[name] = '';
-                }
-            });
-        }
-        
-        function log(data) {
-            write(data, 'log-msg');
-        }
-        
-        function error(data) {
-            write(data, 'error-msg');
-        }
-    }
-    
-    function abortPrompt() {
-        if (isPrompt())
-            jqconsole.AbortPrompt();
-    }
-    
-    function setPromptLabel(prompt) {
-        jqconsole.SetPromptLabel(prompt);
-        jqconsole.UpdatePromptLabel();
-    }
-    
+   
     function addShortCuts(jqconsole) {
         jqconsole.RegisterShortcut('Z', () => {
             jqconsole.SetPromptText('');

@@ -12,12 +12,11 @@
             (function() {
                 'use strict';
                 
-                window.addEventListener('DOMContentLoaded', function load() {
+                window.addEventListener('DOMContentLoaded', async function load() {
                     window.removeEventListener('DOMContentLoaded', load);
                     
-                    Console('.console', function() {
-                        console.log('console ready')
-                    });
+                    await Console('.console')
+                    console.log('console ready')
                 });
             })()
         </script>

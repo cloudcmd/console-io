@@ -36,12 +36,10 @@ For more details see [Jq-console keyboard shortcuts](https://github.com/replit/j
 
 ### Client API
 
-#### Console(element [, options, prefix], callback)
+#### Console(element [, options])
 
 - element   - html element, or selector
-- prefix    - (optional) prefix to url (same as in server)
 - options   - (optional) {cwd}
-- callback  - function to call after init
 
 When prefix set in server and client, you should use same prefix in html.
 For example, if you use prefix "any_prefix" you should connect
@@ -56,7 +54,8 @@ console script in this way:
 Example: show alert on `Ctrl + A`:
 
 ```js
-const konsole = Console();
+const konsole = await Console();
+
 konsole.addShortCuts({
     'A': function() {
         alert('hello');
@@ -110,7 +109,7 @@ Console({
 
 To use `Console` in your programs you should make local install:
 
-`npm i console-io express --save`
+`npm i console-io express`
 
 And use it in your program
 
@@ -146,23 +145,22 @@ server.listen(port, ip);
 <div class="console"></div>
 <script src="/console/console.js"></script>
 <script>
-    const options = {
-        prefix: 'console',
-        env: {
-            CURRENT_FILE: getCurrentFile(),
-            CURRENT_APP: 'console-io'
-        }
-    };
-    
-    const konsole = Console('.console', options, function() {
+    document.addEventListener('load', async () => {
+        const konsole = await Console('.console', {
+            prefix: 'console',
+            env: {
+                CURRENT_FILE: getCurrentFile(),
+                CURRENT_APP: 'console-io'
+            }
+        });
+        
         console.log('console ready')
+        konsole.focus();
+        
+        function getCurrentFile() {
+            return 'filename.txt';
+        }
     });
-    
-    konsole.focus();
-    
-    function getCurrentFile() {
-        return 'filename.txt';
-    }
 </script>
 ```
 
