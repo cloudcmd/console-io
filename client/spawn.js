@@ -26,7 +26,7 @@ function SpawnProto(jqconsole, options) {
             return jqconsole.GetPromptText();
         
         return '';
-    };
+    }
     
     function isPrompt() {
         const state = jqconsole.GetState();
