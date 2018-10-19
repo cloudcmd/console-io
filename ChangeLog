@@ -1,3 +1,10 @@
+2018.10.19, v8.0.4
+
+feature:
+- (package) rm @babel/plugin-proposal-object-rest-spread
+- (console) es2018-ify
+
+
 2018.10.10, v8.0.3
 
 feature:
