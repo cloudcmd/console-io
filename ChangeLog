@@ -1,3 +1,9 @@
+2018.10.19, v8.1.0
+
+feature:
+- (console) add ability to pass instance of console to callback
+
+
 2018.10.19, v8.0.4
 
 feature:
