@@ -19,7 +19,7 @@
     "build:client:dev": "NODE_ENV=development npm run build-progress -- --mode development",
     "build:start": "redrun build:client start",
     "build:start:dev": "redrun build:client:dev start:dev",
-    "build": "redrun build:*",
+    "build": "redrun build:client*",
     "wisdom": "npm run build",
     "watcher": "nodemon -w client -w server --exec",
     "watch:lint": "npm run watcher -- 'npm run lint'",
