@@ -1,3 +1,9 @@
+2018.10.19, v8.1.2
+
+fix:
+- (console) rm duplicate
+
+
 2018.10.19, v8.1.1
 
 feature:
