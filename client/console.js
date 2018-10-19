@@ -31,6 +31,8 @@ function ConsoleProto(element, options, callback) {
     
     const self = this;
     
+    Console(element, options, callback);
+    
     function getElement(el) {
         if (typeof el !== 'string')
             return el;
@@ -65,7 +67,7 @@ function ConsoleProto(element, options, callback) {
             addKeyWhenNoPrompt(jqconsole);
             addOnMouseUp(jqconsole);
             
-            exec(callback, Spawn, this);
+            exec(callback, Spawn);
         });
         
         return this;
