@@ -29,8 +29,6 @@ function ConsoleProto(element, options, callback) {
     if (!(this instanceof ConsoleProto))
         return new ConsoleProto(element, options, callback);
     
-    Console(element, options, callback);
-    
     const self = this;
     
     function getElement(el) {
