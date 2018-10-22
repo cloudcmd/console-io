@@ -15,7 +15,7 @@ const Spawn = require('./spawn');
 const loadJSON = promisify(load.json)
 const loadSeries = promisify(load.series);
 
-module.exports = async (element, options) => {
+module.exports = async (element, options = {}) => {
     const [jqconsole, spawn] = await init(element, options);
     const konsole = Console(element, {
         jqconsole,
