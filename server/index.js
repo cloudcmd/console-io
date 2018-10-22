@@ -103,7 +103,7 @@ function checkOption(isOption) {
 function _konsoleFn(options, req, res, next) {
     const o = options || {};
     const prefix = o.prefix || '/console';
-    const url = req.url
+    const {url} = req;
     
     if (url.indexOf(prefix))
         return next();
