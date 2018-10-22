@@ -1,3 +1,10 @@
+2018.10.22, v9.0.1
+
+fix:
+- (console) crash when no options
+- (babelrc) regeneratorRuntime is not defined (https://github.com/coderaiser/cloudcmd/issues/199)
+
+
 2018.10.19, v9.0.0
 
 feature:
