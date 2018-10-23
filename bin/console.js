@@ -38,7 +38,7 @@ function start() {
               '0.0.0.0';
     
     const online = false;
-    app .use(webconsole({
+    app .use('/', webconsole({
         server,
         online,
     })).use(express.static(DIR));

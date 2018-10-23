@@ -60,6 +60,7 @@ function _modulesFn(prefix, options, req, res, next) {
     if (req.url !== '/modules.json')
         return next();
     
+    prefix = req.baseUrl + prefix;
     const urls = [];
     const o = options;
     
@@ -103,6 +104,7 @@ function checkOption(isOption) {
 function _konsoleFn(options, req, res, next) {
     const o = options || {};
     const prefix = o.prefix || '/console';
+    
     const {url} = req;
     
     if (url.indexOf(prefix))
