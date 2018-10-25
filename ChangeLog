@@ -1,3 +1,13 @@
+2018.10.25, v10.0.0
+
+fix:
+- feature(console) split prefix to: prefix and prefixSocket
+
+feature:
+- (console) split prefix to: prefix and prefixSocket
+- (console) add support of express mount point (coderaiser/cloudcmd#200)
+
+
 2018.10.23, v9.1.0
 
 feature:
