@@ -30,6 +30,7 @@ async function init(element, options) {
     
     const socketPath = options.socketPath || '';
     const prefix = options.prefix || '/console';
+    const prefixSocket = options.prefixSocket || '/console';
     const env = options.env || {};
     const cwd = options.cwd || '';
     
@@ -39,7 +40,7 @@ async function init(element, options) {
     const spawn = Spawn(jqconsole, {
         env,
         cwd,
-        prefix,
+        prefixSocket,
         socketPath,
     });
     

@@ -27,7 +27,7 @@ let ConNum = -1;
 
 module.exports = (socket, options) => {
     const o = options || {};
-    const prefix  = o.prefix || '/console';
+    const prefixSocket = o.prefixSocket || '/console';
     
     if (socket)
         Socket = socket;
@@ -40,7 +40,7 @@ module.exports = (socket, options) => {
     check(auth);
     
     Socket
-        .of(prefix)
+        .of(prefixSocket)
         .on('connection', (socket) => {
             const connection = connectWraped(options, socket);
             

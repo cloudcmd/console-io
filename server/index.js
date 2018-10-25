@@ -44,12 +44,11 @@ module.exports.listen = (socket, options) => {
     
     const o = options;
     
-    if (!options.prefix)
-        options.prefix = '/console';
+    const prefixSocket = options.prefixSocket || '/console';
     
     return Console(socket, {
         server: o.server,
-        prefix: o.prefix,
+        prefixSocket,
         prompt: o.prompt,
         execute: o.execute || execute,
         auth: o.auth,

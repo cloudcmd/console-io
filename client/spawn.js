@@ -57,10 +57,12 @@ function SpawnProto(jqconsole, options) {
         const href = getHost();
         const FIVE_SECONDS = 5000;
         
-        const room = options.prefix;
-        const {socketPath} = options;
+        const {
+            socketPath,
+            prefixSocket,
+        } = options;
         
-        socket = io.connect(href + room, {
+        socket = io.connect(href + prefixSocket, {
             'max reconnection attempts' : Math.pow(2, 32),
             'reconnection limit'        : FIVE_SECONDS,
             path: socketPath + '/socket.io',
