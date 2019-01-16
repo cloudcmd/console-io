@@ -1,0 +1,7 @@
+{
+    "match": {
+        "(bin|client/console.js)": {
+            "remove-console": false
+        }
+    }
+}
