@@ -16,3 +16,5 @@ modules/jq-console/test
 
 *.swp
 
+madrun.js
+

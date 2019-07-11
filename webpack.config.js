@@ -18,8 +18,8 @@ const rules = clean([
         loader: 'babel-loader',
     }, {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!clean-css-loader'
-    }
+        loader: 'style-loader!css-loader!clean-css-loader',
+    },
 ]);
 
 module.exports = {

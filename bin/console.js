@@ -5,7 +5,7 @@
 const argv = process.argv;
 const argvLast = argv.slice().pop();
 
-switch (argvLast) {
+switch(argvLast) {
 case '-v':
     version();
     break;
@@ -21,20 +21,20 @@ default:
 function start() {
     const DIR = __dirname + '/../';
     
-    const webconsole  = require('../');
+    const webconsole = require('../');
     const http = require('http');
     
     const express = require('express');
-     
+    
     const app = express();
     const server = http.createServer(app);
     
-    const port =    process.env.PORT            ||  /* c9           */
-                    process.env.app_port        ||  /* nodester     */
-                    process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
+    const port = process.env.PORT || /* c9           */
+                    process.env.app_port || /* nodester     */
+                    process.env.VCAP_APP_PORT || /* cloudfoundry */
                     1337;
     
-    const ip = process.env.IP ||  /* c9 */
+    const ip = process.env.IP || /* c9 */
               '0.0.0.0';
     
     const online = false;
@@ -44,7 +44,7 @@ function start() {
     })).use(express.static(DIR));
     
     webconsole.listen({
-        server
+        server,
     });
     
     server.listen(port, ip);

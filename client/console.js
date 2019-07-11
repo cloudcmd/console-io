@@ -27,15 +27,17 @@ module.exports = async (element, options = {}) => {
 
 async function init(element, options) {
     const el = getElement(element);
-    
-    const socketPath = options.socketPath || '';
-    const prefix = options.prefix || '/console';
-    const prefixSocket = options.prefixSocket || '/console';
-    const env = options.env || {};
-    const cwd = options.cwd || '';
-    
+
+    const {
+        socketPath = '',
+        prefix = '/console',
+        prefixSocket = '/console',
+        env = {},
+        cwd = ''
+    } = options;
+
     await loadAll(prefix);
-    
+
     const jqconsole = $(el).jqconsole('', '> ');
     const spawn = Spawn(jqconsole, {
         env,
@@ -43,7 +45,7 @@ async function init(element, options) {
         prefixSocket,
         socketPath,
     });
-    
+
     return [
         jqconsole,
         spawn,
@@ -56,22 +58,22 @@ async function loadAll(prefix) {
         'jQuery',
         'io'
     ];
-    
+
     if (error)
         /*eslint no-console: 0*/
         return console.error(error);
-    
+
     /* do not load jquery if it is loaded */
-    names.forEach((name) => {
+    for (const name of names) {
         if (!window[name])
-            return;
+            continue;
         
         const reg = RegExp(name, 'i');
         remote = remote.filter((item) => {
             return !reg.test(item);
         });
-    });
-    
+    }
+
     await loadSeries(remote);
 }
 
@@ -155,14 +157,14 @@ function Console(element, {spawn, jqconsole}) {
         jqconsole.RegisterShortcut('Z', () => {
             jqconsole.SetPromptText('');
         });
-        
+
         jqconsole.RegisterShortcut('L', clear);
-        
-        Object.keys(ShortCuts).forEach((key) => {
+
+        for (const key of Object.keys(ShortCuts)) {
             const func = ShortCuts[key];
             
             jqconsole.RegisterShortcut(key, func);
-        });
+        }
     }
     
     function addKeyWhenNoPrompt(jqconsole) {

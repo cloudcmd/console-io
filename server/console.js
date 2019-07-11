@@ -27,7 +27,9 @@ let ConNum = -1;
 
 module.exports = (socket, options) => {
     const o = options || {};
-    const prefixSocket = o.prefixSocket || '/console';
+    const {
+        prefixSocket = '/console',
+    } = o;
     
     if (socket)
         Socket = socket;
@@ -36,7 +38,7 @@ module.exports = (socket, options) => {
     else
         throw Error('server or socket should be passed in options!');
     
-    const auth = options.auth;
+    const {auth} = options;
     check(auth);
     
     Socket
@@ -57,7 +59,7 @@ module.exports.getSocketPath = () => {
 };
 
 function connect(options, socket) {
-    const execute = options.execute;
+    const {execute} = options;
     const indexEmpty = Clients.indexOf(null);
     
     logClients('add before:', Clients);
@@ -70,13 +72,13 @@ function connect(options, socket) {
     const msg = log(ConNum + 1, 'console connected\n');
     const cwd = socket.handshake.headers['x-cwd'] || CWD;
     const dir = WIN ? cwd : tildify(cwd);
-     
+    
     socket.emit('data', msg);
     socket.emit('label', options.prompt || rmLastSlash(dir));
     socket.emit('prompt');
     
     Clients[ConNum] = {
-        cwd
+        cwd,
     };
     
     logClients('add after:', Clients);

@@ -63,7 +63,7 @@ function SpawnProto(jqconsole, options) {
         } = options;
         
         socket = io.connect(href + prefixSocket, {
-            'max reconnection attempts' : Math.pow(2, 32),
+            'max reconnection attempts' : 2 ** 32,
             'reconnection limit'        : FIVE_SECONDS,
             path: socketPath + '/socket.io',
             transportOptions: {
@@ -158,12 +158,12 @@ function SpawnProto(jqconsole, options) {
     }
     
     function forceWrite() {
-        Object.keys(Buffer).forEach((name) => {
+        for (const name of Object.keys(Buffer)) {
             if (Buffer[name]) {
                 jqconsole.Write(Buffer[name], name);
                 Buffer[name] = '';
             }
-        });
+        }
     }
     
     function log(data) {
