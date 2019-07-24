@@ -2,7 +2,7 @@
 
 'use strict';
 
-const argv = process.argv;
+const {argv} = process;
 const argvLast = argv.slice().pop();
 
 switch(argvLast) {

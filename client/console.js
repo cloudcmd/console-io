@@ -12,7 +12,7 @@ const tryToCatch = require('try-to-catch/legacy');
 
 const Spawn = require('./spawn');
 
-const loadJSON = promisify(load.json)
+const loadJSON = promisify(load.json);
 const loadSeries = promisify(load.series);
 
 module.exports = async (element, options = {}) => {
@@ -27,17 +27,17 @@ module.exports = async (element, options = {}) => {
 
 async function init(element, options) {
     const el = getElement(element);
-
+    
     const {
         socketPath = '',
         prefix = '/console',
         prefixSocket = '/console',
         env = {},
-        cwd = ''
+        cwd = '',
     } = options;
-
+    
     await loadAll(prefix);
-
+    
     const jqconsole = $(el).jqconsole('', '> ');
     const spawn = Spawn(jqconsole, {
         env,
@@ -45,7 +45,7 @@ async function init(element, options) {
         prefixSocket,
         socketPath,
     });
-
+    
     return [
         jqconsole,
         spawn,
@@ -56,13 +56,13 @@ async function loadAll(prefix) {
     let [error, remote] = await tryToCatch(loadJSON, prefix + '/modules.json');
     const names = [
         'jQuery',
-        'io'
+        'io',
     ];
-
+    
     if (error)
         /*eslint no-console: 0*/
         return console.error(error);
-
+    
     /* do not load jquery if it is loaded */
     for (const name of names) {
         if (!window[name])
@@ -73,7 +73,7 @@ async function loadAll(prefix) {
             return !reg.test(item);
         });
     }
-
+    
     await loadSeries(remote);
 }
 
@@ -112,7 +112,7 @@ function Console(element, {spawn, jqconsole}) {
     this.addShortCuts = (shortCuts) => {
         if (shortCuts)
             ShortCuts = {
-                ...shortCuts
+                ...shortCuts,
             };
     };
     
@@ -123,7 +123,7 @@ function Console(element, {spawn, jqconsole}) {
         return '';
     };
     
-    this.setPromptText   = (text) => {
+    this.setPromptText = (text) => {
         jqconsole.SetPromptText(text);
     };
     
@@ -152,14 +152,14 @@ function Console(element, {spawn, jqconsole}) {
         const state = jqconsole.GetState();
         return state === 'prompt';
     }
-   
+    
     function addShortCuts(jqconsole) {
         jqconsole.RegisterShortcut('Z', () => {
             jqconsole.SetPromptText('');
         });
-
+        
         jqconsole.RegisterShortcut('L', clear);
-
+        
         for (const key of Object.keys(ShortCuts)) {
             const func = ShortCuts[key];
             
@@ -205,7 +205,7 @@ function Console(element, {spawn, jqconsole}) {
         
         const shift = event.shiftKey;
         const identifier = event.key || event.keyIdentifier;
-         
+        
         if (identifier === 'Enter')
             return '\n';
         

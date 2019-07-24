@@ -13,7 +13,7 @@ function SpawnProto(jqconsole, options) {
     
     const Buffer = {
         'log-msg': '',
-        'error-msg': ''
+        'error-msg': '',
     };
     
     function setPromptLabel(prompt) {
@@ -65,14 +65,14 @@ function SpawnProto(jqconsole, options) {
         socket = io.connect(href + prefixSocket, {
             'max reconnection attempts' : 2 ** 32,
             'reconnection limit'        : FIVE_SECONDS,
-            path: socketPath + '/socket.io',
-            transportOptions: {
+            'path': socketPath + '/socket.io',
+            'transportOptions': {
                 polling: {
                     extraHeaders: {
-                        'x-cwd': cwd
-                    }
-                }
-            }
+                        'x-cwd': cwd,
+                    },
+                },
+            },
         });
         
         socket.on('err', error);
@@ -115,18 +115,18 @@ function SpawnProto(jqconsole, options) {
         
         socket.emit('command', {
             cmd,
-            env: getEnv(env)
+            env: getEnv(env),
         });
     }
     
     this.on = (...args) => {
         socket.on(...args);
-        return this
+        return this;
     };
     
     this.emit = (...args) => {
         socket.emit(...args);
-        return this
+        return this;
     };
     
     this.handler = function handler(command) {

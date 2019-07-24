@@ -2,11 +2,11 @@
 
 module.exports = (env) => {
     const obj = {};
-
+    
     for (const name of Object.keys(env)) {
         obj[name] = getValue(env[name]);
     }
-
+    
     return obj;
 };
 
