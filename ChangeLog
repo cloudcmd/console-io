@@ -1,3 +1,11 @@
+2019.08.21, v10.0.6
+
+feature:
+- (package) putout v5.7.1
+- (package) style-loader v1.0.0
+- (package) eslint-plugin-putout v2.0.0
+
+
 2019.07.11, v10.0.5
 
 feature:
