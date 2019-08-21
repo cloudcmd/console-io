@@ -1,8 +1,10 @@
 language: node_js
 node_js:
-    - 6
+    - 12
+    - 10
     - 8
-    - 9
+
+cache: false
 
 script:
   - npm run lint
