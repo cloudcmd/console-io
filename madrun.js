@@ -16,11 +16,8 @@ module.exports = {
     'watch:lint': () => run('watcher', '\'npm run lint\''),
     'watch:client': () => run('build:client', '--watch'),
     'watch:client:dev': () => run('build:client:dev', '--watch'),
-    'lint:bin': () => 'eslint -c .eslintrc.server --rule \'no-console:0\' bin',
-    'lint:server': () => 'eslint -c .eslintrc.server server madrun.js webpack.config.js',
-    'lint:client': () => 'eslint -c .eslintrc.client client',
-    'lint': () => run(['putout', 'lint:*']),
-    'fix:lint': () => run(['putout', 'lint:*'], '--fix'),
+    'lint': () => 'putout client server madrun.js webpack.config.js',
+    'fix:lint': () => run('lint', '--fix'),
     'putout': () => 'putout client server madrun.js webpack.config.js',
 };
 
