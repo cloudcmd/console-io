@@ -41,7 +41,7 @@
     "currify": "^3.0.0",
     "debug": "^4.0.1",
     "express": "^4.14.0",
-    "rendy": "^2.0.0",
+    "rendy": "^3.0.1",
     "socket.io": "^2.2.0",
     "spawnify": "^5.0.0",
     "tildify": "^2.0.0",
