@@ -1,18 +1,5 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-      "exclude": [
-        "transform-regenerator"
-      ]
-    }]
-  ],
-  "plugins": [
-    ["module:fast-async", {
-      "compiler": {
-        "generators": false,
-        "runtimePatter": ".js"
-      }
-    }]
+    "@babel/preset-env"
   ]
 }
-

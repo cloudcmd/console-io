@@ -8,7 +8,7 @@ require('../css/ansi.css');
 const load = require('load.js');
 const skipfirst = require('skipfirst');
 const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 
 const Spawn = require('./spawn');
 
