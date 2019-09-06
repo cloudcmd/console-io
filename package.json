@@ -61,7 +61,7 @@
     "fast-async": "7",
     "inherits": "^2.0.3",
     "load.js": "^2.0.0",
-    "madrun": "^2.1.4",
+    "madrun": "^3.0.1",
     "nodemon": "^1.11.0",
     "putout": "^5.7.1",
     "redrun": "^7.0.0",
