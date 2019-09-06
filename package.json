@@ -56,7 +56,7 @@
     "css-loader": "^3.0.0",
     "es6-promisify": "^6.0.0",
     "eslint": "^6.0.1",
-    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-putout": "^2.0.0",
     "fast-async": "7",
     "inherits": "^2.0.3",
