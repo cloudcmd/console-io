@@ -46,7 +46,7 @@
     "spawnify": "^5.0.0",
     "tildify": "^2.0.0",
     "untildify": "^4.0.0",
-    "wraptile": "^2.0.0"
+    "wraptile": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
