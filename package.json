@@ -62,7 +62,7 @@
     "load.js": "^2.0.0",
     "madrun": "^3.0.1",
     "nodemon": "^1.11.0",
-    "putout": "^5.7.1",
+    "putout": "^6.1.0",
     "redrun": "^7.0.0",
     "skipfirst": "^1.0.1",
     "style-loader": "^1.0.0",
