@@ -7,13 +7,9 @@ require('../css/ansi.css');
 
 const load = require('load.js');
 const skipfirst = require('skipfirst');
-const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch');
 
 const Spawn = require('./spawn');
-
-const loadJSON = promisify(load.json);
-const loadSeries = promisify(load.series);
 
 module.exports = async (element, options = {}) => {
     const [jqconsole, spawn] = await init(element, options);
@@ -53,7 +49,7 @@ async function init(element, options) {
 }
 
 async function loadAll(prefix) {
-    let [error, remote] = await tryToCatch(loadJSON, prefix + '/modules.json');
+    let [error, remote] = await tryToCatch(load.json, prefix + '/modules.json');
     const names = [
         'jQuery',
         'io',
@@ -74,7 +70,7 @@ async function loadAll(prefix) {
         });
     }
     
-    await loadSeries(remote);
+    await load.series(remote);
 }
 
 function getElement(el) {
