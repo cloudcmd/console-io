@@ -107,20 +107,20 @@ function _konsoleFn(options, req, res, next) {
     const {
         prefix = '/console',
     } = options || {};
-
+    
     const {url} = req;
-
+    
     if (url.indexOf(prefix))
         return next();
-
+    
     req.url = req.url.replace(prefix, '');
-
+    
     if (/^\/console\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
-
+    
     if (isDev)
         req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
-
+    
     next();
 }
 
