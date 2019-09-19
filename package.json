@@ -1,6 +1,6 @@
 {
   "name": "console-io",
-  "version": "10.1.1",
+  "version": "10.1.2",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Web console",
   "bin": {
@@ -63,7 +63,6 @@
     "madrun": "^3.0.1",
     "nodemon": "^1.11.0",
     "putout": "^6.1.0",
-    "redrun": "^7.0.0",
     "skipfirst": "^1.0.1",
     "style-loader": "^1.0.0",
     "try-to-catch": "^1.0.2",
