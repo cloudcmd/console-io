@@ -70,7 +70,7 @@
     "webpack-cli": "^3.1.0"
   },
   "engines": {
-    "node": ">=8.3.0"
+    "node": ">=10"
   },
   "license": "MIT",
   "publishConfig": {
