@@ -1,3 +1,10 @@
+2019.09.21, v11.0.0
+
+feature:
+- (console-io) drop support of node < 10
+- (package) spawnify v6.0.0
+
+
 2019.09.19, v10.1.3
 
 feature:
