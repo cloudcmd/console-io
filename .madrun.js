@@ -16,8 +16,7 @@ module.exports = {
     'watch:lint': () => run('watcher', '\'npm run lint\''),
     'watch:client': () => run('build:client', '--watch'),
     'watch:client:dev': () => run('build:client:dev', '--watch'),
-    'lint': () => 'putout client server madrun.js webpack.config.js',
+    'lint': () => 'putout client server .madrun.js webpack.config.js',
     'fix:lint': () => run('lint', '--fix'),
-    'putout': () => 'putout client server madrun.js webpack.config.js',
 };
 
