@@ -1,3 +1,13 @@
+2019.11.08, v11.0.1
+
+feature:
+- (package) eslint-plugin-putout v3.0.0
+- (package) load.js v3.1.2
+- (package) madrun v5.0.0
+- (package) putout v7.0.2
+- (package) try-to-catch v2.0.0
+
+
 2019.09.21, v11.0.0
 
 feature:
