@@ -17,4 +17,5 @@ modules/jq-console/test
 
 server_
 *.swp
+.putoutcache
 
