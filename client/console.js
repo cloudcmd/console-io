@@ -95,21 +95,15 @@ function Console(element, {spawn, jqconsole}) {
     addKeyWhenNoPrompt(jqconsole);
     addOnMouseUp(jqconsole);
     
-    this.on = (...args) => {
-        spawn.on(...args);
-    };
+    this.on = spawn.on;
     
-    this.emit = (...args) => {
-        spawn.emit(...args);
-    };
+    this.emit = spawn.emit;
     
     this.handler = spawn.handler;
     
     this.addShortCuts = (shortCuts) => {
         if (shortCuts)
-            ShortCuts = {
-                ...shortCuts,
-            };
+            ShortCuts = shortCuts;
     };
     
     this.getPromptText = () => {
@@ -132,7 +126,7 @@ function Console(element, {spawn, jqconsole}) {
         const {$console} = jqconsole;
         
         $console.mouseup(() => {
-            const isSelection = '' + window.getSelection();
+            const isSelection = String(window.getSelection());
             
             if (isSelection)
                 return;

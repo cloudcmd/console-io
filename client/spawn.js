@@ -149,7 +149,7 @@ function SpawnProto(jqconsole, options) {
             return;
         
         Buffer[className] += data;
-        const isContain = ~Buffer[className].indexOf('\n');
+        const isContain = Buffer[className].includes('\n');
         
         if (isContain) {
             jqconsole.Write(Buffer[className], className);
