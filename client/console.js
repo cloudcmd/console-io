@@ -185,14 +185,14 @@ function Console(element, {spawn, jqconsole}) {
         const isC = event.keyCode === KEY_C;
         
         if (isC && isCtrl)
-            return Spawn.kill();
+            return spawn.kill();
         
         const char = fromCharCode(event);
         
         if (!char)
             return;
         
-        Spawn.write(char);
+        spawn.write(char);
         jqconsole.Write(char);
     }
     
@@ -222,7 +222,7 @@ function Console(element, {spawn, jqconsole}) {
     function clear() {
         jqconsole.Reset();
         addShortCuts(jqconsole);
-        jqconsole.Prompt(true, Spawn.handler);
+        jqconsole.Prompt(true, spawn.handler);
     }
     
     return this;
