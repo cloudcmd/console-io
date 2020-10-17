@@ -64,7 +64,7 @@
     "nodemon": "^2.0.4",
     "putout": "^10.0.3",
     "skipfirst": "^1.0.1",
-    "style-loader": "^1.0.0",
+    "style-loader": "^2.0.0",
     "try-to-catch": "^3.0.0",
     "webpack": "^4.0.1",
     "webpack-cli": "^3.1.0"
