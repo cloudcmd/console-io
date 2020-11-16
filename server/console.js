@@ -34,7 +34,7 @@ module.exports = (socket, options) => {
     if (socket)
         Socket = socket;
     else if (o.server)
-        Socket = io.listen(o.server);
+        Socket = io(o.server);
     else
         throw Error('server or socket should be passed in options!');
     
