@@ -1,14 +1,14 @@
-Console [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
-=======
-[NPMIMGURL]:                https://img.shields.io/npm/v/console-io.svg?style=flat
-[BuildStatusIMGURL]:        https://img.shields.io/travis/cloudcmd/console-io/master.svg?style=flat
-[DependencyStatusIMGURL]:   https://img.shields.io/david/cloudcmd/console-io.svg?style=flat
-[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
-[NPM_INFO_IMG]:             https://nodei.co/npm/console-io.png
-[NPMURL]:                   https://npmjs.org/package/console-io "npm"
-[BuildStatusURL]:           https://travis-ci.org/cloudcmd/console-io  "Build Status"
-[DependencyStatusURL]:      https://david-dm.org/cloudcmd/console-io "Dependency Status"
-[LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
+# Console [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+
+[NPMIMGURL]: https://img.shields.io/npm/v/console-io.svg?style=flat
+[BuildStatusIMGURL]: https://img.shields.io/travis/cloudcmd/console-io/master.svg?style=flat
+[DependencyStatusIMGURL]: https://img.shields.io/david/cloudcmd/console-io.svg?style=flat
+[LicenseIMGURL]: https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
+[NPM_INFO_IMG]: https://nodei.co/npm/console-io.png
+[NPMURL]: https://npmjs.org/package/console-io "npm"
+[BuildStatusURL]: https://travis-ci.org/cloudcmd/console-io "Build Status"
+[DependencyStatusURL]: https://david-dm.org/cloudcmd/console-io "Dependency Status"
+[LicenseURL]: https://tldrlegal.com/license/mit-license "MIT License"
 
 Web console used in [Cloud Commander](http://cloudcmd.io).
 
@@ -54,13 +54,15 @@ console script in this way:
 Example: show alert on `Ctrl + A`:
 
 ```js
-const konsole = await Console();
-
-konsole.addShortCuts({
-    'A': function() {
-        alert('hello');
-    }
-});
+async () => {
+    const konsole = await Console();
+    
+    konsole.addShortCuts({
+        A() {
+            alert('hello');
+        },
+    });
+};
 ```
 
 #### getPromptText()
@@ -87,12 +89,12 @@ Could be used as middleware, or for init `Console`.
 Console.listen(socket, {
     server,                                  // when no socket
     online: true,                            // default
-    prefix: '/console'                       // default
-    prefixSocket: '/console'                 // default
+    prefix: '/console',                      // default
+    prefixSocket: '/console',                // default
     auth: (accept, reject) => (username, password) => {
         accept();
     },
-})
+});
 ```
 
 #### Console.middle(options)
@@ -103,7 +105,7 @@ Middleware function if there is a need of init `socket` in another place.
 Console({
     prefix: '/console', /* default */
     online: true,       /* default */
-})
+});
 ```
 
 ## Use as middleware
@@ -115,7 +117,7 @@ To use `Console` in your programs you should make local install:
 And use it in your program
 
 ```js
-/* server.js */
+// server.js
 
 const webconsole  = require('console-io');
 const http = require('http');
@@ -130,11 +132,11 @@ const ip = '0.0.0.0';
 const online = true;
 app .use(webconsole({
     server,
-    online, /* load jquery and socket.io from cdn */
+    online, // load jquery and socket.io from cdn
 })).use(express.static(__dirname));
 
 webconsole.listen({
-    server
+    server,
 });
 
 server.listen(port, ip);
@@ -168,4 +170,3 @@ server.listen(port, ip);
 ## License
 
 MIT
-
