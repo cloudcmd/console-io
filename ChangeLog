@@ -1,3 +1,17 @@
+2020.11.16, v12.0.0
+
+feature:
+- (modules) socket.io v3.0.1
+- (package) eslint-plugin-putout v6.3.1
+- (package) drop support of node < 12
+- (package) putout v11.1.3
+- (package) socket.io v3.0.1
+- (package) webpack-cli v4.0.0
+- (package) webpack v5.1.3
+- (package) style-loader v2.0.0
+- (package) css-loader v5.0.0
+
+
 2020.09.21, v11.0.2
 
 fix:
