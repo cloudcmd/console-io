@@ -1,3 +1,9 @@
+2021.01.19, v13.0.1
+
+feature:
+- (modules) socket.io v3.1.0
+
+
 2021.01.19, v13.0.0
 
 feature:
