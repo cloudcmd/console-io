@@ -2,7 +2,7 @@
     color: crimson;
 }
 
-.log-msg{
+.log-msg {
     color: #444;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .error-msg, .log-msg, .jqconsole-prompt, .jqconsole-old-prompt {
-    font : 16px "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
+    font : 16px 'Droid Sans Mono', 'Ubuntu Mono', 'Consolas', monospace;
 }
 
 .jqconsole {
@@ -47,11 +47,11 @@
 }
 
 .brace {
-    color: #00FFFF;
+    color: #0ff;
 }
 .paran {
-    color: #FF00FF;
+    color: #f0f;
 }
 .bracket {
-    color: #FFFF00;
+    color: #ff0;
 }

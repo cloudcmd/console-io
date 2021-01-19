@@ -1,13 +1,11 @@
-'use strict';
+import {run} from 'madrun';
 
-const {run} = require('madrun');
-
-module.exports = {
+export default {
     'start': () => 'node bin/console',
     'start:dev': () => 'NODE_ENV=development npm start',
     'build-progress': () => 'webpack --progress',
     'build:client': () => run('build-progress', '--mode production'),
-    'build:client:dev': () => `NODE_ENV=development ${run('build-progress', '--mode development')}`,
+    'build:client:dev': async () => `NODE_ENV=development ${await run('build-progress', '--mode development')}`,
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'build': () => run('build:client*'),
@@ -16,7 +14,9 @@ module.exports = {
     'watch:lint': () => run('watcher', '\'npm run lint\''),
     'watch:client': () => run('build:client', '--watch'),
     'watch:client:dev': () => run('build:client:dev', '--watch'),
-    'lint': () => 'putout client server *.js *.md {.,json}/*.json',
+    'lint': () => 'putout .',
+    'fresh:lint': () => run('lint', '--fresh'),
+    'lint:fresh': () => run('lint', '--fresh'),
     'fix:lint': () => run('lint', '--fix'),
 };
 

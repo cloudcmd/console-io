@@ -63,8 +63,8 @@ function SpawnProto(jqconsole, options) {
         } = options;
         
         socket = io.connect(href + prefixSocket, {
-            'max reconnection attempts' : 2 ** 32,
-            'reconnection limit'        : FIVE_SECONDS,
+            'max reconnection attempts': 2 ** 32,
+            'reconnection limit': FIVE_SECONDS,
             'path': socketPath + '/socket.io',
             'transportOptions': {
                 polling: {

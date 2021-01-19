@@ -1,18 +1,18 @@
 {
-  "name": "console-io",
-  "homepage": "https://github.com/cloudcmd/console",
-  "authors": [
-    "coderaiser <mnemonic.enemy@gmail.com>"
-  ],
-  "description": "web console",
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "node_modules",
-    "modules"
-  ],
-  "dependencies": {
-    "jq-console": "~2.13.2",
-    "jquery": "^3.4.0"
-  }
+    "name": "console-io",
+    "homepage": "https://github.com/cloudcmd/console",
+    "authors": [
+        "coderaiser <mnemonic.enemy@gmail.com>"
+    ],
+    "description": "web console",
+    "license": "MIT",
+    "private": true,
+    "ignore": [
+        "node_modules",
+        "modules"
+    ],
+    "dependencies": {
+        "jq-console": "~2.13.2",
+        "jquery": "^3.4.0"
+    }
 }
