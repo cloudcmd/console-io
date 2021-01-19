@@ -1,3 +1,11 @@
+2021.01.19, v13.0.0
+
+feature:
+- (console) drop support of node < 14
+- (package) putout v13.7.1
+- (package) madrun v8.6.0
+
+
 2020.11.16, v12.0.1
 
 fix:
