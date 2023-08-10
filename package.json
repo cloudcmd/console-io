@@ -1,6 +1,7 @@
 {
   "name": "console-io",
   "version": "13.0.2",
+  "type": "commonjs",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Web console",
   "bin": {

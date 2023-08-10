@@ -10,6 +10,7 @@ const skipfirst = require('skipfirst');
 const tryToCatch = require('try-to-catch');
 
 const Spawn = require('./spawn');
+const isString = (a) => typeof a === 'string';
 
 module.exports = async (element, options = {}) => {
     const [jqconsole, spawn] = await init(element, options);
@@ -42,14 +43,11 @@ async function init(element, options) {
         socketPath,
     });
     
-    return [
-        jqconsole,
-        spawn,
-    ];
+    return [jqconsole, spawn];
 }
 
 async function loadAll(prefix) {
-    let [error, remote] = await tryToCatch(load.json, prefix + '/modules.json');
+    let [error, remote] = await tryToCatch(load.json, `${prefix}/modules.json`);
     const names = [
         'jQuery',
         'io',
@@ -65,16 +63,15 @@ async function loadAll(prefix) {
             continue;
         
         const reg = RegExp(name, 'i');
-        remote = remote.filter((item) => {
-            return !reg.test(item);
-        });
+        
+        remote = remote.filter((item) => !reg.test(item));
     }
     
     await load.series(remote);
 }
 
 function getElement(el) {
-    if (typeof el !== 'string')
+    if (!isString(el))
         return el;
     
     return document.querySelector(el);
@@ -122,9 +119,7 @@ function Console(element, {spawn, jqconsole}) {
             jqconsole.Focus();
     };
     
-    function addOnMouseUp(jqconsole) {
-        const {$console} = jqconsole;
-        
+    function addOnMouseUp({$console}) {
         $console.mouseup(() => {
             const isSelection = String(window.getSelection());
             
@@ -160,17 +155,15 @@ function Console(element, {spawn, jqconsole}) {
     function addKeyWhenNoPrompt(jqconsole) {
         const skip = skipfirst(readNoPrompt);
         
-        jqconsole
-            .$input_source[0]
-            .addEventListener('keydown', (event) => {
-                const ENTER = 13;
-                const is = isPrompt();
-                
-                if (is)
-                    return skip.clear();
-                
-                skip(event.keyCode === ENTER, event);
-            });
+        jqconsole.$input_source[0].addEventListener('keydown', (event) => {
+            const ENTER = 13;
+            const is = isPrompt();
+            
+            if (is)
+                return skip.clear();
+            
+            skip(event.keyCode === ENTER, event);
+        });
     }
     
     function readNoPrompt(event) {
@@ -221,4 +214,3 @@ function Console(element, {spawn, jqconsole}) {
     
     return this;
 }
-

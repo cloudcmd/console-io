@@ -16,3 +16,4 @@ modules/jq-console/test
 
 *.swp
 
+coverage

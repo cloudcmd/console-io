@@ -1,5 +1,6 @@
 'use strict';
 
+const isFn = (a) => typeof a === 'function';
 const io = require('socket.io');
 const tildify = require('tildify');
 const debug = require('debug');
@@ -27,9 +28,7 @@ let ConNum = -1;
 
 module.exports = (socket, options) => {
     const o = options || {};
-    const {
-        prefixSocket = '/console',
-    } = o;
+    const {prefixSocket = '/console'} = o;
     
     if (socket)
         Socket = socket;
@@ -132,7 +131,6 @@ function log(connNum, str, typeParam) {
 }
 
 function check(auth) {
-    if (auth && typeof auth !== 'function')
+    if (auth && !isFn(auth))
         throw Error('options.auth should be function!');
 }
-

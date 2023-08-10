@@ -1,7 +1,7 @@
 'use strict';
 
-const DIR_ROOT = __dirname + '/..';
-
+const isUndefined = (a) => typeof a === 'undefined';
+const isFn = (a) => typeof a === 'function';
 const path = require('path');
 const spawnify = require('spawnify');
 const rendy = require('rendy');
@@ -12,24 +12,21 @@ const {Router} = require('express');
 
 const modules = require('../json/modules');
 
-const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
-const addLastSlash = (a) => a[a.length - 1] === '/' ? a : `${a}/`;
-
-const modulesFn = currify(_modulesFn);
-const konsoleFn = currify(_konsoleFn);
-
 const Console = require('./console');
-
+const konsoleFn = currify(_konsoleFn);
+const modulesFn = currify(_modulesFn);
+const addLastSlash = (a) => a.at(-1) === '/' ? a : `${a}/`;
+const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
+const DIR_ROOT = `${__dirname}/..`;
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = (options) => {
     options = options || {};
     const router = Router();
-    const {
-        prefix = '/console',
-    } = options;
+    const {prefix = '/console'} = options;
     
-    router.route(prefix + '/*')
+    router
+        .route(`${prefix}/*`)
         .get(konsoleFn(options))
         .get(modulesFn(prefix, options))
         .get(staticFn);
@@ -45,9 +42,7 @@ module.exports.listen = (socket, options) => {
     
     const o = options;
     
-    const {
-        prefixSocket = '/console',
-    } = options;
+    const {prefixSocket = '/console'} = options;
     
     return Console(socket, {
         server: o.server,
@@ -86,7 +81,11 @@ function _modulesFn(prefix, options, req, res, next) {
                 urlJq += m.local;
         }
         
-        urls.push(...[urlJquery, urlJq, urlSocket]);
+        urls.push(...[
+            urlJquery,
+            urlJq,
+            urlSocket,
+        ]);
     }
     
     res.type('json');
@@ -94,19 +93,17 @@ function _modulesFn(prefix, options, req, res, next) {
 }
 
 function checkOption(isOption) {
-    if (typeof isOption === 'function')
+    if (isFn(isOption))
         return isOption();
     
-    if (typeof isOption === 'undefined')
+    if (isUndefined(isOption))
         return true;
     
     return isOption;
 }
 
 function _konsoleFn(options, req, res, next) {
-    const {
-        prefix = '/console',
-    } = options || {};
+    const {prefix = '/console'} = options || {};
     
     const {url} = req;
     
@@ -183,4 +180,3 @@ function execute(socket, command, cwd) {
         socket.emit('prompt');
     }
 }
-

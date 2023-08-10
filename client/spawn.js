@@ -1,7 +1,6 @@
 'use strict';
 
 /* global io */
-
 const getHost = require('./get-host');
 const getEnv = require('./get-env');
 
@@ -39,6 +38,7 @@ function SpawnProto(jqconsole, options) {
     }
     
     let socket;
+    
     const prompt = () => {
         if (isPrompt())
             return;
@@ -57,15 +57,12 @@ function SpawnProto(jqconsole, options) {
         const href = getHost();
         const FIVE_SECONDS = 5000;
         
-        const {
-            socketPath,
-            prefixSocket,
-        } = options;
+        const {socketPath, prefixSocket} = options;
         
         socket = io.connect(href + prefixSocket, {
             'max reconnection attempts': 2 ** 32,
             'reconnection limit': FIVE_SECONDS,
-            'path': socketPath + '/socket.io',
+            'path': `${socketPath}/socket.io`,
             'transportOptions': {
                 polling: {
                     extraHeaders: {
@@ -90,7 +87,7 @@ function SpawnProto(jqconsole, options) {
             if (commands.length)
                 execute(commands.pop(), env);
             else
-                setPromptLabel(path + '> ');
+                setPromptLabel(`${path}> `);
             
             cwd = path;
         });
@@ -102,7 +99,7 @@ function SpawnProto(jqconsole, options) {
         socket.on('disconnect', () => {
             error('console: disconnected\n');
             
-            commands.push('cd ' + cwd);
+            commands.push(`cd ${cwd}`);
             promptText.push(getPromptText());
             
             abortPrompt();
@@ -174,4 +171,3 @@ function SpawnProto(jqconsole, options) {
         write(data, 'error-msg');
     }
 }
-

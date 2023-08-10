@@ -18,9 +18,12 @@ const rules = clean([
         loader: 'babel-loader',
     }, {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'clean-css-loader'],
-    },
-]);
+        use: [
+            'style-loader',
+            'css-loader',
+            'clean-css-loader',
+        ],
+    }]);
 
 module.exports = {
     devtool,
@@ -43,4 +46,3 @@ function devtoolModuleFilenameTemplate(info) {
     const resource = info.absoluteResourcePath.replace(__dirname + path.sep, '');
     return `file://console/${resource}`;
 }
-

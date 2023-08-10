@@ -1,13 +1,11 @@
-# Console [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+# Console [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 
 [NPMIMGURL]: https://img.shields.io/npm/v/console-io.svg?style=flat
 [BuildStatusIMGURL]: https://img.shields.io/travis/cloudcmd/console-io/master.svg?style=flat
-[DependencyStatusIMGURL]: https://img.shields.io/david/cloudcmd/console-io.svg?style=flat
 [LicenseIMGURL]: https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPM_INFO_IMG]: https://nodei.co/npm/console-io.png
 [NPMURL]: https://npmjs.org/package/console-io "npm"
 [BuildStatusURL]: https://travis-ci.org/cloudcmd/console-io "Build Status"
-[DependencyStatusURL]: https://david-dm.org/cloudcmd/console-io "Dependency Status"
 [LicenseURL]: https://tldrlegal.com/license/mit-license "MIT License"
 
 Web console used in [Cloud Commander](http://cloudcmd.io).
@@ -87,10 +85,10 @@ Could be used as middleware, or for init `Console`.
 
 ```js
 Console.listen(socket, {
-    server,                                  // when no socket
-    online: true,                            // default
-    prefix: '/console',                      // default
-    prefixSocket: '/console',                // default
+    server, // when no socket
+    online: true, // default
+    prefix: '/console', // default
+    prefixSocket: '/console', // default
     auth: (accept, reject) => (username, password) => {
         accept();
     },
@@ -103,8 +101,8 @@ Middleware function if there is a need of init `socket` in another place.
 
 ```js
 Console({
-    prefix: '/console', /* default */
-    online: true,       /* default */
+    prefix: '/console', // default
+    online: true, // default
 });
 ```
 
@@ -118,8 +116,7 @@ And use it in your program
 
 ```js
 // server.js
-
-const webconsole  = require('console-io');
+const webconsole = require('console-io');
 const http = require('http');
 const express = require('express');
 
@@ -130,10 +127,12 @@ const port = 1337;
 const ip = '0.0.0.0';
 
 const online = true;
-app .use(webconsole({
-    server,
-    online, // load jquery and socket.io from cdn
-})).use(express.static(__dirname));
+app
+    .use(webconsole({
+        server,
+        online, // load jquery and socket.io from cdn
+    }))
+    .use(express.static(__dirname));
 
 webconsole.listen({
     server,

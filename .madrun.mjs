@@ -11,7 +11,7 @@ export default {
     'build': () => run('build:client*'),
     'wisdom': () => run('build'),
     'watcher': () => 'nodemon -w client -w server --exec',
-    'watch:lint': () => run('watcher', '\'npm run lint\''),
+    'watch:lint': async () => await run('watcher', `'npm run lint'`),
     'watch:client': () => run('build:client', '--watch'),
     'watch:client:dev': () => run('build:client:dev', '--watch'),
     'lint': () => 'putout .',
@@ -19,4 +19,3 @@ export default {
     'lint:fresh': () => run('lint', '--fresh'),
     'fix:lint': () => run('lint', '--fix'),
 };
-

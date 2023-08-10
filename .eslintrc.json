@@ -1,19 +1,19 @@
 {
     "overrides": [{
-        "files": ["client/**"],
         "env": {
             "browser": true
         },
+        "files": "client/*.js",
         "rules": {
-            "node/no-unpublished-require": "off"
+            "n/no-unpublished-require": "off"
         }
     }],
     "extends": [
-        "plugin:node/recommended",
+        "plugin:n/recommended",
         "plugin:putout/recommended"
     ],
     "plugins": [
         "putout",
-        "node"
+        "n"
     ]
 }

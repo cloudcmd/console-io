@@ -14,22 +14,22 @@
     text-decoration: underline;
 }
 
-@-webkit-keyframes blinker {
+@keyframes blinker {
     from { opacity: 1.0; }
     to { opacity: 0.0; }
 }
 
-@-moz-keyframes blinker {
+@keyframes blinker {
     from { opacity: 1.0; }
     to { opacity: 0.0; }
 }
 
-@-ms-keyframes blinker {
+@keyframes blinker {
     from { opacity: 1.0; }
     to { opacity: 0.0; }
 }
 
-@-o-keyframes blinker {
+@keyframes blinker {
     from { opacity: 1.0; }
     to { opacity: 0.0; }
 }
@@ -126,7 +126,7 @@
     color: yellow;
 }
 .jqconsole-ansi-color-blue {
-    color: rgb(49, 123, 249);
+    color: rgb(49 123 249);
 }
 .jqconsole-ansi-color-magenta {
     color: magenta;
