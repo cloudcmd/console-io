@@ -1,8 +1,8 @@
 [{
     "name": "jquery",
     "version": "3.4.1",
-    "local": "/modules/jquery/dist/jquery.slim.min.js",
-    "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.slim.min.js"
+    "local": "/modules/jquery/dist/jquery.min.js",
+    "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
 }, {
     "name": "socket",
     "version": "3.1.0",
