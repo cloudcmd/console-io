@@ -1,11 +1,9 @@
-# Console [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+# Console [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL]
 
 [NPMIMGURL]: https://img.shields.io/npm/v/console-io.svg?style=flat
-[BuildStatusIMGURL]: https://img.shields.io/travis/cloudcmd/console-io/master.svg?style=flat
 [LicenseIMGURL]: https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPM_INFO_IMG]: https://nodei.co/npm/console-io.png
 [NPMURL]: https://npmjs.org/package/console-io "npm"
-[BuildStatusURL]: https://travis-ci.org/cloudcmd/console-io "Build Status"
 [LicenseURL]: https://tldrlegal.com/license/mit-license "MIT License"
 
 Web console used in [Cloud Commander](http://cloudcmd.io).
