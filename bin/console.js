@@ -2,6 +2,7 @@
 
 'use strict';
 
+const process = require('process');
 const {argv} = process;
 const argvLast = argv
     .slice()

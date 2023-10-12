@@ -1,7 +1,6 @@
 'use strict';
 
-const isUndefined = (a) => typeof a === 'undefined';
-const isFn = (a) => typeof a === 'function';
+const process = require('process');
 const path = require('path');
 const spawnify = require('spawnify');
 const rendy = require('rendy');
@@ -13,6 +12,8 @@ const {Router} = require('express');
 const modules = require('../json/modules');
 
 const Console = require('./console');
+const isFn = (a) => typeof a === 'function';
+const isUndefined = (a) => typeof a === 'undefined';
 const konsoleFn = currify(_konsoleFn);
 const modulesFn = currify(_modulesFn);
 const addLastSlash = (a) => a.at(-1) === '/' ? a : `${a}/`;
