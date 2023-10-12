@@ -65,7 +65,7 @@
     "loader-utils": "^3.2.1",
     "madrun": "^9.3.1",
     "nodemon": "^3.0.1",
-    "putout": "^31.0.5",
+    "putout": "^32.2.1",
     "skipfirst": "^1.0.1",
     "style-loader": "^3.3.3",
     "try-to-catch": "^3.0.0",
