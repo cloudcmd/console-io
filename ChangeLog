@@ -1,3 +1,10 @@
+2023.10.12, v14.1.0
+
+feature:
+- 9922bb8 package: eslint-plugin-putout v20.0.0
+- 561eea1 package: putout v32.2.1
+- 6bc8019 package: rendy v4.1.3
+
 2023.08.10, v14.0.1
 
 fix:
