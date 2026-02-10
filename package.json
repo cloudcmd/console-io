@@ -45,7 +45,7 @@
     "rendy": "^4.1.3",
     "socket.io": "^4.7.2",
     "spawnify": "^8.0.1",
-    "tildify": "^2.0.0",
+    "tildify": "^3.0.0",
     "untildify": "^4.0.0",
     "wraptile": "^3.0.0"
   },
