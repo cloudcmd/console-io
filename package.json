@@ -59,7 +59,7 @@
     "eslint": "^10.0.0",
     "eslint-plugin-n": "^17.23.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-putout": "^20.0.0",
+    "eslint-plugin-putout": "^30.0.2",
     "inherits": "^2.0.3",
     "load.js": "^3.1.2",
     "loader-utils": "^3.2.1",
