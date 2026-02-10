@@ -56,7 +56,7 @@
     "clean-css-loader": "^4.2.1",
     "css-loader": "^7.1.3",
     "es6-promisify": "^7.0.0",
-    "eslint": "^8.46.0",
+    "eslint": "^10.0.0",
     "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-putout": "^20.0.0",
