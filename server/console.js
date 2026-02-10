@@ -1,8 +1,8 @@
 'use strict';
 
-const process = require('process');
+const process = require('node:process');
 const io = require('socket.io');
-const tildify = require('tildify');
+const tildify = require('tildify').default;
 const debug = require('debug');
 const wraptile = require('wraptile');
 const isFn = (a) => typeof a === 'function';

@@ -1,8 +1,8 @@
 'use strict';
 
-const path = require('path');
+const path = require('node:path');
 
-const {env} = require('process');
+const {env} = require('node:process');
 const dir = './client';
 const isDev = env.NODE_ENV === 'development';
 
@@ -17,7 +17,7 @@ const rules = clean([
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-    }, {
+    },{
         test: /\.css$/,
         use: [
             'style-loader',

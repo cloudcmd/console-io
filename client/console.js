@@ -7,7 +7,7 @@ require('../css/ansi.css');
 
 const load = require('load.js');
 const skipfirst = require('skipfirst');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 
 const Spawn = require('./spawn');
 const isString = (a) => typeof a === 'string';
@@ -86,8 +86,6 @@ function Console(element, {spawn, jqconsole}) {
             jqconsole,
         });
     
-    const self = this;
-    
     addShortCuts(jqconsole);
     addKeyWhenNoPrompt(jqconsole);
     addOnMouseUp(jqconsole);
@@ -121,14 +119,14 @@ function Console(element, {spawn, jqconsole}) {
     
     function addOnMouseUp({$console}) {
         $console.mouseup(() => {
-            const isSelection = String(window.getSelection());
+            const isSelection = String(globalThis.getSelection());
             
             if (isSelection)
                 return;
             
             const top = $console.scrollTop();
             
-            self.focus();
+            globalThis.focus();
             $console.scrollTop(top);
         });
     }

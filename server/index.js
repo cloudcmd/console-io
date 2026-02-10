@@ -1,11 +1,11 @@
 'use strict';
 
-const process = require('process');
-const path = require('path');
+const process = require('node:process');
+const path = require('node:path');
 const spawnify = require('spawnify');
 const rendy = require('rendy');
 
-const untildify = require('untildify');
+const untildify = require('untildify').default;
 const currify = require('currify');
 const {Router} = require('express');
 
@@ -27,7 +27,7 @@ module.exports = (options) => {
     const {prefix = '/console'} = options;
     
     router
-        .route(`${prefix}/*`)
+        .route(`${prefix}/*path`)
         .get(konsoleFn(options))
         .get(modulesFn(prefix, options))
         .get(staticFn);
