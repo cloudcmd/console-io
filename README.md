@@ -115,7 +115,7 @@ And use it in your program
 ```js
 // server.js
 import http from 'node:http';
-import {webconsole} from 'console-io';
+import {konsole} from 'console-io';
 import express from 'express';
 
 const app = express();
@@ -126,13 +126,13 @@ const ip = '0.0.0.0';
 
 const online = true;
 app
-    .use(webconsole({
+    .use(konsole({
         server,
         online, // load jquery and socket.io from cdn
     }))
     .use(express.static(__dirname));
 
-webconsole.listen({
+konsole.listen({
     server,
 });
 

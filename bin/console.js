@@ -5,7 +5,7 @@ import http from 'node:http';
 import {fileURLToPath} from 'node:url';
 import {dirname} from 'node:path';
 import express from 'express';
-import {webconsole} from '../server/index.js';
+import {konsole} from '../server/index.js';
 import pack from '../package.json' with {
     type: 'json',
 };
@@ -47,13 +47,13 @@ function start() {
     const online = false;
     
     app
-        .use('/', webconsole({
+        .use('/', konsole({
         server,
         online,
     }))
         .use(express.static(DIR));
     
-    webconsole.listen({
+    konsole.listen({
         server,
     });
     

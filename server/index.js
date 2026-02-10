@@ -22,7 +22,7 @@ const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
 const DIR_ROOT = `${__dirname}/..`;
 const isDev = process.env.NODE_ENV === 'development';
 
-export const webconsole = (options) => {
+export const konsole = (options) => {
     options = options || {};
     const router = Router();
     const {prefix = '/console'} = options;
@@ -36,7 +36,7 @@ export const webconsole = (options) => {
     return router;
 };
 
-webconsole.listen = (socket, options) => {
+konsole.listen = (socket, options) => {
     if (!options) {
         options = socket;
         socket = null;
