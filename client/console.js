@@ -1,18 +1,14 @@
 /* global $ */
+import '../css/console.css';
+import '../css/ansi.css';
+import load from 'load.js';
+import skipfirst from 'skipfirst';
+import {tryToCatch} from 'try-to-catch';
+import Spawn from './spawn.js';
 
-'use strict';
-
-require('../css/console.css');
-require('../css/ansi.css');
-
-const load = require('load.js');
-const skipfirst = require('skipfirst');
-const {tryToCatch} = require('try-to-catch');
-
-const Spawn = require('./spawn');
 const isString = (a) => typeof a === 'string';
 
-module.exports = async (element, options = {}) => {
+export default async (element, options = {}) => {
     const [jqconsole, spawn] = await init(element, options);
     const konsole = Console(element, {
         jqconsole,

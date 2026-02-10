@@ -1,17 +1,18 @@
-'use strict';
+import process from 'node:process';
+import path, {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import spawnify from 'spawnify';
+import rendy from 'rendy';
+import untildify from 'untildify';
+import currify from 'currify';
+import {Router} from 'express';
+import modules from '../json/modules.json' with {
+    type: 'json',
+};
+import Console from './console.js';
 
-const process = require('node:process');
-const path = require('node:path');
-const spawnify = require('spawnify');
-const rendy = require('rendy');
-
-const untildify = require('untildify').default;
-const currify = require('currify');
-const {Router} = require('express');
-
-const modules = require('../json/modules');
-
-const Console = require('./console');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const isFn = (a) => typeof a === 'function';
 const isUndefined = (a) => typeof a === 'undefined';
 const konsoleFn = currify(_konsoleFn);
@@ -21,7 +22,7 @@ const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
 const DIR_ROOT = `${__dirname}/..`;
 const isDev = process.env.NODE_ENV === 'development';
 
-module.exports = (options) => {
+export const webconsole = (options) => {
     options = options || {};
     const router = Router();
     const {prefix = '/console'} = options;
@@ -35,7 +36,7 @@ module.exports = (options) => {
     return router;
 };
 
-module.exports.listen = (socket, options) => {
+webconsole.listen = (socket, options) => {
     if (!options) {
         options = socket;
         socket = null;

@@ -1,6 +1,6 @@
 {
     "match": {
-        "(bin|client/console.js)": {
+        "(client/console.js)": {
             "remove-console": "off"
         }
     },

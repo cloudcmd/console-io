@@ -1,9 +1,19 @@
 #!/usr/bin/env node
 
-'use strict';
+import process from 'node:process';
+import http from 'node:http';
+import {fileURLToPath} from 'node:url';
+import {dirname} from 'node:path';
+import express from 'express';
+import {webconsole} from '../server/index.js';
+import pack from '../package.json' with {
+    type: 'json',
+};
 
-const process = require('node:process');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const {argv} = process;
+
 const argvLast = argv
     .slice()
     .pop();
@@ -23,11 +33,6 @@ default:
 
 function start() {
     const DIR = `${__dirname}/../`;
-    
-    const webconsole = require('../');
-    const http = require('node:http');
-    
-    const express = require('express');
     
     const app = express();
     const server = http.createServer(app);
@@ -58,7 +63,5 @@ function start() {
 }
 
 function version() {
-    const pack = require('../package');
-    
     console.log('v' + pack.version);
 }

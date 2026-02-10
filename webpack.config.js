@@ -1,8 +1,9 @@
-'use strict';
+import path, {dirname} from 'node:path';
+import {env} from 'node:process';
+import {fileURLToPath} from 'node:url';
 
-const path = require('node:path');
-
-const {env} = require('node:process');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const dir = './client';
 const isDev = env.NODE_ENV === 'development';
 
@@ -17,7 +18,7 @@ const rules = clean([
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-    },{
+    }, {
         test: /\.css$/,
         use: [
             'style-loader',
@@ -26,7 +27,7 @@ const rules = clean([
         ],
     }]);
 
-module.exports = {
+export default {
     devtool,
     entry: {
         console: `${dir}/console.js`,
@@ -36,6 +37,7 @@ module.exports = {
         filename: '[name].js',
         path: isDev ? distDev : dist,
         pathinfo: isDev,
+        libraryExport: 'default',
         devtoolModuleFilenameTemplate,
     },
     module: {

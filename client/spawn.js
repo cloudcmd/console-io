@@ -1,10 +1,8 @@
-'use strict';
-
 /* global io */
-const getHost = require('./get-host');
-const getEnv = require('./get-env');
+import getHost from './get-host.js';
+import getEnv from './get-env.js';
 
-module.exports = SpawnProto;
+export default SpawnProto;
 
 function SpawnProto(jqconsole, options) {
     if (!(this instanceof SpawnProto))

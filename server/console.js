@@ -1,10 +1,9 @@
-'use strict';
+import process from 'node:process';
+import {Server} from 'socket.io';
+import tildify from 'tildify';
+import debug from 'debug';
+import wraptile from 'wraptile';
 
-const process = require('node:process');
-const io = require('socket.io');
-const tildify = require('tildify').default;
-const debug = require('debug');
-const wraptile = require('wraptile');
 const isFn = (a) => typeof a === 'function';
 const logConsole = debug('console');
 const logClients = debug('console:clients');
@@ -26,14 +25,16 @@ const cwd = (conNum) => (path) => {
 let Socket;
 let ConNum = -1;
 
-module.exports = (socket, options) => {
+export default 
+
+function Console(socket, options) {
     const o = options || {};
     const {prefixSocket = '/console'} = o;
     
     if (socket)
         Socket = socket;
     else if (o.server)
-        Socket = io(o.server);
+        Socket = new Server(o.server);
     else
         throw Error('server or socket should be passed in options!');
     
@@ -53,7 +54,7 @@ module.exports = (socket, options) => {
         });
 };
 
-module.exports.getSocketPath = () => {
+Console.getSocketPath = () => {
     return Socket.path();
 };
 

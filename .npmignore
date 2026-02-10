@@ -16,5 +16,6 @@ modules/jq-console/test
 
 *.swp
 
+client
 coverage
 *.config.*
