@@ -1,3 +1,21 @@
+2026.02.10, v15.0.0
+
+feature:
+- b042adb console-io: migrate to ESM
+- a951e39 console-io: webpack-cli v6.0.1
+- f50e8ce console-io: untildify v6.0.0
+- 642cc45 console-io: try-to-catch v4.0.5
+- f924cd5 console-io: tildify v3.0.0
+- bc358ea console-io: style-loader v4.0.0
+- 27d9b32 console-io: putout v41.20.1
+- dcd5a4d console-io: madrun v12.1.3
+- eb1e37a console-io: express v5.2.1
+- 466c79f console-io: eslint-plugin-putout v30.0.2
+- 215a00c console-io: eslint-plugin-n v17.23.2
+- f0b10ce console-io: eslint v10.0.0
+- 02b9aba console-io: css-loader v7.1.3
+- 8f9dac1 console-io: babel-loader v10.0.0
+
 2023.10.12, v14.1.0
 
 feature:
