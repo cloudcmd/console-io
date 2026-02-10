@@ -46,7 +46,7 @@
     "socket.io": "^4.7.2",
     "spawnify": "^8.0.1",
     "tildify": "^3.0.0",
-    "untildify": "^4.0.0",
+    "untildify": "^6.0.0",
     "wraptile": "^3.0.0"
   },
   "devDependencies": {
