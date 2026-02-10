@@ -1,3 +1,8 @@
+2026.02.10, v15.0.1
+
+fix:
+- 0559cff console-io: drop devDependencies of jq-console
+
 2026.02.10, v15.0.0
 
 feature:
