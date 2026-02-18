@@ -2,7 +2,7 @@ import process from 'node:process';
 import path, {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import spawnify from 'spawnify';
-import rendy from 'rendy';
+import {rendy} from 'rendy';
 import untildify from 'untildify';
 import currify from 'currify';
 import {Router} from 'express';
