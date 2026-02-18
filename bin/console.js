@@ -38,19 +38,19 @@ function start() {
     const server = http.createServer(app);
     
     const port = process.env.PORT
-        ||     /* c9           */process.env.app_port
-        ||     /* nodester     */process.env.VCAP_APP_PORT
-        ||     /* cloudfoundry */1337;
+        || /* c9           */process.env.app_port
+        || /* nodester     */process.env.VCAP_APP_PORT
+        || /* cloudfoundry */1337;
     
-    const ip = process.env.IP ||     /* c9 */'0.0.0.0';
+    const ip = process.env.IP || /* c9 */'0.0.0.0';
     
     const online = false;
     
     app
         .use('/', konsole({
-        server,
-        online,
-    }))
+            server,
+            online,
+        }))
         .use(express.static(DIR));
     
     konsole.listen({

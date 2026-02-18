@@ -25,9 +25,7 @@ const cwd = (conNum) => (path) => {
 let Socket;
 let ConNum = -1;
 
-export default 
-
-function Console(socket, options) {
+export default function Console(socket, options) {
     const o = options || {};
     const {prefixSocket = '/console'} = o;
     
@@ -52,7 +50,7 @@ function Console(socket, options) {
             const reject = () => socket.emit('reject');
             socket.on('auth', auth(connection, reject));
         });
-};
+}
 
 Console.getSocketPath = () => {
     return Socket.path();
