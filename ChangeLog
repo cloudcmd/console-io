@@ -1,3 +1,11 @@
+2026.02.18, v15.0.3
+
+feature:
+- 421d148 console-io: putout v42.0.5
+- 4f91157 console-io: madrun v13.0.0
+- b8d1045 console-io: eslint-plugin-putout v31.0.0
+- e381505 console-io: rendy v5.0.0
+
 2026.02.10, v15.0.2
 
 fix:
