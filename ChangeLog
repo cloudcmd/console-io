@@ -1,3 +1,8 @@
+2026.03.29, v15.0.4
+
+feature:
+- 26ed439 console-io: webpack-cli v7.0.2
+
 2026.02.18, v15.0.3
 
 feature:
