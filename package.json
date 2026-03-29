@@ -68,7 +68,7 @@
     "style-loader": "^4.0.0",
     "try-to-catch": "^4.0.5",
     "webpack": "^5.1.3",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^7.0.2"
   },
   "engines": {
     "node": ">=22"
